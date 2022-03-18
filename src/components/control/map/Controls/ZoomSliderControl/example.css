@@ -1,0 +1,18 @@
+.myStyle1 {
+    top: 4.5em;
+    left: .5em;
+    height: 200px;
+    background-color: rgba(24, 144, 255, 0.4);
+}
+
+.myStyle1 button {
+    position: relative;
+    height: 10px;
+    background-color: rgb(255, 0, 0, 1);
+    
+  }
+
+  .myStyle1:hover {
+    border-style: inset;
+  }
+  

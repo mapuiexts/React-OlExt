@@ -1,0 +1,12 @@
+.rolext-wnd {
+    position: fixed;
+    top: 30vh;
+    left: calc(50% - 15rem);
+    z-index: 100;
+}
+
+.rolext-wnd-btn-container {
+    display:flex;
+    gap: 5px;
+    justify-content: flex-end;
+}

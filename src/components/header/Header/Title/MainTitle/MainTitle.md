@@ -1,0 +1,2 @@
+<p>The <i>Header.Title.MainTitle</i> component must be used as a child of the <i>Header.Title</i> Component.</p>
+<p>Check the example for the <i>Header</i> Component to see how <i>Header.Title.MainTitle</i> must be used.</p>

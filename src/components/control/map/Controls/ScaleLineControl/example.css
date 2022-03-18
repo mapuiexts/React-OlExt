@@ -1,0 +1,11 @@
+.myScaleLineStyle {
+  background: rgba(255, 97, 24, 0.8);
+  border-radius: 4px;
+  bottom: 8px;
+  left: 8px;
+  padding: 2px;
+  color: #eee;
+  text-align: center;
+  border: 4px solid cyan;
+  border-top: none;
+}

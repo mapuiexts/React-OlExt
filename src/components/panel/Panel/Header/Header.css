@@ -1,0 +1,21 @@
+.rolext-panel-header {
+    display: flex;
+    border: 1px solid #1890ff;
+    /*border-radius: 5px;*/
+    border-color: #d9d9d9;
+    border-bottom-width: 0;
+    background-color: #1890ff;
+    line-height: 20px;
+    padding: 4px 8px;
+    color: white;
+}
+
+.rolext-panel-header-tool {
+    cursor: pointer;
+    transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    margin-left: 6px;
+}
+
+.rolext-panel-expanded .rolext-panel-header-collapse-tool {
+    transform: rotate(-180deg);
+}

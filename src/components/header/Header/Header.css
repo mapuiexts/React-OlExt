@@ -1,0 +1,46 @@
+.rolext-header-container {
+    display:flex;
+    width: 100%;
+    /* background: linear-gradient(.25turn, black, #0000A0); */
+    background:black;
+}
+
+.rolext-header-logo {
+    flex: 0 0 5%;
+    justify-content: center;
+    align-items: center;
+}
+
+.rolext-header-title {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 25%;
+    /* width:20%; */
+    justify-content: center;
+    align-items: center;
+    border-width:5px;
+    line-height: 0.8;
+}
+
+.rolext-header-title-main {
+    color: #61dafb;
+    font-size: 35px;
+    text-align: center;
+}
+
+.rolext-header-title-sub {
+    color: white;
+    font-size: 15px;
+    text-align: center;
+}
+
+.rolext-header-content {
+    flex: 1 1 70%;
+    justify-content: flex-end ;
+    align-items: center;
+    color: #61dafb;
+    font-weight: bolder;
+    display: flex;
+    gap:5px;
+    padding: 5px;
+}

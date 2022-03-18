@@ -1,0 +1,26 @@
+@import 'antd/dist/antd.css';
+
+.rolext-tree-context-menu {
+
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* display: flex;
+  flex-direction: column;
+  text-align: center; */
+  position: fixed;
+  /* position: absolute; */
+  z-index: 50;
+  border: 10px;
+  color: #777;
+  background: #141414;
+  padding: 1px;
+  /*
+  background: #f7f7f7;
+  transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  */
+}
+  
+[data-theme="dark"] rolext-tree-context-menu {
+    background: #141414;
+    color: rgba(255,255,255,.65);
+}

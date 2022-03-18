@@ -1,0 +1,150 @@
+import React, {useState, useContext, useRef, useEffect, useCallback} from 'react';
+import {Tree} from 'antd';
+import OlMapEvent from 'ol/MapEvent';
+import OlLayerBase from 'ol/layer/Base';
+import OlLayerGroup from 'ol/layer/Group';
+import {getAllLayers} from '../../../util/map'
+
+const LayerTree = ({
+        map,
+        layerGroup = map.getLayerGroup(),
+        className = null,
+        draggable = true,
+        checkable = true,
+        filterFunction = () => true,
+        nodeTitleRenderer = null
+    }) => {
+    
+    const [layerGroupRevision, setLayerGroupRevision] = useState(layerGroup.getRevision());
+    const [treeNodes, setTreeNodes] = useState([]);
+    const [checkedKeys, setCheckedKeys] = useState([]);
+
+
+  /**
+   * Get the flat array of ol_uids from visible non groupLayers.
+   *
+   * @return The visible ol_uids.
+   */
+    const getVisibleOlUids = useCallback(() => {
+        const layers = getAllLayers(layerGroup, (layer) => {
+            return !(layer instanceof OlLayerGroup) && layer.getVisible();
+        }).filter(filterFunction);
+        return layers.map(l => l.ol_uid.toString());
+    }, [filterFunction, layerGroup]);
+    
+
+    /**
+     * Determines if the target has already registered the given
+     * listener for the given event type.
+     * 
+     * @param {Event} target The event target
+     * @param {string} type  The event types (name)
+     * @param {Function} listener The function
+     * @return True if the listener is already contained 
+     */
+    const hasListener = (target, type, listener) => {
+        return this.olListenerKeys.some((listenerKey) => {
+          return listenerKey.target === target
+            && listenerKey.type === type
+            && listenerKey.listener === listener;
+        });
+    };
+
+    const onLayerChangeVisible = () => {
+        const newCheckedKeys = getVisibleOlUids();
+        setCheckedKeys(newCheckedKeys);
+        rebuildTreeNodes();
+    };
+
+    /**
+     * Creates a treeNode for the input layer.
+     * 
+     * @param {ol.layer.Base} layer 
+     * @return The corresponding LayerTreeNode element.
+     */
+    const treeNodeFromLayer = useCallback((layer) => {
+        let childNodes =  [];
+
+        if (layer instanceof OlLayerGroup) {
+            const childLayers = layer.getLayers().getArray().filter(filterFunction);
+            childNodes = childLayers.map((childLayer) => {
+                return treeNodeFromLayer(childLayer);
+            });
+            childNodes.reverse();
+        } 
+        return (
+            <Tree.TreeNode key={layer.ol_uid.toString()} title={layer.get('name')}>
+                {childNodes.length() > 0 && childNodes}
+            </Tree.TreeNode>
+        );
+    }, [filterFunction]);
+    
+    /**
+     * Creates TreeNodes from a given layergroup and sets the treeNodes in the state.
+     * 
+     * @param {ol.layer.Group} groupLayer A Layer Group
+     */
+    const treeNodesFromLayerGroup = useCallback((groupLayer) => {
+        const layers = groupLayer.getLayers().getArray().filter(filterFunction);
+        const newTreeNodes = layers.map((layer) => treeNodeFromLayer(layer));
+        newTreeNodes.reverse();
+        setTreeNodes(newTreeNodes);
+    }, [filterFunction, treeNodeFromLayer]);
+
+    /**
+     * 
+     * @param {ol.MapEvent} evt 
+     */
+    const rebuildTreeNodes = useCallback((evt) => {
+        treeNodesFromLayerGroup(layerGroup);
+        setCheckedKeys(getVisibleOlUids());
+    }, [layerGroup, getVisibleOlUids, treeNodesFromLayerGroup]);
+
+
+    
+    
+
+    /**
+     * Update the revision if layer group has changed
+     */
+    useEffect(() => {
+        setLayerGroupRevision(layerGroup.getRevision());
+    }, [layerGroup]);
+
+    /**
+     * Update the revision if it has changed internally
+     */
+    useEffect(() => {
+        if(layerGroupRevision !== layerGroup.getRevision())
+        {
+            setLayerGroupRevision(layerGroup.getRevision());
+        }
+
+    }, [layerGroupRevision, layerGroup]);
+
+    /**
+     * rebuild the tree nodes
+     */
+    useEffect(() => {
+        rebuildTreeNodes();
+    }, [rebuildTreeNodes]);
+
+
+    
+
+
+
+
+
+
+
+
+
+
+    return(
+        <Tree/>
+    );
+
+};
+
+export default LayerTree;

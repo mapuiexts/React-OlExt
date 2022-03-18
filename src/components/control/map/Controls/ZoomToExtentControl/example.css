@@ -1,0 +1,9 @@
+.myStyle button {
+    background-color: #1890ff;
+    background: #1890ff;
+    color: white;
+    width: 120px;
+    border:5px;
+    font-size: 15px;
+    font-weight: normal;
+}
