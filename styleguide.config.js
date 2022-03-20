@@ -241,6 +241,15 @@ module.exports = {
             ]
           },
           {
+            name: 'slider',
+            //content: 'docs/ui.md',
+            components: [
+              'src/components/slider/**/*.{js,jsx,ts,tsx}'
+            ],
+            exampleMode: 'expand', // 'hide' | 'collapse' | 'expand'
+            usageMode: 'expand' // 'hide' | 'collapse' | 'expand'
+          },
+          {
             name: 'text',
             //content: 'docs/ui.md',
             components: [
