@@ -62,6 +62,7 @@ const OpacityLayerSlider = ({
             max={1}
             min={0}
             step={step}
+            vertical={vertical}
             range={false}
             disabled={false}
             onChange={onChangeHandler}

@@ -263,7 +263,15 @@ module.exports = {
                   'src/components/slider/layer/**/*.{js,jsx,ts,tsx}'
                 ],
                 exampleMode: 'expand', // 'hide' | 'collapse' | 'expand'
-                usageMode: 'expand' // 'hide' | 'collapse' | 'expand'
+                usageMode: 'expand', // 'hide' | 'collapse' | 'expand'
+              },
+              {
+                name: 'heatmap',
+                components: [
+                  'src/components/slider/heatmap/**/*.{js,jsx,ts,tsx}'
+                ],
+                exampleMode: 'expand', // 'hide' | 'collapse' | 'expand'
+                usageMode: 'expand', // 'hide' | 'collapse' | 'expand'
               }
             ]
           },
