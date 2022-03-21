@@ -1,6 +1,8 @@
 <p>Example to show the usage of <i>Opacity Layer Slider</i>:</p>
 <ul>
+    <li>Initially the slider has the value of the current opacity for the layer provided as property in the Slider</li>
     <li>Change the slider value moving its cursor position: the layer opacity will change accordingly</li>
+    <li>Change the layer opacity clicking in the button "Change Opacity to 0.5": the new opacity will be reflected in the slider</li>
 </ul>
 
 ```js
@@ -18,7 +20,6 @@ const viewOpts= {
 const map = createDefaultMap(viewOpts);
 //get the first layer (OSM layer)
 const layer = map.getAllLayers()[0];
-console.log(layer);
 
 const OpacityLayerSliderExample = () => {
 

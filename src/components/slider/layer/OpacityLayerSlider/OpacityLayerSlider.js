@@ -79,7 +79,7 @@ OpacityLayerSlider.propTypes = {
 
     /**
      * The granularity the slider can step through values. 
-     * Must be greater than 0, and be between 0 and 1.
+     * Must be greater than 0 and between 0 and 1.
      */
      step: PropTypes.number,
 
