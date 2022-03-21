@@ -241,13 +241,31 @@ module.exports = {
             ]
           },
           {
+            name: 'select',
+            sections: [
+              {
+                name: 'projection',
+                components: [
+                  'src/components/select/projection/**/*.{js,jsx,ts,tsx}'
+                ],
+                exampleMode: 'expand', // 'hide' | 'collapse' | 'expand'
+                usageMode: 'expand' // 'hide' | 'collapse' | 'expand'
+              }
+            ]
+            
+          },
+          {
             name: 'slider',
-            //content: 'docs/ui.md',
-            components: [
-              'src/components/slider/**/*.{js,jsx,ts,tsx}'
-            ],
-            exampleMode: 'expand', // 'hide' | 'collapse' | 'expand'
-            usageMode: 'expand' // 'hide' | 'collapse' | 'expand'
+            sections: [
+              {
+                name: 'layer',
+                components: [
+                  'src/components/slider/layer/**/*.{js,jsx,ts,tsx}'
+                ],
+                exampleMode: 'expand', // 'hide' | 'collapse' | 'expand'
+                usageMode: 'expand' // 'hide' | 'collapse' | 'expand'
+              }
+            ]
           },
           {
             name: 'text',

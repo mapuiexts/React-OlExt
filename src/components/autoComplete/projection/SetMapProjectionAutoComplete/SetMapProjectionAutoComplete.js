@@ -76,7 +76,7 @@ const SetMapProjectionAutoComplete = ({
     }, [onChange, onClearProjection]);
 
     /**
-     * Register 'change:name' for the group layer and all its
+     * Register 'change:view' for the group layer and all its
      * childrens
      */
     useEffect(() => {

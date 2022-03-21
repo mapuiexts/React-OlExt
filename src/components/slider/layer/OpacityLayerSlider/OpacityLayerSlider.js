@@ -8,7 +8,7 @@ import usePrevious from '../../../../hooks/common/usePrevious';
  * Slider component to change the layer opacity.
  * Check <a href="https://ant.design/components/slider/">
  * Antd Slider</a> component for additional properties.
- * @visibleName Opacity Layer Slider
+ * @visibleName OpacityLayer Slider
  *  
  */
 const OpacityLayerSlider = ({
