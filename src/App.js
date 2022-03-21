@@ -21,7 +21,7 @@ import ZoomCenterButton from './components/button/zoom/ZoomCenterButton/ZoomCent
 import AboutButton from './components/button/common/AboutButton/AboutButton';
 import NewWImageMSLayerButton from './components/button/layer/new/NewImageWMSLayerButton/NewImageWMSLayerButton';
 import NewGroupLayerButton from './components/button/layer/new/NewGroupLayerButton/NewGroupLayerButton';
-import './App.css';
+//import './App.css';
 import 'antd/dist/antd.css';
 import 'ol/ol.css';
 
@@ -138,12 +138,12 @@ const App = () => {
       <Space direction='vertical' style={{width:"100%", minWidth:'100%', maxWidth:'100%'}}>
         <SimpleHeader map={map}/>   
         <Menu mode="horizontal">
-          <Menu.Item key="2"><GetCoordinateButton type="primary" map={map} projs={[map.getView().getProjection(), getProjection('EPSG:4326')]}>Get Coordinate</GetCoordinateButton></Menu.Item>
-          <Menu.Item key="3"><ZoomCenterButton type="primary" map={map} projs={projs}>Zoom Center</ZoomCenterButton></Menu.Item>
-          <Menu.Item key="5"><NewWImageMSLayerButton type="primary" map={map} wndStyle={{visibility: 'visible', width: 700, maxHeight: 500}}>New WMS Layer</NewWImageMSLayerButton></Menu.Item>
-          <Menu.Item key="6"><NewGroupLayerButton type="primary" map={map} wndStyle={{visibility: 'visible', width: 700, maxHeight: 500}}>New Group Layer</NewGroupLayerButton></Menu.Item>
-          <Menu.Item key="4"><AboutButton type="primary"/></Menu.Item>
-          <Menu.Item key="1"><WmsGetFeatureInfoButton icon= {<InfoOutlined style={{fontSize:20}}/>}  shape="circle" type='primary' style={{backgroundColor:'red'}} map={map} layers={wmsLayers.getLayers().getArray()} wndStyle={{width:600}}/></Menu.Item>
+          <Menu.Item key="1"><GetCoordinateButton type="primary" map={map} projs={[map.getView().getProjection(), getProjection('EPSG:4326')]}>Get Coordinate</GetCoordinateButton></Menu.Item>
+          <Menu.Item key="2"><ZoomCenterButton type="primary" map={map} projs={projs}>Zoom Center</ZoomCenterButton></Menu.Item>
+          <Menu.Item key="3"><NewWImageMSLayerButton type="primary" map={map} wndStyle={{visibility: 'visible', width: 700, maxHeight: 500}}>New WMS Layer</NewWImageMSLayerButton></Menu.Item>
+          <Menu.Item key="4"><NewGroupLayerButton type="primary" map={map} wndStyle={{visibility: 'visible', width: 700, maxHeight: 500}}>New Group Layer</NewGroupLayerButton></Menu.Item>
+          <Menu.Item key="5"><AboutButton type="primary"/></Menu.Item>
+          <Menu.Item key="7"><WmsGetFeatureInfoButton icon= {<InfoOutlined style={{fontSize:20}}/>}  shape="circle" type='primary' style={{backgroundColor:'red'}} map={map} layers={wmsLayers.getLayers().getArray()} wndStyle={{width:600}}/></Menu.Item>
         </Menu>
       </Space>
       <BorderLayout split="horizontal" defaultSize={250} primary="second" onDragFinished={dragHandler}>

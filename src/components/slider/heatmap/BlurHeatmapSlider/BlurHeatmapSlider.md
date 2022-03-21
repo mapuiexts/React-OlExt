@@ -1,8 +1,8 @@
-<p>Example to show the usage of <i>RadiusHeatmap Slider</i> to visualize the earthquakes magnitude:</p>
+<p>Example to show the usage of <i>BlurHeatmap Slider</i> to visualize the earthquakes magnitude:</p>
 <ul>
-    <li>Initially the slider has the value of the current radius for the heatmap layer provided as property in the Slider</li>
-    <li>Change the slider value moving its cursor position: the heatmap layer radius will change accordingly</li>
-    <li>Change the heatmap layer radius clicking in the button "Reset Radius": the new radius with value 10 will be reflected in the slider</li>
+    <li>Initially the slider has the value of the current blur for the heatmap layer provided as property in the Slider</li>
+    <li>Change the slider value moving its cursor position: the heatmap layer blur will change accordingly</li>
+    <li>Change the heatmap layer blur clicking in the button "Reset Blur": the new blur with value 15 will be reflected in the slider</li>
 </ul>
 
 ```js
@@ -14,7 +14,7 @@ import Stamen from 'ol/source/Stamen';
 import VectorSource from 'ol/source/Vector';
 import KML from 'ol/format/KML';
 import MapWidget from '../../../widget/map/MapWidget/MapWidget';
-import RadiusHeatmapSlider from './RadiusHeatmapSlider';
+import BlurHeatmapSlider from './BlurHeatmapSlider';
 import earthquakesKml from '../../../../assets/data/2012_Earthquakes_Mag5.kml';
 
 //method to create heatmap layer
@@ -62,21 +62,21 @@ const map = new Map({
 });
 
 
-const RadiusHeatmapSliderExample = () => {
-    const resetRadius = () => {
-        heatmapLayer.setRadius(10);
+const BlurHeatmapSliderExample = () => {
+    const resetBlur = () => {
+        heatmapLayer.setBlur(15);
     };
 
     return(
         <div style={{display:'flex', height:'500px', width: '100%', flexDirection: 'column', gap:5}}>
             <Space>
-                <Button type="primary" onClick={resetRadius}>Reset Radius</Button>
-                <RadiusHeatmapSlider heatmapLayer={heatmapLayer} min={1} max={50} step={1} style={{width:300}}/>
+                <Button type="primary" onClick={resetBlur}>Reset Blur</Button>
+                <BlurHeatmapSlider heatmapLayer={heatmapLayer} min={1} max={50} step={1} style={{width:300}}/>
             </Space>
             <MapWidget map={map} width='100%'/>
         </div>
     );
 };
 
-<RadiusHeatmapSliderExample/>
+<BlurHeatmapSliderExample/>
 ```
