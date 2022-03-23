@@ -15,6 +15,17 @@ const PanelExample = (props) => {
                 <Panel title="Better JS Framework" style={{width: 500}} expanded={props.expanded} titleStyle={{ width: '100%', cursor: 'move'}}>
                     <div>
                         <strong>{props.value}</strong>
+                        {props.showIcon &&
+                            <>
+                                <div style={{position:'relative', paddingBottom: 'calc(79.52% + 44px)'}}>
+                                    <iframe src='https://gfycat.com/ifr/ImaginativeAdoredBluemorphobutterfly' 
+                                            frameborder='0' scrolling='no' width='100%' height='100%'     
+                                            style={{position:'absolute', top:0, left:0}} allowfullscreen>
+                                    </iframe>
+                                </div>
+                                <p><a href="https://gfycat.com/discover/snow-man-gifs">from Snow Man GIFs</a></p>
+                            </>
+                        }
                     </div>
                 </Panel>
         </>
@@ -24,7 +35,7 @@ const PanelExample = (props) => {
 <>
     <PanelExample value="Vue is better than React!!!!"/>
     <PanelExample value="WTF??? React is better than Vue" expanded={false} />
-    <PanelExample value="But belgian beers are better than React, Vue, Angular, Svelte ..." expanded={false} />
+    <PanelExample value="But belgian beers are better than React, Vue, Angular, Svelte ..." expanded={false} showIcon />
 </>
 
 ```
