@@ -7,7 +7,7 @@
     With a few lines of code you will be able to create a powerfull Map application.
 </p>
 <p>
-    React-OlExt is under the xxx License, which allow you to develop open-source or commercial applications 
+    React-OlExt is under the MIT License, which allow you to develop open-source or commercial applications 
     free of charge and modify the source code as well.
 </p>
 <p>
