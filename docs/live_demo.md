@@ -1,4 +1,5 @@
 
+<p>The source code for the examples can be found on <a href="https://github.com/MapUIExtensions/react-olext-examples">github</a></P>
 <p>Live Examples using React-OlExt:</p>
 <ul>
     <li><strong><a href="../examples/basic-app/index.html">Basic-App</a></strong></li>
