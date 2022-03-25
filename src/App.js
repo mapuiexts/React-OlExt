@@ -1,14 +1,21 @@
 import React from 'react';
-import SimpleHeader from './components/header/SimpleHeader/SimpleHeader';
-import MapWidget from './components/widget/map/MapWidget/MapWidget';
-import MapOverviewWidget from './components/widget/map/MapOverviewWidget/MapOverviewWidget';
-import BorderLayout from './components/layout/BorderLayout';
+//import SimpleHeader from './components/header/SimpleHeader/SimpleHeader';
+import {
+  SimpleHeader, 
+  MapWidget,
+  MapOverviewWidget,
+  BorderLayout,
+  LayerTree,
+  WmsGetFeatureInfoButton,
+  GetCoordinateButton,
+  WfsFeatureGrid,
+  ZoomCenterButton,
+  AboutButton,
+  NewImageWMSLayerButton,
+  NewGroupLayerButton
+} from './main.js';
 import {createDefaultOverviewMap} from './util/map';
 import {createDefaultMap} from './util/map';
-import LayerTree from './components/tree/layer/LayerTree/LayerTree';
-import WmsGetFeatureInfoButton from './components/button/wms/WmsGetFeatureInfoButton/WmsGetFeatureInfoButton';
-import GetCoordinateButton from './components/button/coordinate/GetCoordinateButton/GetCoordinateButton';
-import WfsFeatureGrid from './components/grid/feature/WfsFeatureGrid/WfsFeatureGrid';
 import OlSourceVector from 'ol/source/Vector';
 import OlLayerVector from 'ol/layer/Vector';
 import ImageLayer from 'ol/layer/Image';
@@ -17,11 +24,7 @@ import LayerGroup from 'ol/layer/Group';
 import {Space, Menu} from 'antd';
 import {InfoOutlined } from '@ant-design/icons';
 import {get as getProjection} from 'ol/proj';
-import ZoomCenterButton from './components/button/zoom/ZoomCenterButton/ZoomCenterButton';
-import AboutButton from './components/button/common/AboutButton/AboutButton';
-import NewWImageMSLayerButton from './components/button/layer/new/NewImageWMSLayerButton/NewImageWMSLayerButton';
-import NewGroupLayerButton from './components/button/layer/new/NewGroupLayerButton/NewGroupLayerButton';
-//import './App.css';
+import './App.css';
 import 'antd/dist/antd.css';
 import 'ol/ol.css';
 
@@ -140,7 +143,7 @@ const App = () => {
         <Menu mode="horizontal">
           <Menu.Item key="1"><GetCoordinateButton type="primary" map={map} projs={[map.getView().getProjection(), getProjection('EPSG:4326')]}>Get Coordinate</GetCoordinateButton></Menu.Item>
           <Menu.Item key="2"><ZoomCenterButton type="primary" map={map} projs={projs}>Zoom Center</ZoomCenterButton></Menu.Item>
-          <Menu.Item key="3"><NewWImageMSLayerButton type="primary" map={map} wndStyle={{visibility: 'visible', width: 700, maxHeight: 500}}>New WMS Layer</NewWImageMSLayerButton></Menu.Item>
+          <Menu.Item key="3"><NewImageWMSLayerButton type="primary" map={map} wndStyle={{visibility: 'visible', width: 700, maxHeight: 500}}>New WMS Layer</NewImageWMSLayerButton></Menu.Item>
           <Menu.Item key="4"><NewGroupLayerButton type="primary" map={map} wndStyle={{visibility: 'visible', width: 700, maxHeight: 500}}>New Group Layer</NewGroupLayerButton></Menu.Item>
           <Menu.Item key="5"><AboutButton type="primary"/></Menu.Item>
           <Menu.Item key="7"><WmsGetFeatureInfoButton icon= {<InfoOutlined style={{fontSize:20}}/>}  shape="circle" type='primary' style={{backgroundColor:'red'}} map={map} layers={wmsLayers.getLayers().getArray()} wndStyle={{width:600}}/></Menu.Item>

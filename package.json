@@ -1,8 +1,35 @@
 {
-    "name": "react-olext",
+    "name": "@mapuiexts/react-olext",
     "homepage": "https://mapuiextensions.github.io/react-olext.github.io/en/v0.1/examples/basic-app/",
     "version": "0.1.0",
-    "private": true,
+    "description": "A react component to build map applications",
+    "keywords": [
+        "maps",
+        "gis",
+        "openLayers",
+        "react"
+    ],
+    "author": "Paulo Aragao",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/MapUIExtensions/React-OlExt/issues"
+    },
+    "main": "dist/main.js",
+    "files": [
+        "dist",
+        "README.md"
+    ],
+    "types": "./dist/types.d.ts",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/MapUIExtensions/React-OlExt"
+    },
+    "private": false,
+    "babel": {
+        "presets": [
+            "@babel/preset-react"
+        ]
+    },
     "dependencies": {
         "@ant-design/icons": "^4.7.0",
         "@ant-design/react-slick": "^0.27.14",
@@ -28,7 +55,8 @@
         "test": "react-scripts test",
         "eject": "react-scripts eject",
         "styleguide": "styleguidist server",
-        "styleguide:build": "styleguidist build"
+        "styleguide:build": "styleguidist build",
+        "publish:npm": "(if exist dist rmdir /s /q dist) && mkdir dist && babel ./src -d dist --copy-files"
     },
     "eslintConfig": {
         "extends": [
@@ -49,6 +77,8 @@
         ]
     },
     "devDependencies": {
+        "@babel/cli": "^7.17.6",
+        "@babel/preset-react": "^7.16.7",
         "react-styleguidist": "^11.2.0"
     }
 }
