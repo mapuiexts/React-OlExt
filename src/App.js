@@ -24,7 +24,7 @@ import LayerGroup from 'ol/layer/Group';
 import {Space, Menu} from 'antd';
 import {InfoOutlined } from '@ant-design/icons';
 import {get as getProjection} from 'ol/proj';
-import './App.css';
+//import './App.css';
 import 'antd/dist/antd.css';
 import 'ol/ol.css';
 

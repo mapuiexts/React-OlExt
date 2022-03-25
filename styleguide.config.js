@@ -42,25 +42,21 @@ module.exports = {
       },
       {
         name: 'Installation',
-        description: 'To be added.',
         content: 'docs/installation.md',
       },
+      /*
       {
         name: 'Configuration',
         description: 'To be added',
         content: 'docs/configuration.md'
       },
+      */
       {
         name: 'Live Demo',
-        description: 'To be added',
+        //description: 'To be added',
         //external: true,
         //href: 'http://example.com'
         content: 'docs/live_demo.md'
-      },
-      {
-        name: 'Glossary',
-        description: 'To be added',
-        content: 'docs/glossary.md'
       },
       {
         name: 'UI Components',
@@ -348,6 +344,10 @@ module.exports = {
         ],
         exampleMode: 'expand', // 'hide' | 'collapse' | 'expand'
         usageMode: 'expand' // 'hide' | 'collapse' | 'expand'
-      }
+      },
+      {
+        name: 'Glossary',
+        content: 'docs/glossary.md'
+      },
     ]
 }

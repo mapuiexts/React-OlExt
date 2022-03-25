@@ -1,4 +1,4 @@
-import React, {useEffect}  from 'react';
+import React  from 'react';
 import {Menu} from 'antd';
 import {FileAddOutlined  , EditOutlined  , DeleteOutlined , InfoCircleOutlined , ClearOutlined   } from '@ant-design/icons';
 import OlLayerImage from 'ol/layer/Image';

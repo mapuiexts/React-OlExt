@@ -22,7 +22,7 @@ var projObj = {
 };
 proj4.defs('EPSG:31370', projObj['proj4']);
 register(proj4);
-const proj31370 = getProjection('EPSG:31370');
+//const proj31370 = getProjection('EPSG:31370');
 
 export function registerProjection(projectionCode, proj4Definition) {
   let projection = getProjection(projectionCode);

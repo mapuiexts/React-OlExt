@@ -13,6 +13,12 @@
 <p>
     <b>React-OlExt 0.1</b> is the first base version which uses currently the versions OpenLayers 6.13 and React 17.0.2.
 </p>
+<p>
+    For a complete description of all components, check our 
+    <a href="https://mapuiextensions.github.io/react-olext.github.io/en/v0.1/apidoc/">
+        API Documentation
+    </a>.
+</p>
 
 <h2>[2] UI Components</h2>
 <p>
@@ -21,8 +27,9 @@
 </p>
 <p>
     There are hundreds of UI components ready to be used or to be extended.
-    For the complete list and description of all components, check the section "UI Components" (there you can also find the usage of 
-    each component with description of the parameters and a LIVE EDITOR on where you can modify the code and see interactively the result).
+    For the complete list and description of all components, check the section 
+    <a href="https://mapuiextensions.github.io/react-olext.github.io/en/v0.1/apidoc/#/UI%20Components">UI Components</a>: there you can also find the usage of 
+    each component with description of the parameters and a LIVE EDITOR on where you can modify the code and see interactively the result.
 </p>
 <img src="docs/images/intro_1.png" alt="description of image" width="80%">
 <p></p>

@@ -1,2 +1,2 @@
 
-<p> To be added ...</p>
+<p><code>npm i @mapuiexts/react-olext</code></p>
