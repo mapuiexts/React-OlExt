@@ -16,18 +16,18 @@
         </li>
         <li>
             In the <i>property</i> combobox select one of the properties. For instance,
-            "straatnaamid" (street name id in dutch).
+            "straatnaam" (street name in dutch).
         </li>
         <li>
-            In the <i>operator</i> combobox keep the option "Equal To".
+            In the <i>operator</i> combobox keep the option "Like".
         </li>
         <li>
-            In the <i>property value</i> combobox enter the value 30461.
+            In the <i>property value</i> combobox enter the value "Essel*".
         </li>
         <li>
             Click the button <i>Search</i>. As a result, a WFS request will
-            be fired and the features having the street name id equal to
-            30461 will be loaded in the grid.
+            be fired and retrieve all the streets starting with the
+            substring "Essel".
         </li>
         <li>
             Click in the <i>Zoom All</i> button to zoom to all the
@@ -55,26 +55,25 @@
         </li>
     </ol>
     <li>To illustrate a search on the features by Polygon, follow the steps:</li>
-        <ol>
-            <li>
-                Click in the button <i>Search Type</i> and select the option 
-                <i>By Polygon</i> 
-            </li>
-            <li>
-                Click the button <i>Search by Polygon</i>. 
-            </li>
-            <li>
-                Click 3 or more points to define the vertices of the polygon.
-                To finish click the first vertice to close the polygon.
-                As a result, the WFS request will be fired and the features intersecting this
-                polygon will be retrieved and loaded in the grid.
-            </li>
-            <li>
-                Click in the <i>Zoom All</i> button to zoom to all the
-                retrieved features.
-            </li>
-        </ol>
-    </li>
+    <ol>
+        <li>
+            Click in the button <i>Search Type</i> and select the option 
+            <i>By Polygon</i> 
+        </li>
+        <li>
+            Click the button <i>Search by Polygon</i>. 
+        </li>
+        <li>
+            Click 3 or more points to define the vertices of the polygon.
+            To finish click the first vertice to close the polygon.
+            As a result, the WFS request will be fired and the features intersecting this
+            polygon will be retrieved and loaded in the grid.
+        </li>
+        <li>
+            Click in the <i>Zoom All</i> button to zoom to all the
+            retrieved features.
+        </li>
+    </ol>
 </ul>
 
 

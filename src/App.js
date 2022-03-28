@@ -1,5 +1,4 @@
 import React from 'react';
-//import SimpleHeader from './components/header/SimpleHeader/SimpleHeader';
 import {
   SimpleHeader, 
   MapWidget,
@@ -25,7 +24,8 @@ import {Space, Menu} from 'antd';
 import {InfoOutlined } from '@ant-design/icons';
 import {get as getProjection} from 'ol/proj';
 //import './App.css';
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.min.css'; //https://github.com/ant-design/ant-design/issues/33327
+//import 'antd/dist/antd.css';
 import 'ol/ol.css';
 
 

@@ -14,16 +14,23 @@
     <b>React-OlExt 0.1</b> is the first base version which uses currently the versions OpenLayers 6.13 and React 17.0.2.
 </p>
 <p>
-    For a complete description of all components, check our 
+    For a complete description of all components with a LIVE CODE EDITOR, check our 
     <a href="https://mapuiextensions.github.io/react-olext.github.io/en/v0.1/apidoc/">
         API Documentation
+    </a>.
+</p>
+<p>
+    For the source code of some application examples, check our 
+    <a href="https://github.com/MapUIExtensions/react-olext-examples">
+        examples
     </a>.
 </p>
 
 <h2>[2] UI Components</h2>
 <p>
     As shown in the figure below, some included components are: Layer Tree, WFS Feature Grid, WMS Get Feature Info, Overview Map, etc.
-    Click in the link <a href="https://mapuiextensions.github.io/react-olext.github.io/en/v0.1/examples/basic-app/index.html">Basic React-OlExt Application</a> to access this application on-line.
+    Click in the link <a href="https://mapuiextensions.github.io/react-olext.github.io/en/v0.1/examples/basic-app/index.html">Basic React-OlExt Application</a> to access this application on-line. The source code for this application can be found 
+    </a href="https://github.com/MapUIExtensions/react-olext-examples/tree/main/basic-app">here.</a>
 </p>
 <p>
     There are hundreds of UI components ready to be used or to be extended.

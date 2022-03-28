@@ -17,7 +17,7 @@ const defaultKeyFunction = (feature) => feature.ol_uid;
 const defaultColumnDefs = [];
 
 /**
- * <p>Component to load the the openlayers features <i>ol/Feature</i> in the grid:</p>
+ * <p>Component to load the the openlayers features in the grid:</p>
  * <ol>
  *  <li>All the features in the vector layer <i>vectorLayer</i> 
  *      will be loaded in the grid.
@@ -111,8 +111,8 @@ const FeatureGrid = (
      * 
      * Usage: const rowNode = gridOptions.api.getRowNode(key);
      */
-    const getRowNodeId =  useCallback((data) => {
-        return data.key;
+    const getRowId =  useCallback((params) => {
+        return params.data.key;
         //usage: var rowNode = gridOptions.api.getRowNode('aa');
     }, []);
 
@@ -503,8 +503,8 @@ const FeatureGrid = (
                 onRowClicked={onRowClicked}
                 rowSelection={rowSelection}
                 enableCellTextSelection
-                getRowNodeId={getRowNodeId}
-                immutableData={true}
+                getRowId={getRowId}
+                //immutableData={true}
                 //columDefs={[{field: 'make'}, {field:'model'}, {field:'price'}]}
                 defaultColDef={{
                     sortable: true,

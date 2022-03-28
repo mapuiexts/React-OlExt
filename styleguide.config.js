@@ -1,5 +1,21 @@
+const path = require('path');
+const webpackConfig = require('./webpack.base.config.js');
+
 
 module.exports = {
+    //
+    webpackConfig, //https://github.com/styleguidist/react-styleguidist/issues/1910, https://gist.github.com/nebomilic/938f93695b4ed6756fb37db757aca06f
+    components: 'src/**/*.{js,jsx,tsx}',
+    getExampleFilename(componentPath) {
+      return componentPath.replace(/\.js?$/, '.md');
+    },
+    getComponentPathLine(componentPath) {
+      const fileName = path.basename(componentPath, '.js');
+      let dir = path.dirname(componentPath).replace('src', 'dist');
+      dir = dir.split(path.sep).join("/");
+      return `import ${fileName} from '@mapuiexts/react-olext/${dir}/${fileName}';`;
+    },
+    //
     pagePerSection: true,
     assetsDir: './docs',
     tocMode: 'collapse',
