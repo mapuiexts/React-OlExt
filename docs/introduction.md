@@ -19,7 +19,7 @@
     As shown in the figure below, some included components are: Layer Tree, WFS Feature Grid, WMS Get Feature Info, Overview Map, etc.
     Click in the link <a href="../examples/basic-app/index.html">Basic React-OlExt Application</a> to access this application on-line.
     The source code for this application can be found 
-    <a href="https://github.com/MapUIExtensions/react-olext-examples/tree/main/basic-app">here.</a>
+    <a href="https://github.com/mapuiexts/react-olext-examples/tree/main/basic-app">here.</a>
 </p>
 <p>
     There are hundreds of UI components ready to be used or to be extended.
