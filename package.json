@@ -1,6 +1,6 @@
 {
     "name": "@mapuiexts/react-olext",
-    "homepage": "https://mapuiextensions.github.io/react-olext.github.io/en/v0.1/apidoc",
+    "homepage": "https://mapuiexts.github.io/react-olext.github.io/en/v0.1/apidoc",
     "version": "0.1.2",
     "description": "A react component to build map applications",
     "keywords": [
@@ -12,7 +12,7 @@
     "author": "Paulo Aragao",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/MapUIExtensions/React-OlExt/issues"
+        "url": "https://github.com/mapuiexts/React-OlExt/issues"
     },
     "main": "dist/main.js",
     "files": [
@@ -22,7 +22,7 @@
     "types": "./dist/types.d.ts",
     "repository": {
         "type": "git",
-        "url": "https://github.com/MapUIExtensions/React-OlExt"
+        "url": "https://github.com/mapuiexts/React-OlExt"
     },
     "publishConfig": {
         "registry": "https://npm.pkg.github.com"

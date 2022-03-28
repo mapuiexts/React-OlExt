@@ -15,13 +15,13 @@
 </p>
 <p>
     For a complete description of all components with a LIVE CODE EDITOR, check our 
-    <a href="https://mapuiextensions.github.io/react-olext.github.io/en/v0.1/apidoc/">
+    <a href="https://mapuiexts.github.io/react-olext.github.io/en/v0.1/apidoc/">
         API Documentation
     </a>.
 </p>
 <p>
     For the source code of some application examples, check our 
-    <a href="https://github.com/MapUIExtensions/react-olext-examples">
+    <a href="https://github.com/mapuiexts/react-olext-examples">
         examples
     </a>.
 </p>
@@ -29,13 +29,13 @@
 <h2>[2] UI Components</h2>
 <p>
     As shown in the figure below, some included components are: Layer Tree, WFS Feature Grid, WMS Get Feature Info, Overview Map, etc.
-    Click in the link <a href="https://mapuiextensions.github.io/react-olext.github.io/en/v0.1/examples/basic-app/index.html">Basic React-OlExt Application</a> to access this application on-line. The source code for this application can be found 
-    </a href="https://github.com/MapUIExtensions/react-olext-examples/tree/main/basic-app">here.</a>
+    Click in the link <a href="https://mapuiexts.github.io/react-olext.github.io/en/v0.1/examples/basic-app/index.html">Basic React-OlExt Application</a> to access this application on-line. The source code for this application can be found 
+    </a href="https://github.com/mapuiexts/react-olext-examples/tree/main/basic-app">here.</a>
 </p>
 <p>
     There are hundreds of UI components ready to be used or to be extended.
     For the complete list and description of all components, check the section 
-    <a href="https://mapuiextensions.github.io/react-olext.github.io/en/v0.1/apidoc/#/UI%20Components">UI Components</a>: there you can also find the usage of 
+    <a href="https://mapuiexts.github.io/react-olext.github.io/en/v0.1/apidoc/#/UI%20Components">UI Components</a>: there you can also find the usage of 
     each component with description of the parameters and a LIVE EDITOR on where you can modify the code and see interactively the result.
 </p>
 <img src="docs/images/intro_1.png" alt="description of image" width="80%">
