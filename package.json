@@ -24,9 +24,7 @@
         "type": "git",
         "url": "https://github.com/mapuiexts/React-OlExt"
     },
-    "publishConfig": {
-        "registry": "https://npm.pkg.github.com"
-    },
+
     "private": false,
     "dependencies": {
         "@ant-design/icons": "^4.7.0",
