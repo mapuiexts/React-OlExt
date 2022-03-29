@@ -1,0 +1,35 @@
+.ol-scale-line {
+    background: rgba(24, 144, 255, 0.3);
+    border-radius: 4px;
+    bottom: 8px;
+    left: 8px;
+    padding: 2px;
+    position: absolute;
+}
+
+.ol-control button {
+    display: block;
+    margin: 1px;
+    padding: 0;
+    color: white;
+    font-size: 1.14em;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    height: 1.375em;
+    width: 1.375em;
+    line-height: .4em;
+    background-color: rgba(24, 144, 255, 0.5);
+    border: none;
+    border-radius: 2px;
+}
+
+.ol-control button:hover,
+.ol-control button:focus {
+    text-decoration: none;
+    background-color: rgba(24, 144, 255, 0.7);
+}
+
+.ol-overviewmap-box {
+    border: 2px dotted rgba(24, 144, 255, 0.7);
+}

@@ -1,8 +1,7 @@
 .rolext-header-container {
-    display:flex;
+    display: flex;
     width: 100%;
-    /* background: linear-gradient(.25turn, black, #0000A0); */
-    background:black;
+    background: rgba(0, 0, 0, 0.7);
 }
 
 .rolext-header-logo {
@@ -18,12 +17,12 @@
     /* width:20%; */
     justify-content: center;
     align-items: center;
-    border-width:5px;
+    border-width: 5px;
     line-height: 0.8;
 }
 
 .rolext-header-title-main {
-    color: #61dafb;
+    color: #1890ff;
     font-size: 35px;
     text-align: center;
 }
@@ -36,11 +35,12 @@
 
 .rolext-header-content {
     flex: 1 1 70%;
-    justify-content: flex-end ;
+    justify-content: flex-end;
     align-items: center;
-    color: #61dafb;
+    /* color: #61dafb; */
+    color: #1890ff;
     font-weight: bolder;
     display: flex;
-    gap:5px;
+    gap: 5px;
     padding: 5px;
 }

@@ -4,7 +4,7 @@
 <ul>
     <li><strong><a href="../examples/basic-app/index.html">Basic-App</a></strong></li>
     <ul>
-        <li>a basic React-OlExt with some components like LayerTree, WfsFeatureGrid, MapOverview, etc...</li>
+        <li>A basic React-OlExt application with some components like LayerTree, WfsFeatureGrid, MapOverview, etc...</li>
         <li>Build complexes WFS GetFeature queries using several OGC operators: Equal To, Like, Greater Than, Less Than, etc.</li>
         <li>Build complexes WFS GetFeature queries using OGC spatial operators: Filter by Polygon, Bounding Box, etc.</li>
         <li>The Grid column names are automatically retrieved from WFS query</li>
@@ -14,8 +14,8 @@
         <li>Retrieve attributes from a selected feature in the map through WMS GetFeatureInfo request</li>
         <li>Etc.</li>
     </ul>
-    <li><strong>Basic-App-With-Custom-Theme (to be done...)</strong></li>
+    <li><strong><a href="../examples/basic-app-with-custom-theme/index.html">Basic-App-With-Custom-Theme</a></strong></li>
     <ul>
-        <li>a basic React-OlExt with customized colors</li>
+        <li>A basic React-OlExt application with customized colors</li>
     </ul>
 </ul>

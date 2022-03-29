@@ -26,7 +26,8 @@ import {get as getProjection} from 'ol/proj';
 //import './App.css';
 import 'antd/dist/antd.min.css'; //https://github.com/ant-design/ant-design/issues/33327
 //import 'antd/dist/antd.css';
-import 'ol/ol.css';
+//import 'ol/ol.css';
+import './assets/css/react-olext-ol.css';
 
 
 
