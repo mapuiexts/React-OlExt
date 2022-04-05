@@ -29,7 +29,7 @@ const TreeLayerContextMenu = ({
     const createAddWMSLayerButton = (layer) => {
         if(layer && layer instanceof OlLayerGroup) {
             return(
-                <Menu.Item icon={<FileAddOutlined   />}>
+                <Menu.Item key="ADD_WMS_LAYER" icon={<FileAddOutlined   />}>
                     <NewImageWMSLayerButton 
                         size="small"
                         type="text"
@@ -48,7 +48,7 @@ const TreeLayerContextMenu = ({
     const createAddTileWMSLayerButton = (layer) => {
         if(layer && layer instanceof OlLayerGroup) {
             return(
-                <Menu.Item icon={<FileAddOutlined   />}>
+                <Menu.Item key="ADD_TILE_WMS_LAYER" icon={<FileAddOutlined   />}>
                     <NewTileWMSLayerButton 
                         size="small"
                         type="text"
@@ -86,7 +86,7 @@ const TreeLayerContextMenu = ({
     const createAddGroupLayerButton = (layer) => {
         if(layer && layer instanceof OlLayerGroup) {
             return(
-                <Menu.Item icon={<FileAddOutlined   />}>
+                <Menu.Item key="ADD_GROUP_LAYER" icon={<FileAddOutlined   />}>
                     <NewGroupLayerButton 
                         size="small"
                         type="text"
@@ -105,7 +105,7 @@ const TreeLayerContextMenu = ({
     const createAddOSMLayerButton = (layer) => {
         if(layer && layer instanceof OlLayerGroup) {
             return(
-                <Menu.Item icon={<FileAddOutlined   />}>
+                <Menu.Item key="ADD_OSM_LAYER" icon={<FileAddOutlined   />}>
                     <NewOSMLayerButton 
                         size="small"
                         type="text"
@@ -172,7 +172,7 @@ const TreeLayerContextMenu = ({
     const createEditLayerButton = (layer) => {
         if(layer) {
             return (
-                <Menu.Item icon={<EditOutlined />}>
+                <Menu.Item key="EDIT_LAYER" icon={<EditOutlined />}>
                     <EditLayerButton 
                         size="small" 
                         type="text"
@@ -189,7 +189,7 @@ const TreeLayerContextMenu = ({
     const createRemoveLayerButton = (layer) => {
         if(layer && layer !== map.getLayerGroup()) {
             return(
-                <Menu.Item icon={<DeleteOutlined />}>
+                <Menu.Item key="REMOVE_LAYER" icon={<DeleteOutlined />}>
                     <RemoveLayerButton size='small' type="text" map={map} layer={node.ol_layer}>
                         Remove Layer
                     </RemoveLayerButton>
@@ -202,7 +202,7 @@ const TreeLayerContextMenu = ({
     const createClearLayerButton = (layer) => {
         if(layer instanceof OlLayerVector) {
             return (
-                <Menu.Item icon={<ClearOutlined  />}>
+                <Menu.Item key="CLEAR_LAYER" icon={<ClearOutlined  />}>
                     <ClearAllFeaturesButton size='small' type="text" map={map} vectorLayer={node.ol_layer}>
                         Clear Layer
                     </ClearAllFeaturesButton>
@@ -215,7 +215,7 @@ const TreeLayerContextMenu = ({
     const createGetFeatureInfoButton = (map, layer) => {
         if(layer instanceof OlLayerImage || layer instanceof OlLayerGroup) {
             return (
-                <Menu.Item icon={<InfoCircleOutlined />} selectable={false}>
+                <Menu.Item key="GET_FEATURE_INFO" icon={<InfoCircleOutlined />} selectable={false}>
                     <WmsGetFeatureInfoButton 
                         size='small' 
                         type="text"

@@ -73,7 +73,7 @@ const WfsSearchMenuBar = ({
 
     const searchMenu = (
         <Menu>
-            <Menu.Item>
+            <Menu.Item  key="1">
                 <Radio.Group onChange={onChangeSearchType} value={searchType}>
                     <Radio style={radioStyle} value={1}>
                         By Property

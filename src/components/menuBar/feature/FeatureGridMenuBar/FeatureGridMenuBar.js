@@ -12,12 +12,12 @@ const FeatureGridMenuBar = ({
 }) => {
     const zoomMenu = (
         <Menu>
-            <Menu.Item>
+            <Menu.Item  key="1">
                 <ZoomToAllFeaturesButton type="text" map={map} vectorLayer={layer}>
                     Zoom All
                 </ZoomToAllFeaturesButton>
             </Menu.Item>
-            <Menu.Item>
+            <Menu.Item  key="2">
                 <ZoomToSelectedFeaturesButton type='text' map={map} gridApi={gridApi}>
                     Zoom to Selected Feature(s)
                 </ZoomToSelectedFeaturesButton>
@@ -27,12 +27,12 @@ const FeatureGridMenuBar = ({
 
     const clearMenu = (
         <Menu>
-            <Menu.Item>
+            <Menu.Item  key="1">
                 <ClearAllFeaturesButton type='text' vectorLayer={layer}>
                     Clear All
                 </ClearAllFeaturesButton>
             </Menu.Item>
-            <Menu.Item>
+            <Menu.Item  key="2">
                 <ClearSelectedFeaturesButton type="text" gridApi={gridApi} vectorLayer={layer}>
                     Clear Selected Feature(s)
                 </ClearSelectedFeaturesButton>
