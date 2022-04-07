@@ -180,12 +180,8 @@ const FeatureGrid = (
         if(row) {
             //change the data for the grid row
             row.setDataValue(propertyName, propertyValue);
-            //change the value for the data row
-            const result = _rowData.find((item) => item.key === keyFunc(changedFeature));
-            result[propertyName] = propertyValue;
-            setRowData([..._rowData]);
         }
-    }, [_gridApi, _rowData, keyFunc]);
+    }, [_gridApi, keyFunc]);
 
     /**
      * Method to register the feature 'propertychange' event handler in all
@@ -264,9 +260,6 @@ const FeatureGrid = (
         const row = _gridApi.getRowNode(keyFunc(removedFeature));
         if(!row) return;
         _gridApi.applyTransaction({remove: [row.data]});
-        //update data row: commented by Paulo
-        // const newRowData = _rowData.filter((item) => item.key !== keyFunc(removedFeature));
-        // setRowData(newRowData);
     }, [_gridApi, keyFunc, onFeaturePropertyChangeHandler]);
 
 
@@ -288,8 +281,6 @@ const FeatureGrid = (
         //remove the row from the grid
         //_gridApi.applyTransaction({remove: _rowData});
         _gridApi.setRowData([]);
-        //clear the row data: commented by paulo
-        // setRowData([]);
     }, [_gridApi]);
 
     /**

@@ -1,5 +1,7 @@
 
 ```js
+import {useState} from 'react';
+import {Button} from 'antd';
 import {createDefaultMap} from '../../../../util/map';
 import MapWidget from '../../../widget/map/MapWidget/MapWidget';
 import FeatureGrid from './FeatureGrid';
@@ -22,25 +24,50 @@ const initVectorLayer = (map) => {
     return layer;
 };
 
-const onSelectionChanged = (evt) => {
-    evt.api.getSelectedRows().forEach((row) => {
-        console.log('feature:', row.__feature.getProperties());
-    });
-};
+
 
 //create map and vector layer
 const map = createDefaultMap();
 const vectorLayer = initVectorLayer(map);
+const FeatureGridExample = () => {
+    const [selectedFeatures, setSelectedFeatures] = useState([]);
 
-<div style={{display:'flex', height:'500px', width: '100%', flexDirection: 'column', gap:5}}>
-    <MapWidget map={map} height='60%' width='100%'/>
-    <div style={{height:'40%'}}>
-        <FeatureGrid map={map} onSelectionChanged={onSelectionChanged} 
-                    vectorLayer={vectorLayer} columnDefs={[
-            {headerName: 'ID', field: 'PROVINCE_ID'},
-            {headerName: 'Name', field: 'NAME'},
-            {headerName: 'Region', field: 'REGION'}
-        ]}/>
-    </div>
-</div>
+
+    const onSelectionChanged = (evt) => {
+        const features = [];
+        evt.api.getSelectedRows().forEach((row) => {
+            console.log('feature:', row.__feature.getProperties());
+            features.push(row.__feature);
+        });
+        setSelectedFeatures(features);
+    };
+
+    const changeNameHandler = () => {
+        selectedFeatures.forEach((feature) => {
+            feature.set('NAME', feature.get('NAME') + 'X');
+        });
+    }
+
+    return(
+        <div style={{display:'flex', height:'500px', width: '100%', flexDirection: 'column', gap:5}}>
+            <Button type="primary" 
+                    style={{width:'30%'}} 
+                    disabled={selectedFeatures.length === 0}
+                    onClick={changeNameHandler}
+            >
+                Change Name
+            </Button>
+            <MapWidget map={map} height='60%' width='100%'/>
+            <div style={{height:'40%'}}>
+                <FeatureGrid map={map} onSelectionChanged={onSelectionChanged} 
+                            vectorLayer={vectorLayer} columnDefs={[
+                    {headerName: 'ID', field: 'PROVINCE_ID'},
+                    {headerName: 'Name', field: 'NAME'},
+                    {headerName: 'Region', field: 'REGION'}
+                ]}/>
+            </div>
+        </div>
+    );
+}
+<FeatureGridExample/>
 ```
