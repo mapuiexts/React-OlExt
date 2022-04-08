@@ -179,7 +179,8 @@ const FeatureGrid = (
 
         if(row) {
             //change the data for the grid row
-            row.setDataValue(propertyName, propertyValue);
+            if(propertyName in row.data)
+                row.setDataValue(propertyName, propertyValue);
         }
     }, [_gridApi, keyFunc]);
 

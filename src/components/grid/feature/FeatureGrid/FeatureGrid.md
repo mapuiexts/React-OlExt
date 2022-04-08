@@ -1,3 +1,16 @@
+<p>The following functionalities are present in the grid:</p>
+<ul>
+    <li>If the feature is selected in the grid, it will be highlighted in the map</li>
+    <li>Multiple selection is possible by default holding the shift key and selecting the rows in the grid</li>
+    <ul>
+        <li>If you need a single selection, set the value "single" for the property <code>rowSelection</code></li>
+    </ul>
+    <li>If the feature property is changed, the result is reflected in the grid</li>
+    <ul>
+        <li>See the result after clicking in the "Change Name" button</li>
+    </ul>
+</ul>
+
 
 ```js
 import {useState} from 'react';
