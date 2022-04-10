@@ -137,7 +137,6 @@ const magnification = 5;
 
 const App = () => {
   return (
-    // <MapProvider map={map}>
     <BorderLayout split="horizontal" minSize={0} maxSize={150} defaultSize={150} onDragFinished={dragHandler} >
       <Space direction='vertical' style={{width:"100%", minWidth:'100%', maxWidth:'100%'}}>
         <SimpleHeader map={map}/>   
@@ -152,20 +151,19 @@ const App = () => {
       </Space>
       <BorderLayout split="horizontal" defaultSize={250} primary="second" onDragFinished={dragHandler}>
         <BorderLayout split="vertical" defaultSize={250} onDragFinished={dragHandler}>
-          {/* <VBoxLayout> */}
             <div style={{width:"100%"}}>
               <LayerTree map={map}/>
             </div>
-          {/* </VBoxLayout> */}
           <BorderLayout split="vertical" primary="second" defaultSize={350} maxSize={400} minSize={0} onDragFinished={dragHandler}>
               <MapWidget map={map}/>
               <MapOverviewWidget parentMap={map} map={overviewMap} magnification={magnification}/>
           </BorderLayout>
         </BorderLayout>
-        <WfsFeatureGrid url={url} wfsOptions={wfsOptions} map={map} vectorLayer={wfsLayer}/>
+        <div style={{height:'80%', width:'100%'}}>
+          <WfsFeatureGrid url={url} wfsOptions={wfsOptions} map={map} vectorLayer={wfsLayer}/>
+        </div>
       </BorderLayout>
     </BorderLayout>
-    // </MapProvider>
   );
 };
 

@@ -1,4 +1,4 @@
-import React, {useState, useCallback, useEffect} from 'react';
+import React, {useState, useCallback, useEffect, useMemo} from 'react';
 import PropTypes from 'prop-types';
 import olMap from 'ol/Map';
 import olVectorLayer from 'ol/layer/Vector';
@@ -8,13 +8,15 @@ import OlStyleCircle from 'ol/style/Circle';
 import OlStyleStroke from 'ol/style/Stroke';
 import OlGeomGeometry from 'ol/geom/Geometry';
 import {zoomToLayer as zoomToLyr} from '../../../../util/map';
-import { AgGridColumn, AgGridReact } from 'ag-grid-react';
+import { AgGridReact } from 'ag-grid-react';
 import FeatureGridMenuBar from '../../../menuBar/feature/FeatureGridMenuBar/FeatureGridMenuBar';
+import usePrevious from '../../../../hooks/common/usePrevious';
+import defined from '../../../../core/defined';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-balham.css';
 
 const defaultKeyFunction = (feature) => feature.ol_uid;
-const defaultColumnDefs = [];
+
 
 /**
  * <p>Component to load the the openlayers features in the grid:</p>
@@ -44,7 +46,7 @@ const FeatureGrid = (
     map,
     vectorLayer,
     zoomToLayer = true,
-    columnDefs = defaultColumnDefs,
+    columnDefs = null,
     rowSelection= 'multiple', //'single',
     featureStyle =  new OlStyle({
         stroke: new OlStyleStroke({
@@ -98,12 +100,17 @@ const FeatureGrid = (
     ...otherProps
 } ) => {
 
-    if(!columnDefs) columnDefs = [];
-    //const [_columnDefs, setColumnDefs] = useState(columnDefs);
+    const [currentColumnDefs, setCurrentColumnDefs] = useState(columnDefs);
     const [_rowData, setRowData] = useState([]);
     const [_selectedFeatures, setSelectedFeatures] = useState([]);
     const [_gridApi, setGridApi] = useState(null);
     const [, setGridColumnApi] = useState();
+
+    const previousColumnDefs = usePrevious(columnDefs);
+    if(columnDefs !== previousColumnDefs && columnDefs !== currentColumnDefs) {
+        setCurrentColumnDefs(columnDefs);
+    }
+
 
     /**
      * callback used to pass as attribute for ag-grid
@@ -324,17 +331,22 @@ const FeatureGrid = (
      * in the vector layer
      */
 
-    const buildColumnDefs = (columnDefs, vectorLayer) => {
-        if((columnDefs.length === 0) && vectorLayer 
-            && vectorLayer.getSource().getFeatures().length > 0) {
+    const buildColumnDefs = useCallback((vectorLayer) => {
+        if((!defined(currentColumnDefs) || currentColumnDefs.length === 0)
+            && defined(vectorLayer) && vectorLayer.getSource().getFeatures().length > 0) {
+        // if((columnDefs.length === 0) && vectorLayer 
+        //     && vectorLayer.getSource().getFeatures().length > 0) {
             const features = vectorLayer.getSource().getFeatures();
             if(features && features.length > 0) {
                 //retrieve the first feature and its properties
                 const feature = features[0];
                 const properties = feature.getProperties();
+                const geometryName = feature.getGeometryName();
+                const gridColumnDefs = [];
+                //build grid properties ignoring geometry property
                 for (const field in properties) {
-                    if(field !== feature.getGeometryName()) {
-                        columnDefs.push({
+                    if(field !== geometryName) {
+                        gridColumnDefs.push({
                             field: field,
                             sortable:true,
                             filter:true,
@@ -342,33 +354,10 @@ const FeatureGrid = (
                         });
                     }
                 }
+                setCurrentColumnDefs(gridColumnDefs);
             }
         }
-    };
-    
-    // const buildColumnDefs = useCallback(() => {
-    //     if((! _columnDefs || _columnDefs.length === 0) && vectorLayer 
-    //         && vectorLayer.getSource().getFeatures().length > 0) {
-    //         const newColumnDefs = [];
-    //         const features = vectorLayer.getSource().getFeatures();
-    //         if(features && features.length > 0) {
-    //             //retrieve the first feature and its properties
-    //             const feature = features[0];
-    //             const properties = feature.getProperties();
-    //             for (const field in properties) {
-    //                 if(field !== feature.getGeometryName()) {
-    //                     newColumnDefs.push({
-    //                         field: field,
-    //                         sortable:true,
-    //                         filter:true,
-    //                         resizable:true
-    //                     });
-    //                 }
-    //             }
-    //         }
-    //         setColumnDefs(newColumnDefs);
-    //     }
-    // }, [_columnDefs, vectorLayer]);
+    }, [currentColumnDefs]);
 
     /**
      * Event Handler fired when the grid is ready.
@@ -378,6 +367,7 @@ const FeatureGrid = (
     const onInternalGridReady = useCallback((params) => {
         setGridApi(params.api);
         setGridColumnApi(params.columnApi);
+        params.api.sizeColumnsToFit();
         onGridReady && onGridReady(params);
     }, [onGridReady]);
    
@@ -448,10 +438,10 @@ const FeatureGrid = (
      * the features present in the vector layer and its properties
      */
     useEffect(() => {
-        buildColumnDefs(columnDefs, vectorLayer);
+        buildColumnDefs(vectorLayer);
         const data = buildRowDataFromLayer(vectorLayer);
         setRowData(data);
-    }, [columnDefs, buildRowDataFromLayer, vectorLayer]);
+    }, [buildColumnDefs, buildRowDataFromLayer, vectorLayer]);
 
 
     /**
@@ -486,45 +476,34 @@ const FeatureGrid = (
         }
     }, [registerLayerEventHandlers, unRegisterLayerEventHandlers, vectorLayer]);
 
-    return(
-        //<div className="ag-theme-balham" style={ { height: "100", width: "100%" } }>
-            <AgGridReact
-                className={className}
-                onGridReady={onInternalGridReady}
-                onSelectionChanged={onInternalSelectionChanged}
-                onRowClicked={onRowClicked}
-                rowSelection={rowSelection}
-                enableCellTextSelection
-                getRowId={getRowId}
-                //immutableData={true}
-                //columDefs={[{field: 'make'}, {field:'model'}, {field:'price'}]}
-                defaultColDef={{
-                    sortable: true,
-                    resizable: true,
-                    filter: true,
-                    //headerComponentFramework: SortableHeaderComponent,
-                    headerComponentParams: {
-                        menuIcon: 'fa-bars'
-                    }
-                }}
-                rowData={_rowData}
-                {...otherProps}
-            >
-                    {columnDefs.map((column, index) => {
-                        return(
-                            <AgGridColumn 
-                                key={String(index)}
-                                field= {'field' in column ? column.field: null} 
-                                headerName= {'headerName' in column ? column.headerName: null}
-                            />
-                        );
-                    })}
-                {/* <AgGridColumn field="USE" headerName="USE" sortable filter></AgGridColumn>
-                <AgGridColumn field="RS" sortable filter></AgGridColumn>
-                <AgGridColumn field="RS_ALT" sortable filter></AgGridColumn> */}
-            </AgGridReact>
-        //</div>
+    const defaultColDef = useMemo(() => {
+        return {
+            sortable: true,
+            resizable: true,
+            filter: true,
+            flex: 1,
+            minWidth: 100,
+            headerComponentParams: {
+                menuIcon: 'fa-bars'
+            }
+        };
+      }, []);
 
+    return(
+        <AgGridReact
+            {...otherProps}
+            className={className}
+            onGridReady={onInternalGridReady}
+            onSelectionChanged={onInternalSelectionChanged}
+            onRowClicked={onRowClicked}
+            rowSelection={rowSelection}
+            enableCellTextSelection
+            getRowId={getRowId}
+            columnDefs={currentColumnDefs}
+            defaultColDef={defaultColDef}
+            rowData={_rowData}
+            
+        />
     );
 };
 

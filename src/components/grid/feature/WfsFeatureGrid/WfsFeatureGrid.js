@@ -155,7 +155,7 @@ const WfsFeatureGrid = (
     return(
         // <VBoxLayout>
             <div style={ { height: "100%", width: "100%" } }>
-                <Space wrap /*style={{ margin: "2px" }}*/ >
+                <Space wrap style={{ marginBottom: 3, marginTop: 3, marginLeft: 3}} >
                     <FeatureGrid.MenuBar map={map} layer={vectorLayer} gridApi={gridApi} />
                     <Divider type="vertical" />
                     <WfsFeatureGrid.SearchMenuBar map={map} layer={vectorLayer} url={url} 
