@@ -8,10 +8,11 @@
 </p>
 <p>
     React-OlExt is under the MIT License, which allow you to develop open-source or commercial applications 
-    free of charge and modify the source code as well.
+    free of charge. The source code can be found 
+    <a href="https://github.com/mapuiexts/React-OlExt">here.</a>
 </p>
 <p>
-    <b>React-OlExt 0.1</b> is the first base version which uses currently the versions OpenLayers 6.13 and React 17.0.2.
+    <b>React-OlExt 0.1</b> is the first base version which uses currently the versions OpenLayers 6.13 and React 17.
 </p>
 
 <h2>[2] UI Components</h2>

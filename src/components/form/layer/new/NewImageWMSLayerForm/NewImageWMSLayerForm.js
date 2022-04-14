@@ -4,6 +4,8 @@ import OlImageWMSSource from 'ol/source/ImageWMS';
 import NewLayerForm from '../NewLayerForm/NewLayerForm';
 import GeneralTab from '../../tabs/general/GeneralTab/GeneralTab';
 import ImageWMSSourceTab  from '../../tabs/source/ImageWMSSourceTab/ImageWMSSourceTab';
+import {DEFAULT_WMS_IMAGE_FORMAT} from '../../../../../core/constants';
+import {DEFAULT_WMS_VERSION } from 'ol/source/common';
 
 const defaultWMSLayerOpts = {
     opacity: 1,
@@ -17,10 +19,9 @@ const defaultWMSLayerOpts = {
     source: {
         ratio: 1,
         params: {
-            FORMAT: 'image/png',
+            FORMAT: DEFAULT_WMS_IMAGE_FORMAT,
             STYLES: '',
-            VERSION: '1.1.1',
-            FEATURE_COUNT: 50
+            VERSION: DEFAULT_WMS_VERSION,
         }
     }
 };

@@ -215,7 +215,9 @@ const TreeLayerContextMenu = ({
     const createGetFeatureInfoButton = (map, layer) => {
         if(layer instanceof OlLayerImage || layer instanceof OlLayerGroup) {
             return (
-                <Menu.Item key="GET_FEATURE_INFO" icon={<InfoCircleOutlined />} selectable={false}>
+                <Menu.Item key="GET_FEATURE_INFO" icon={<InfoCircleOutlined />} 
+                           selectable={false ? 0 : 1} //https://github.com/styled-components/styled-components/issues/1198
+                >
                     <WmsGetFeatureInfoButton 
                         size='small' 
                         type="text"
@@ -225,7 +227,7 @@ const TreeLayerContextMenu = ({
                     >
                         Feature Info
                     </WmsGetFeatureInfoButton>
-                 </Menu.Item>
+                </Menu.Item>
             );
         }
         return null;

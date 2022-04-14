@@ -8,7 +8,7 @@ const getOpts = (layer) => {
             source: {
                 url: layer.getSource().getUrl(), 
                 params: {
-                    FEATURE_COUNT: layer.getSource().getParams().FEATURE_COUNT,
+                    FEATURE_COUNT: layer.getSource().getParams().FEATURE_COUNT || undefined,
                     FORMAT: layer.getSource().getParams().FORMAT,
                     LAYERS: layer.getSource().getParams().LAYERS,
                     STYLES: layer.getSource().getParams().STYLES,
@@ -40,11 +40,11 @@ const ImageWMSSourceTab = (props) => {
             <Form.Item
                 name={['source', 'params', 'FEATURE_COUNT']}
                 label="Feature Count"
-                rules={[
-                    {
-                        required: true,
-                    },
-                ]}
+                // rules={[
+                //     {
+                //         //required: true,
+                //     },
+                // ]}
             >
                 <InputNumber/>
             </Form.Item>
@@ -54,7 +54,7 @@ const ImageWMSSourceTab = (props) => {
                 label="Format"
                 rules={[
                     {
-                        required: true,
+                        //required: true,
                     },
                 ]}
             >
@@ -85,7 +85,7 @@ const ImageWMSSourceTab = (props) => {
                 label="Version"
                 rules={[
                     {
-                        required: true,
+                        //required: true,
                     },
                 ]}
             >

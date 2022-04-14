@@ -4,6 +4,7 @@ import Header from '../Header/Header';
 import app_logo from '../../../assets/images/react-olext_logo.svg';
 import CurrentCoordinateText from '../../text/coordinate/CurrentCoordinateText/CurrentCoordinateText';
 import CurrentScaleText from '../../text/scale/CurrentScaleText/CurrentScaleText';
+import {API_DOC_LINK} from '../../../core/constants';
 
 /**
  * <p>
@@ -19,7 +20,11 @@ const SimpleHeader = ({
     map,
     style,
     logo = app_logo,
-    mainTitle = 'React-Olext',
+    mainTitle = (<a href={API_DOC_LINK} target="_blank" 
+                    rel="noopener noreferrer" title="React-Olext API Doc"
+                 >
+                    React-Olext
+                 </a>),
     subTitle='Components for OpenLayers',
     ...otherProps
 }) => {

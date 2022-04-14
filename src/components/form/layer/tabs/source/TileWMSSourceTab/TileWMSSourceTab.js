@@ -102,11 +102,11 @@ const TileWMSSourceTab = (
             <Form.Item
                 name={['source', 'params', 'FEATURE_COUNT']}
                 label="Feature Count"
-                rules={[
-                    {
-                        required: true,
-                    },
-                ]}
+                // rules={[
+                //     {
+                //         required: true,
+                //     },
+                // ]}
             >
                 <InputNumber/>
             </Form.Item>
@@ -115,11 +115,11 @@ const TileWMSSourceTab = (
             <Form.Item
                 name={['source', 'params', 'FORMAT']}
                 label="Format"
-                rules={[
-                    {
-                        required: true,
-                    },
-                ]}
+                // rules={[
+                //     {
+                //         required: true,
+                //     },
+                // ]}
             >
                 <Input/>
             </Form.Item>
@@ -149,11 +149,11 @@ const TileWMSSourceTab = (
             <Form.Item
                 name={['source', 'params', 'VERSION']}
                 label="Version"
-                rules={[
-                    {
-                        required: true,
-                    },
-                ]}
+                // rules={[
+                //     {
+                //         required: true,
+                //     },
+                // ]}
             >
                 <Input/>
             </Form.Item>
