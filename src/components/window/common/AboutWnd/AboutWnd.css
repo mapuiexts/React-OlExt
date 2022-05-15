@@ -19,3 +19,17 @@
     text-align: center;
     margin:0;
 }
+
+.rolext-about-wnd label {
+    color: #F7FFF7;
+    font-size: 25px;
+    text-align: center;
+    margin:0;
+}
+
+.rolext-about-wnd div p {
+    color: rgb(224, 224, 224);
+    font-size: 25px;
+    font-style: italic;
+    font-family: monospace;
+}

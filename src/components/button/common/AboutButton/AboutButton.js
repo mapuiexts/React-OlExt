@@ -19,6 +19,7 @@ import AboutWnd from '../../../window/common/AboutWnd/AboutWnd';
 const AboutButton = ({
     wndStyle, 
     children = 'About',
+    content = 'Content about your application goes here...',
     ...otherProps
 }) => {
 
@@ -42,7 +43,7 @@ const AboutButton = ({
     return (
         <React.Fragment>
             <Button onClick={onShowWindow} {...otherProps}>{children}</Button>
-            {visibleWnd && <AboutWnd onClose={onCloseWindow} style={wndStyle} visible={visibleWnd}/>}
+            {visibleWnd && <AboutWnd onClose={onCloseWindow} style={wndStyle} visible={visibleWnd} content={content} />}
         </React.Fragment>
     );
     
@@ -58,7 +59,12 @@ AboutButton.propTypes = {
      /**
      * The child node for the About Button
      */
-    children: PropTypes.node
+    children: PropTypes.node,
+
+    /**
+     * The custom content for the About Button
+     */
+    content: PropTypes.string
 };
 
 export default AboutButton;
