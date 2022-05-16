@@ -64,7 +64,10 @@ AboutButton.propTypes = {
     /**
      * The custom content for the About Button
      */
-    content: PropTypes.string
+    content: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.node
+    ])
 };
 
 export default AboutButton;

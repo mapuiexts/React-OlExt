@@ -61,6 +61,8 @@ import MapProjectionSelect from './components/select/projection/MapProjectionSel
 import BlurHeatmapSlider from './components/slider/heatmap/BlurHeatmapSlider/BlurHeatmapSlider';
 import RadiusHeatmapSlider from './components/slider/heatmap/RadiusHeatmapSlider/RadiusHeatmapSlider';
 import OpacityLayerSlider from './components/slider/layer/OpacityLayerSlider/OpacityLayerSlider';
+//tabs
+import BottomTabs from './components/tabs/common/MainTabs/MainTabs';
 //text
 import CurrentCoordinateText from './components/text/coordinate/CurrentCoordinateText/CurrentCoordinateText';
 import CurrentScaleText from './components/text/scale/CurrentScaleText/CurrentScaleText';
@@ -139,6 +141,8 @@ export {
     BlurHeatmapSlider,
     RadiusHeatmapSlider,
     OpacityLayerSlider,
+    //tabs
+    BottomTabs,
     //text
     CurrentCoordinateText,
     CurrentScaleText,

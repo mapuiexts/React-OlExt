@@ -288,6 +288,19 @@ module.exports = {
             ]
           },
           {
+            name: 'tabs',
+            sections: [
+              {
+                name: 'common',
+                components: [
+                  'src/components/tabs/common/**/*.{js,jsx,ts,tsx}'
+                ],
+                exampleMode: 'expand', // 'hide' | 'collapse' | 'expand'
+                usageMode: 'expand', // 'hide' | 'collapse' | 'expand'
+              }
+            ]
+          },
+          {
             name: 'text',
             //content: 'docs/ui.md',
             components: [

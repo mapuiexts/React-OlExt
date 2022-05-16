@@ -7,6 +7,7 @@ import olVectorLayer from 'ol/layer/Vector';
 import FeatureGrid from '../FeatureGrid/FeatureGrid';
 import WfsSearchMenuBar from '../../../menuBar/wfs/search/WfsSearchMenuBar/WfsSearchMenuBar';
 import useWFSDescribeFeatureType from '../../../../hooks/wfs/useWFSDescribeFeatureType';
+import './WfsFeatureGrid.css';
 
 
 const defaultKeyFunction = (feature) => feature.ol_uid;
@@ -153,15 +154,15 @@ const WfsFeatureGrid = (
     }, [internalColumnDefs, vectorLayer, data, isLoading, error]);
 
     return(
-        // <VBoxLayout>
-            <div style={ { height: "100%", width: "100%" } }>
-                <Space wrap style={{ marginBottom: 3, marginTop: 3, marginLeft: 3}} >
-                    <FeatureGrid.MenuBar map={map} layer={vectorLayer} gridApi={gridApi} />
-                    <Divider type="vertical" />
-                    <WfsFeatureGrid.SearchMenuBar map={map} layer={vectorLayer} url={url} 
-                        wfsOptions={wfsOptions} fetchOptions={fetchOptions} columnDefs={internalColumnDefs}
-                    />
-                </Space>
+        <div className='rolext-wfsfeaturegrid'/*style={ { height: "100%", width: "100%" } }*/>
+            <Space wrap className='rolext-wfsfeaturegrid-menubar-container'>
+                <FeatureGrid.MenuBar map={map} layer={vectorLayer} gridApi={gridApi} />
+                <Divider type="vertical" />
+                <WfsFeatureGrid.SearchMenuBar map={map} layer={vectorLayer} url={url} 
+                    wfsOptions={wfsOptions} fetchOptions={fetchOptions} columnDefs={internalColumnDefs}
+                />
+            </Space>
+            <div className='rolext-wfsfeaturegrid-content-container' /*style={{height:'80%'}}*/>
                 <FeatureGrid
                     map={map}
                     vectorLayer={vectorLayer}
@@ -178,7 +179,7 @@ const WfsFeatureGrid = (
                     {...otherProps}
                 />
             </div>
-        // </VBoxLayout> 
+        </div>
     );
 };
 

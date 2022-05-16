@@ -23,14 +23,14 @@ const AboutWnd = ({
                 <br/>
                 <ul>
                     <li>
-                        <label><a rel="noreferrer" href='https://mapuiexts.github.io/react-olext.github.io/en/v0.1/apidoc/' target='_blank' >API Docs</a></label>         
+                        <label className="rolext-about-wnd-link"><a rel="noreferrer" href='https://mapuiexts.github.io/react-olext.github.io/en/v0.1/apidoc/' target='_blank' >API Docs</a></label>         
                     </li>
                     <li>
-                        <label><a rel="noreferrer" href='https://github.com/mapuiexts/React-OlExt' target='_blank' >Source Code</a></label>
+                        <label className="rolext-about-wnd-link "><a rel="noreferrer" href='https://github.com/mapuiexts/React-OlExt' target='_blank' >Source Code</a></label>
                     </li>
                 </ul>
-                <div>
-                    <p>{content}</p>
+                <div className="rolext-about-wnd-content">
+                    {content}
                 </div>
             </div>
       </Window>
