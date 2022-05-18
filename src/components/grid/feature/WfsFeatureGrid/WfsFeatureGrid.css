@@ -1,16 +1,18 @@
 .rolext-wfsfeaturegrid {
+    display: flex;
+    flex-flow: column;
     height: 100%;
     width: 100%;
-    margin-left: 0.2rem;
     box-sizing: border-box;
 }
 
 .rolext-wfsfeaturegrid-menubar-container {
+    flex: 0 1 auto;
     margin-bottom: 0.2rem;
     margin-top: 0.2rem;
-    height: 3rem;
+    margin-left: 0.2rem;
 }
 
 .rolext-wfsfeaturegrid-content-container {
-    height: calc(100% - 3rem);
+    flex: 1 1 auto;
 }

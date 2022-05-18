@@ -1,5 +1,4 @@
 import {Tabs} from 'antd';
-import PropTypes from 'prop-types';
 import useMainTabs from '../../../../hooks/ui/useMainTabs'
 import './MainTabs.css';
 
