@@ -42,6 +42,7 @@ import SimpleHeader from './components/header/SimpleHeader/SimpleHeader';
 //layout
 import BorderLayout from './components/layout/BorderLayout';
 //menuBar
+import MenuBar from './components/menuBar/common/MenuBar/MenuBar';
 import FeatureGridMenuBar from './components/menuBar/feature/FeatureGridMenuBar/FeatureGridMenuBar';
 import WfsSearchByBBoxMenuBar from './components/menuBar/wfs/search/WfsSearchByBBoxMenuBar/WfsSearchByBBoxMenuBar';
 import WfsSearchByCQLFilterMenuBar from './components/menuBar/wfs/search/WfsSearchByCQLFilterMenuBar/WfsSearchByCQLFilterMenuBar';
@@ -49,6 +50,7 @@ import WfsSearchByPointMenuBar from './components/menuBar/wfs/search/WfsSearchBy
 import WfsSearchByPolygonMenuBar from './components/menuBar/wfs/search/WfsSearchByPolygonMenuBar/WfsSearchByPolygonMenuBar';
 import WfsSearchByPropertyMenuBar from './components/menuBar/wfs/search/WfsSearchByPropertyMenuBar/WfsSearchByPropertyMenuBar';
 import WfsSearchMenuBar from './components/menuBar/wfs/search/WfsSearchMenuBar/WfsSearchMenuBar';
+
 //panel
 import Panel from './components/panel/Panel/Panel';
 //popup
@@ -129,6 +131,8 @@ export {
     WfsSearchByPolygonMenuBar,
     WfsSearchByPropertyMenuBar,
     WfsSearchMenuBar,
+    //menuBar
+    MenuBar,
     //panel
     Panel,
     //popup

@@ -1,20 +1,27 @@
 import React, {useState} from 'react';
-import { Space, Dropdown, Button, Radio, Divider, Menu } from 'antd';
+import {Dropdown, Button, Radio, Divider, Menu } from 'antd';
+import MenuBar from '../../../common/MenuBar/MenuBar';
 import WfsSearchByPropertyMenuBar from '../WfsSearchByPropertyMenuBar/WfsSearchByPropertyMenuBar';
 import WfsSearchByPointMenuBar from '../WfsSearchByPointMenuBar/WfsSearchByPointMenuBar';
 import WfsSearchByBBoxMenuBar from '../WfsSearchByBBoxMenuBar/WfsSearchByBBoxMenuBar';
 import WfsSearchByPolygonMenuBar from '../WfsSearchByPolygonMenuBar/WfsSearchByPolygonMenuBar';
 import WfsSearchByCQLFilterMenuBar from '../WfsSearchByCQLFilterMenuBar/WfsSearchByCQLFilterMenuBar';
+import useWindowSize from '../../../../../hooks/ui/useWindowSize';
+import {convertRemToPixels} from '../../../../../core/deviceUnits';
 
 const WfsSearchMenuBar = ({
     map,
     layer,
     url,
     wfsOptions,
-    columnDefs
+    columnDefs,
+    breakpoint=convertRemToPixels(75),
+    title="Search"
 }) => {
 
     const [searchType, setSearchType] = useState(1);
+    const { width } = useWindowSize();
+    //const direction = width > breakpoint  ?
    
 
     const onChangeSearchType = (e) => {
@@ -32,7 +39,8 @@ const WfsSearchMenuBar = ({
             case 1:
                 childSearchPanel = (
                     <WfsSearchByPropertyMenuBar url={url} map={map} layer={layer} 
-                                              wfsOptions={wfsOptions} columnDefs={columnDefs}
+                                                direction={width > breakpoint ? "horizontal" : "vertical"}
+                                                wfsOptions={wfsOptions} columnDefs={columnDefs}
                     />
                 );
                 break;
@@ -97,14 +105,16 @@ const WfsSearchMenuBar = ({
 
 
     return(
-        <Space>
+        // <Space>
+        <MenuBar breakpoint={breakpoint} title={title}>
             <Dropdown overlay={searchMenu} placement="bottomLeft">
                 <Button>Search Type</Button>
             </Dropdown>
             <Divider type="vertical" />
             {childSearchPanel}
             {/* <WfsSearchByPropertyMenuBar url={url} map={map} layer={layer} wfsOptions={wfsOptions} columnDefs={columnDefs}/> */}
-        </Space>
+        </MenuBar>
+        // </Space>
     );
 
 };

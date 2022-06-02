@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   SimpleHeader, 
+  MenuBar,
   MapWidget,
   MapOverviewWidget,
   BorderLayout,
@@ -21,14 +22,13 @@ import OlLayerVector from 'ol/layer/Vector';
 import ImageLayer from 'ol/layer/Image';
 import ImageWMSSource from 'ol/source/ImageWMS';
 import LayerGroup from 'ol/layer/Group';
-import {Space} from 'antd';
 import {InfoOutlined } from '@ant-design/icons';
 import {get as getProjection} from 'ol/proj';
-import './App.css';
 import 'antd/dist/antd.min.css'; //https://github.com/ant-design/ant-design/issues/33327
 //import 'antd/dist/antd.css';
-//import 'ol/ol.css';
+import 'ol/ol.css';
 import './assets/css/react-olext-ol.css';
+import './App.css';
 
 
 
@@ -138,20 +138,18 @@ const magnification = 5;
 
 const App = () => {
   return (
-    <BorderLayout split="horizontal" minSize={0} maxSize={150} defaultSize={120} onDragFinished={dragHandler} >
-      <Space direction='vertical' style={{width:"100%", minWidth:'100%', maxWidth:'100%'}}>
-        <SimpleHeader map={map}/> 
-        <Space style={{marginLeft:4}}>
-        {/* <Menu mode="horizontal"> */}
+    <BorderLayout split="horizontal" minSize={96} maxSize={96} defaultSize={96} onDragFinished={dragHandler} >
+      <div style={{width:"100%", display:'flex', flexDirection:'column'}}>
+        <SimpleHeader map={map} style={{height:'64px'}}/> 
+        <MenuBar>
           <GetCoordinateButton type="primary" map={map} projs={[map.getView().getProjection(), getProjection('EPSG:4326')]}>Get Coordinate</GetCoordinateButton>
           <ZoomCenterButton type="primary" map={map} projs={projs}>Zoom Center</ZoomCenterButton>
-          <NewImageWMSLayerButton type="primary" map={map} wndStyle={{visibility: 'visible', width: 700, maxHeight: 500}}>New WMS Layer</NewImageWMSLayerButton>
-          <NewGroupLayerButton type="primary" map={map} wndStyle={{visibility: 'visible', width: 700, maxHeight: 500}}>New Group Layer</NewGroupLayerButton>
+          <NewImageWMSLayerButton type="primary" map={map} wndStyle={{visibility: 'visible', width: '50vh', maxHeight: 500}}>New WMS Layer</NewImageWMSLayerButton>
+          <NewGroupLayerButton type="primary" map={map} wndStyle={{visibility: 'visible', width: '50vh', maxHeight: 500}}>New Group Layer</NewGroupLayerButton>
           <AboutButton type="primary"/>
           <WmsGetFeatureInfoButton icon= {<InfoOutlined style={{fontSize:20}}/>}  shape="circle" type='primary' style={{backgroundColor:'red'}} map={map} layers={wmsLayers.getLayers().getArray()} wndStyle={{width:600}}/>
-        {/* </Menu> */}
-        </Space>  
-      </Space>
+        </MenuBar>
+      </div>
       <BorderLayout split="horizontal" defaultSize={250} primary="second" onDragFinished={dragHandler}>
         <BorderLayout split="vertical" defaultSize={250} onDragFinished={dragHandler}>
             <div style={{width:"100%"}}>

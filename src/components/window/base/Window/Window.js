@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Draggable from 'react-draggable';
 import Panel from '../../../panel/Panel/Panel';
 import {Divider, Space, Button} from 'antd';
+import {convertRemToPixels} from '../../../../core/deviceUnits';
 import './Window.css';
 
 /**
@@ -16,7 +17,7 @@ const Window = ({
     preTools = undefined,
     postTools = undefined, 
     style = {}, 
-    title = 'My Window',
+    title = 'Untitled',
     onOk = undefined,
     onCancel = undefined,
     onClose = undefined,
@@ -28,8 +29,27 @@ const Window = ({
     const [dragDisabled, setDragDisabled] = useState(true);
     const draggleRef = useRef(null);
 
+
+
+    const onStart = useCallback((event, uiData) => {
+        const { /*clientWidth,*/ clientHeight } = window?.document?.documentElement;
+        const targetRect = draggleRef?.current?.getBoundingClientRect();
+        
+        setBounds({
+            //left: -targetRect?.left + uiData?.x,
+            //right: clientWidth - (targetRect?.right - uiData?.x),
+
+            top: -targetRect?.top + uiData?.y,
+           
+            //bottom: clientHeight -  (targetRect?.bottom - uiData?.y)
+            //bottom: 1.10*clientHeight - (targetRect?.bottom - uiData?.y),
+            bottom: clientHeight - convertRemToPixels(20),
+          },);
+    },[]);
+
    
 
+    /*
     const onStart = useCallback((event, uiData) => {
         const { clientWidth, clientHeight } = window?.document?.documentElement;
         const targetRect = draggleRef?.current?.getBoundingClientRect();
@@ -38,9 +58,10 @@ const Window = ({
             right: clientWidth - (targetRect?.right - uiData?.x),
             top: -targetRect?.top + uiData?.y,
             bottom: clientHeight - (targetRect?.bottom - uiData?.y),
-            //bottom: 1.15*clientHeight - (targetRect?.bottom - uiData?.y),
+            //bottom: 1.10*clientHeight - (targetRect?.bottom - uiData?.y),
           },);
     },[]);
+    */
 
     /**
      * Handler to enable dragging if the mouse is 

@@ -11,7 +11,7 @@ import app_logo from '../../../../assets/images/react-olext_logo.svg';
  */
 const Logo = ({
     logo=app_logo,
-    style={paddingLeft:'10px', paddingBottom:'5px', paddingTop:'5px'},
+    style,
     alt= 'logo',
     width=undefined,
     height=undefined,

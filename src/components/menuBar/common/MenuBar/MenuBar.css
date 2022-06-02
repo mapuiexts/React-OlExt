@@ -1,0 +1,17 @@
+.rolext-menubar-main {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    column-gap: 0.125rem;
+    margin: 0.125rem;
+}
+
+.rolext-menubar-side {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    row-gap: 0.125rem;
+    margin: 0.125rem;
+}

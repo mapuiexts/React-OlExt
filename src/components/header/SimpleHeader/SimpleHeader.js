@@ -4,6 +4,8 @@ import Header from '../Header/Header';
 import app_logo from '../../../assets/images/react-olext_logo.svg';
 import CurrentCoordinateText from '../../text/coordinate/CurrentCoordinateText/CurrentCoordinateText';
 import CurrentScaleText from '../../text/scale/CurrentScaleText/CurrentScaleText';
+import useWindowSize from '../../../hooks/ui/useWindowSize';
+import {convertRemToPixels} from '../../../core/deviceUnits';
 import {API_DOC_LINK} from '../../../core/constants';
 
 /**
@@ -26,22 +28,31 @@ const SimpleHeader = ({
                     React-Olext
                  </a>),
     subTitle='Components for OpenLayers',
+    breakpoint=convertRemToPixels(40),
     ...otherProps
 }) => {
+    const { width } = useWindowSize();
+    const logoHeight = style && style.height ? style.height : undefined;
+    const styleMainTitle = width <= breakpoint ? {fontSize:'1.5rem'} : null;
 
     return(
         <Header style={style} {...otherProps}>
-        <Header.Logo logo={logo}/>
+        <Header.Logo logo={logo} height={logoHeight}/>
         <Header.Title>
-            <Header.Title.MainTitle>{mainTitle}</Header.Title.MainTitle>
-            <Header.Title.SubTitle>{subTitle}</Header.Title.SubTitle>
+            <Header.Title.MainTitle style={styleMainTitle}>{mainTitle}</Header.Title.MainTitle>
+            { width > breakpoint &&
+                <Header.Title.SubTitle>{subTitle}</Header.Title.SubTitle>
+            }
         </Header.Title>
+        { width > breakpoint &&
         <Header.Content>
-            <div>Pos:</div>
-            <CurrentCoordinateText map={map} style={{color:"white", width:"160px"}}/>
-            <div>Scale: 1/</div>
-            <CurrentScaleText map={map} style={{color:"white", width:"100px"}}/>
+            <div className="rolext-header-content-label">Pos:</div>
+            <CurrentCoordinateText map={map} className="rolext-header-content-value" style={{width:"10rem"}}/>
+            <div className="rolext-header-content-label">Scale: 1/</div>
+            <CurrentScaleText map={map} className="rolext-header-content-value" style={{width:"4rem"}}/>
         </Header.Content>
+        }
+
     </Header>
     );
 };
@@ -76,7 +87,13 @@ SimpleHeader.propTypes = {
     subTitle: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.element
-    ])
+    ]),
+
+    /**
+     * If the window size is less than or equal to the breakpoint, 
+     * the header will not show the content (position and scale)
+     */
+    breakpoint: PropTypes.number
 
 };
 

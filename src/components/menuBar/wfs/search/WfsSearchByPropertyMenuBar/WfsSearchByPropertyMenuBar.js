@@ -13,7 +13,8 @@ const WfsSearchByPropertyMenuBar = ({
     layer,
     map,
     wfsOptions,
-    columnDefs
+    columnDefs,
+    direction="horizontal"
 }) => {
     const [internalColumnDefs, setInternalColumnDefs] = useState(columnDefs);
     const [propertyName, setPropertyName] = useState("");
@@ -119,13 +120,14 @@ const WfsSearchByPropertyMenuBar = ({
                 <Input placeholder="Property Value" onChange={onPropertyValue2ChangeHandler}
                     onPressEnter={onSearchClickHandler}
                 />
-                </Space>
+            </Space>
         );
     }
 
 
     return (
-        <Space>
+        // <div style={{display:"flex",  flexDirection:'column', columnGap: 5, rowGap:5}}>
+        <Space direction={direction} style={{display: 'flex', margin:5}}>
             <Button type="primary" loading={wfsGetFeature.isLoading} onClick={onSearchClickHandler}>Search</Button>
             <Select style={{ width: 200 }}  value = {propertyName} onChange={onPropertyNameChangeHandler}>
                 {columnDefs.map((column, index) => {
@@ -152,6 +154,7 @@ const WfsSearchByPropertyMenuBar = ({
             {betweenControl}
             {matchCaseControl}
         </Space>
+        // </div>
 
     );
 };
