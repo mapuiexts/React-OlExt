@@ -23,12 +23,14 @@ import useTreeContextMenu from '../../../../hooks/ui/useTreeContextMenu';
 const LayerTree = ({
         map,
         layerGroup = map.getLayerGroup(),
+        showRoot = true,
         //className = null,
         draggable = true,
         checkable = true,
         onExpand = false,
         filterFunc = null,
-        titleFunc = null
+        titleFunc = null,
+        ...otherProps
     }) => {
     
     const [treeNodes, setTreeNodes] = useState([]);
@@ -103,6 +105,7 @@ const LayerTree = ({
         );
         //treeNode._ol_layer = layer;
 
+        console.log(treeNode);
         return treeNode;
     }, [filterFunc, titleFunc]);
     
@@ -536,6 +539,7 @@ const LayerTree = ({
     return(
         <React.Fragment>
             <Tree 
+                {...otherProps}
                 checkedKeys={checkedKeys} 
                 draggable = {draggable}
                 checkable = {checkable}
@@ -545,9 +549,15 @@ const LayerTree = ({
                 onExpand={onExpandTree}
                 onRightClick={onRightClickNode}
             >
-                <Tree.TreeNode key="root" title={rootLayerName} ol_layer={map.getLayerGroup()}>
-                    {treeNodes}
-                </Tree.TreeNode>
+                {showRoot ?
+                    <Tree.TreeNode key="root" title={rootLayerName} ol_layer={map.getLayerGroup()}>
+                        {treeNodes}
+                    </Tree.TreeNode>
+                    :
+                    <>
+                        {treeNodes}
+                    </>
+                }
             </Tree>
             {/* { showMenu && */}
                 <TreeLayerContextMenu 
