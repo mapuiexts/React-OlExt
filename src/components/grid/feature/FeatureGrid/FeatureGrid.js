@@ -50,18 +50,16 @@ const FeatureGrid = (
     rowSelection= 'multiple', //'single',
     featureStyle =  new OlStyle({
         stroke: new OlStyleStroke({
-            //color: 'rgba(204, 0, 204, 1.0)',
-            color: 'rgba(0, 0, 255, 0.4)',
+            color: 'rgba(255, 179, 255, 1.0)',
 			width: 2
 		}),
 		fill: new OlStyleFill({
-            //color: 'rgba(255, 179, 255, 0.4)'
-            color: 'rgba(97, 218, 251, 0.4)'
+            color: 'rgba(255, 179, 255, 0.4)'
         }),
         image: new OlStyleCircle({
 			radius: 8,
 			fill: new OlStyleFill({
-				color: 'rgba(97, 218, 251, 1.0)',
+				color: 'rgba(255, 179, 255, 1.0)',
 			}),
 			stroke: new OlStyleStroke({
 				color: '#000',
@@ -71,18 +69,16 @@ const FeatureGrid = (
     } ),
     selectedFeatureStyle =  new OlStyle({
         stroke: new OlStyleStroke({
-            //color: 'rgba(204, 0, 204, 1.0)',
-            color: 'rgba(0, 0, 0, 1.0)',
-			width: 3
+            color: 'rgba(204, 0, 204, 1.0)',
+			width: 4
 		}),
 		fill: new OlStyleFill({
-            color: 'rgba(0, 0, 255, 0.5)' 
-            
+            color: 'rgba(204, 0, 204, 0.4)' 
         }),
         image: new OlStyleCircle({
 			radius: 10,
 			fill: new OlStyleFill({
-				color: 'rgba(0, 0, 255, 1.0)', //dark magenta (40%)
+				color: 'rgba(204, 0, 204, 1.0)', 
 			}),
 			stroke: new OlStyleStroke({
 				color: '#000',

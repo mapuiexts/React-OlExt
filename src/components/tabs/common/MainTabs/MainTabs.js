@@ -17,7 +17,7 @@ const MainTabs = (props) => {
     const {tabs} = useMainTabs();
     
     return(
-        <Tabs {...props} style={{marginLeft:3, height:'100%', width:'100%'}}>
+        <Tabs {...props} style={{...props.style, paddingLeft: '0.2rem', height:'100%', width:'100%'}}>
             {tabs.map((tabItem) => {
                 return(
                     <Tabs.TabPane tab={tabItem.name} key={tabItem.key} 

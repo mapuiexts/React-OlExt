@@ -24,6 +24,7 @@ const LayerTree = ({
         map,
         layerGroup = map.getLayerGroup(),
         showRoot = true,
+        showContextMenu = true,
         //className = null,
         draggable = true,
         checkable = true,
@@ -35,8 +36,6 @@ const LayerTree = ({
     
     const [treeNodes, setTreeNodes] = useState([]);
     const [checkedKeys, setCheckedKeys] = useState([]);
-    //const [rightClickedNode, setRightClickedNode] = useState(null);
-    //const [showMenuContext, setShowMenuContext] = useState(false);
 
     const { xPos, yPos, showMenu, rightClickedNode, onRightClickNode} = useTreeContextMenu();
     let rootLayerName = null;
@@ -48,20 +47,6 @@ const LayerTree = ({
         rootLayerName = map.getLayerGroup().get('name');
     }
     
-   
-    /*
-    const onRightClickNode = useCallback((event) => {
-        setRightClickedNode(event.node);
-        setShowMenuContext(true);
-    }, []);
-    */
-
-    /*
-    const onFinishMenuContext = useCallback(() => {
-        setShowMenuContext(false);
-        setRightClickedNode(null);
-    }, []);
-    */
 
   /**
    * Get the flat array of ol_uids from visible non groupLayers.
@@ -559,7 +544,7 @@ const LayerTree = ({
                     </>
                 }
             </Tree>
-            {/* { showMenu && */}
+            {showContextMenu &&
                 <TreeLayerContextMenu 
                     map={map}
                     node={rightClickedNode}
@@ -567,7 +552,7 @@ const LayerTree = ({
                     yPos={yPos}
                     showMenu={showMenu}
                 />
-            {/* } */}
+            }
         </React.Fragment>
     );
 
