@@ -15,7 +15,7 @@ import FeaturePropertiesWnd from '../../../window/feature/FeaturePropertiesWnd/F
 const WmsGetFeatureInfoButton = (props) => {
     const {
         map, 
-        layers, 
+        layers=map.getLayers().getArray(), 
         //icon=<InfoOutlined/>,
         //shape="circle", 
         fetchOpts, 
@@ -93,9 +93,10 @@ WmsGetFeatureInfoButton.propTypes = {
     map: PropTypes.instanceOf(Map).isRequired,
 
     /**
-     * The layers to retrieve the feature information
+     * The layers to retrieve the feature information. If not provided,
+     * all the layers in the map will be considered.
      */
-    layers: PropTypes.arrayOf(PropTypes.instanceOf(BaseLayer)).isRequired,
+    layers: PropTypes.arrayOf(PropTypes.instanceOf(BaseLayer)),
 
     /**
      * Additional options to be used for the 

@@ -3,13 +3,16 @@ import {message} from 'antd';
 import {parseFeatureInfo} from '../../util/featureinfo';
 
 import {getLeafVisibleLayers} from '../../util/map';
+import defined from '../../core/defined';
 
 const useWmsGetFeatureInfo = () => {
     const [errors, setErrors] = useState(null);
+    //const [features, setFeatures] = useState(null);
     const [features, setFeatures] = useState(null);
 
     const clearRequest = useCallback(() => {
         setErrors(null);
+        //setFeatures(null)
         setFeatures(null);
     }, []);
 
@@ -69,10 +72,14 @@ const useWmsGetFeatureInfo = () => {
                 
                 const newFeatures = parseFeatureInfo(responseData, info_format);
                 setFeatures((prevFeatures) => {
-                    if(prevFeatures && newFeatures) {
+                    if(defined(prevFeatures) && defined(newFeatures) && newFeatures.length > 0) {
                         return [...prevFeatures, ...newFeatures];
                     }
-                    return newFeatures;
+                    else if(defined(newFeatures) && newFeatures.length > 0){
+                        return newFeatures;
+                    }
+                    else 
+                        return prevFeatures;
                 });
             })
             .catch(error => {

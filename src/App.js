@@ -147,7 +147,7 @@ const App = () => {
           <NewImageWMSLayerButton type="primary" map={map} wndStyle={{visibility: 'visible', width: '50vh', maxHeight: 500}}>New WMS Layer</NewImageWMSLayerButton>
           <NewGroupLayerButton type="primary" map={map} wndStyle={{visibility: 'visible', width: '50vh', maxHeight: 500}}>New Group Layer</NewGroupLayerButton>
           <AboutButton type="primary"/>
-          <WmsGetFeatureInfoButton icon= {<InfoOutlined style={{fontSize:20}}/>}  shape="circle" type='primary' style={{backgroundColor:'red'}} map={map} layers={wmsLayers.getLayers().getArray()} wndStyle={{width:600}}/>
+          <WmsGetFeatureInfoButton icon= {<InfoOutlined style={{fontSize:20}}/>}  shape="circle" type='primary' style={{backgroundColor:'red'}} map={map} /*layers={map.getLayers().getArray()}*/ wndStyle={{width:600}}/>
         </MenuBar>
       </div>
       <BorderLayout split="horizontal" defaultSize={250} primary="second" onDragFinished={dragHandler}>

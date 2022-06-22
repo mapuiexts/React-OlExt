@@ -34,12 +34,6 @@ const prettifyXml = (source) => {
  */
 export const parseFeatureInfoJSON = (source) => {
     const features = new GeoJSON().readFeatures(source);
-	/*
-    console.log('newFeatures', features);
-    features.forEach((feature) => {
-        console.log('feature', feature);
-    });
-	*/
     return features;
 };
 
@@ -92,8 +86,8 @@ export const parseEsriWmsRawXml = (source) => {
             feature['getId'] = () => `${layerName}.${i}`;
             features.push(feature);
         }
-        return features;
     }
+    return features;
 }
 
 /**
@@ -128,8 +122,8 @@ export const parseEsriWmsFeatureInfoXml = (source) => {
             feature['getId'] = () => `${layerName}.${i}`;
             features.push(feature);
         }
-        return features;
     }
+    return features;
 };
 
 export const parseFeatureInfo = (source, infoFormat) => {
