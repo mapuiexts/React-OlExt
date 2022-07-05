@@ -125,7 +125,7 @@ const viewOpts= {
   zoom: 18
 };
 const map = createDefaultMap(viewOpts);
-const wmsLayers = createWmsLayers(map);
+createWmsLayers(map);
 const wfsLayer = createWfsLayer(map);
 const wfsOptions = getWfsOptions();
 

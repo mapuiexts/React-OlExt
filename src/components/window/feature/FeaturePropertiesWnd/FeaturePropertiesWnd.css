@@ -1,0 +1,19 @@
+.rolext-featureproperties-container .ant-table.ant-table-middle .ant-table-tbody>tr>td {
+    padding: 0.25rem;
+}
+
+.rolext-featureproperties-container .ant-tabs-tab {
+    padding: 0.25rem 0;
+}
+
+
+/*
+.rolext-featureproperties-container .ant-table-tbody>tr:nth-child(even) {
+    background-color: rgba(74, 162, 235, 0.5);
+}
+*/
+
+.rolext-featureproperties-container .ant-table-tbody>tr.ant-table-row:hover>td,
+.rolext-featureproperties-container .ant-table-tbody>tr>td.ant-table-cell-row-hover {
+    background: rgba(24, 144, 255, 0.3);
+}

@@ -1,4 +1,5 @@
 import {useCallback, useState, useRef} from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import Draggable from 'react-draggable';
 import Panel from '../../../panel/Panel/Panel';
@@ -78,49 +79,47 @@ const Window = ({
     const onTitleMouseOut = useCallback(() => {
         setDragDisabled(true);
     }, []);
-    
 
     return (
         visible &&
-        <div className="rolext-wnd">
-            
-            <Draggable
-                nodeRef={draggleRef}
-                disabled={dragDisabled}
-                bounds={bounds}
-                onStart={onStart}
-            >
-            <div ref={draggleRef}>
-            {/* <ResizableBox> */}
-                <Space>
-                    <Panel
-                        title={title}
-                        expanded={expanded}
-                        collapsible
-                        style={style}
-                        preTools={preTools}
-                        postTools={postTools}
-                        expandDir={expandDir}
-                        onTitleMouseOver={onTitleMouseOver}
-                        onTitleMouseOut={onTitleMouseOut}
-                        titleStyle={{ width: '100%', cursor: 'move'}}
-                        onClose={onClose}
-                    >
-                        {otherProps.children}
-                        <Divider style={{margin:"5px"}}/>
-                        {(onOk || onCancel) &&
-                            <div className="rolext-wnd-btn-container">
-                                {onOk && <Button type="primary" onClick={onOk}>OK</Button>}
-                                {onCancel && <Button type="primary" onClick={onCancel}>Cancel</Button>}
-                            </div>
-                        }
-                    </Panel>
-                    
-                </Space>
-            {/* </ResizableBox>   */}
-            </div>
-            </Draggable>
-        </div>
+        ReactDOM.createPortal(
+            <div className="rolext-wnd">
+                <Draggable
+                    nodeRef={draggleRef}
+                    disabled={dragDisabled}
+                    bounds={bounds}
+                    onStart={onStart}
+                >
+                    <div ref={draggleRef}>
+                        <Space>
+                            <Panel
+                                title={title}
+                                expanded={expanded}
+                                collapsible
+                                style={style}
+                                preTools={preTools}
+                                postTools={postTools}
+                                expandDir={expandDir}
+                                onTitleMouseOver={onTitleMouseOver}
+                                onTitleMouseOut={onTitleMouseOut}
+                                titleStyle={{ width: '100%', cursor: 'move'}}
+                                onClose={onClose}
+                            >
+                                {otherProps.children}
+                                <Divider style={{margin:"5px"}}/>
+                                {(onOk || onCancel) &&
+                                    <div className="rolext-wnd-btn-container">
+                                        {onOk && <Button type="primary" onClick={onOk}>OK</Button>}
+                                        {onCancel && <Button type="primary" onClick={onCancel}>Cancel</Button>}
+                                    </div>
+                                }
+                            </Panel>
+                            
+                        </Space>
+                    </div>
+                </Draggable>
+            </div>, 
+            document.querySelector('body'))
     );
 };
 

@@ -2,15 +2,8 @@
     display: flex;
     flex-direction: column;
     background: white;
-    /*test*/
-    /*
-    position: fixed;
-    top: 30vh;
-    left: calc(50% - 15rem); 
-    z-index: 100; */
+}
 
-  }
-  .rolext-panel-body-el {
-    padding: 8px;
-  }
-  
+.rolext-panel-body-el {
+    padding: 0.5rem;
+}

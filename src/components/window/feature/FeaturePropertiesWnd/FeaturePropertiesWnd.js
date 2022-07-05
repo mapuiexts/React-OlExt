@@ -2,6 +2,7 @@ import React, {useState, useCallback, useEffect} from 'react';
 import {Table, Tabs} from 'antd';
 import OlGeomGeometry from 'ol/geom/Geometry';
 import Window from '../../base/Window/Window';
+import './FeaturePropertiesWnd.css';
 
 
 const FeaturePropertiesWnd = ({
@@ -84,26 +85,28 @@ const FeaturePropertiesWnd = ({
             style={style}
             {...otherProps}
         >
-            <Tabs defaultActiveKey={['0']} /*style={{ height: 400}}*/ tabPosition="top">
-                {
-                    dataSources.map((dataSource, idx) => {
-                        return(
-                            <Tabs.TabPane tab={featureIds[idx]} key={idx.toString()}>
-                                <Table 
-                                    dataSource={dataSource} 
-                                    columns={columns}  
-                                    size='middle'
-                                    tableLayout='auto'
-                                    pagination= {false}
-                                    scroll={scroll}
-                                    bordered
-                                    sticky
-                                />
-                            </Tabs.TabPane>
-                        );
-                    })
-                }
-            </Tabs>
+            <div className="rolext-featureproperties-container">
+                <Tabs defaultActiveKey={['0']} tabPosition="top">
+                    {
+                        dataSources.map((dataSource, idx) => {
+                            return(
+                                <Tabs.TabPane tab={featureIds[idx]} key={idx.toString()}>
+                                    <Table 
+                                        dataSource={dataSource} 
+                                        columns={columns}  
+                                        size='middle'
+                                        tableLayout='auto'
+                                        pagination= {false}
+                                        scroll={scroll}
+                                        bordered
+                                        sticky
+                                    />
+                                </Tabs.TabPane>
+                            );
+                        })
+                    }
+                </Tabs>
+            </div>
         </Window>     
     );
 };

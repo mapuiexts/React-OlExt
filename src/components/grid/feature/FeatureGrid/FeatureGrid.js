@@ -14,6 +14,7 @@ import usePrevious from '../../../../hooks/common/usePrevious';
 import defined from '../../../../core/defined';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-balham.css';
+import './FeatureGrid.css';
 
 const defaultKeyFunction = (feature) => feature.ol_uid;
 
@@ -486,20 +487,22 @@ const FeatureGrid = (
       }, []);
 
     return(
-        <AgGridReact
-            {...otherProps}
-            className={className}
-            onGridReady={onInternalGridReady}
-            onSelectionChanged={onInternalSelectionChanged}
-            onRowClicked={onRowClicked}
-            rowSelection={rowSelection}
-            enableCellTextSelection
-            getRowId={getRowId}
-            columnDefs={currentColumnDefs}
-            defaultColDef={defaultColDef}
-            rowData={_rowData}
-            
-        />
+        <div className='rolext-featuregrid'>
+            <AgGridReact
+                {...otherProps}
+                className={className}
+                onGridReady={onInternalGridReady}
+                onSelectionChanged={onInternalSelectionChanged}
+                onRowClicked={onRowClicked}
+                rowSelection={rowSelection}
+                enableCellTextSelection
+                getRowId={getRowId}
+                columnDefs={currentColumnDefs}
+                defaultColDef={defaultColDef}
+                rowData={_rowData}
+                
+            />
+        </div>
     );
 };
 

@@ -26,11 +26,11 @@ const TreeLayerContextMenu = ({
    
     if(!node) return null;
 
-    const createAddWMSLayerButton = (layer) => {
+    const createAddWMSLayerButtonItem = (layer, items) => {
         if(layer && layer instanceof OlLayerGroup) {
-            return(
-                <Menu.Item key="ADD_WMS_LAYER" icon={<FileAddOutlined   />}>
-                    <NewImageWMSLayerButton 
+            items.push({
+                key: "ADD_WMS_LAYER",
+                label: <NewImageWMSLayerButton 
                         size="small"
                         type="text"
                         map={map} 
@@ -39,258 +39,152 @@ const TreeLayerContextMenu = ({
                     >
                         New WMS Layer
                     </NewImageWMSLayerButton>
-                </Menu.Item>
-            );
+            });
         }
-        return null;
-    }
+    };
 
-    const createAddTileWMSLayerButton = (layer) => {
+    const createAddTileWMSLayerButtonItem = (layer, items) => {
         if(layer && layer instanceof OlLayerGroup) {
-            return(
-                <Menu.Item key="ADD_TILE_WMS_LAYER" icon={<FileAddOutlined   />}>
-                    <NewTileWMSLayerButton 
-                        size="small"
-                        type="text"
-                        map={map} 
-                        parentLayerGroup={layer}
-                        wndStyle={{visibility: 'visible', width: 700, maxHeight: 500}}
-                    >
-                        New Tile WMS Layer
-                    </NewTileWMSLayerButton>
-                </Menu.Item>
-            );
+            items.push({
+                key: "ADD_TILE_WMS_LAYER",
+                label: <NewTileWMSLayerButton 
+                            size="small"
+                            type="text"
+                            map={map} 
+                            parentLayerGroup={layer}
+                            wndStyle={{width: 700, maxHeight: 500}}
+                        >
+                            New Tile WMS Layer
+                        </NewTileWMSLayerButton>
+            });
         }
-        return null;
-    }
+    };
 
-    // const createAddWMSLayerButton = (layer) => {
-    //     if(layer && layer instanceof OlLayerGroup) {
-    //         return(
-    //             <Menu.Item icon={<FileAddOutlined   />}>
-    //                 <AddImageWMSLayerButton 
-    //                     size="small"
-    //                     type="text"
-    //                     map={map} 
-    //                     layerGroup={layer}
-    //                     wndStyle={{visibility: 'visible', width: 700, maxHeight: 500}}
-    //                 >
-    //                     Add WMS Layer
-    //                 </AddImageWMSLayerButton>
-    //             </Menu.Item>
-    //         );
-    //     }
-    //     return null;
-    // }
-
-    const createAddGroupLayerButton = (layer) => {
+    const createAddGroupLayerButtonItem = (layer, items) => {
         if(layer && layer instanceof OlLayerGroup) {
-            return(
-                <Menu.Item key="ADD_GROUP_LAYER" icon={<FileAddOutlined   />}>
-                    <NewGroupLayerButton 
-                        size="small"
-                        type="text"
-                        map={map} 
-                        parentLayerGroup={layer}
-                        wndStyle={{visibility: 'visible', width: 700, maxHeight: 500}}
-                    >
-                        New Group Layer
-                    </NewGroupLayerButton>
-                </Menu.Item>
-            );
+            items.push({
+                key: "ADD_GROUP_LAYER",
+                label: <NewGroupLayerButton 
+                            size="small"
+                            type="text"
+                            map={map} 
+                            parentLayerGroup={layer}
+                            wndStyle={{width: 700, maxHeight: 500}}
+                        >
+                            New Group Layer
+                        </NewGroupLayerButton>
+            });
         }
-        return null;
-    }
+    };
 
-    const createAddOSMLayerButton = (layer) => {
+    const createAddOSMLayerButtonItem = (layer, items) => {
         if(layer && layer instanceof OlLayerGroup) {
-            return(
-                <Menu.Item key="ADD_OSM_LAYER" icon={<FileAddOutlined   />}>
-                    <NewOSMLayerButton 
-                        size="small"
-                        type="text"
-                        map={map} 
-                        parentLayerGroup={layer}
-                        wndStyle={{visibility: 'visible', width: 700, maxHeight: 500}}
-                    >
-                        New OSM Layer
-                    </NewOSMLayerButton>
-                </Menu.Item>
-            );
+            items.push({
+                key: "ADD_OSM_LAYER",
+                label: <NewOSMLayerButton 
+                            size="small"
+                            type="text"
+                            map={map} 
+                            parentLayerGroup={layer}
+                            wndStyle={{width: 700, maxHeight: 500}}
+                        >
+                            New OSM Layer
+                        </NewOSMLayerButton>
+            });
         }
-        return null;
-    }
+    };
 
-    // const createAddGroupLayerButton = (layer) => {
-    //     if(layer && layer instanceof OlLayerGroup) {
-    //         return(
-    //             <Menu.Item icon={<FileAddOutlined   />}>
-    //                 <AddGroupLayerButton 
-    //                     size="small"
-    //                     type="text"
-    //                     map={map} 
-    //                     layerGroup={layer}
-    //                     wndStyle={{visibility: 'visible', width: 700, maxHeight: 500}}
-    //                 >
-    //                     Add Group Layer
-    //                 </AddGroupLayerButton>
-    //             </Menu.Item>
-    //         );
-    //     }
-    //     return null;
-    // }
-
-    /*
-    const createAddLayerSubMenu = (layer) => {
+    const createAddLayerItems = (layer, items) => {
         if(layer && layer instanceof OlLayerGroup) {
-            return(
-                <Menu.SubMenu title="Add Layer" icon={<FileAddOutlined   />}>
-                    {createAddWMSLayerButton(layer)}
-                    {createAddGroupLayerButton(layer)}
-                </Menu.SubMenu>
-            );
+            const subItems = [];
+            items.push({
+                key: "ADD_LAYER",
+                icon: <FileAddOutlined/>,
+                label: "Add Layer",
+                children: subItems
+            });
+            createAddGroupLayerButtonItem(layer, subItems);
+            createAddWMSLayerButtonItem(layer, subItems);
+            createAddTileWMSLayerButtonItem(layer, subItems);
+            createAddOSMLayerButtonItem(layer, subItems);
         }
-        return null;
-    }
-    */
+    };
 
-    
-    // const createAddLayerItemGroup = (layer) => {
-    //     if(layer && layer instanceof OlLayerGroup) {
-    //         return(
-    //             <Menu.ItemGroup title="Add Layer">
-    //                 {/* <FileAddTwoTone/> */}
-    //                 {createAddWMSLayerButton(layer)}
-    //                 {createAddGroupLayerButton(layer)}
-    //             </Menu.ItemGroup>
-    //         );
-    //     }
-    //     return null;
-    // }
-    
-
-    const createEditLayerButton = (layer) => {
+    const createEditLayerButtonItem = (layer, items) => {
         if(layer) {
-            return (
-                <Menu.Item key="EDIT_LAYER" icon={<EditOutlined />}>
-                    <EditLayerButton 
-                        size="small" 
-                        type="text"
-                        wndStyle={{visibility: 'visible', width: 700, maxHeight: 500}}
-                        layer={layer}
-                    >
-                        Edit Layer
-                    </EditLayerButton>
-                </Menu.Item>
-            );
+            items.push({
+                key: "EDIT_LAYER",
+                icon: <EditOutlined/>,
+                label: <EditLayerButton 
+                            size="small" 
+                            type="text"
+                            wndStyle={{width: 700, maxHeight: 500}}
+                            layer={layer}
+                        >
+                            Edit Layer
+                        </EditLayerButton>
+            });
         }
-    }
+    };
 
-    const createRemoveLayerButton = (layer) => {
+    const createRemoveLayerButtonItem = (layer, items) => {
         if(layer && layer !== map.getLayerGroup()) {
-            return(
-                <Menu.Item key="REMOVE_LAYER" icon={<DeleteOutlined />}>
-                    <RemoveLayerButton size='small' type="text" map={map} layer={node.ol_layer}>
-                        Remove Layer
-                    </RemoveLayerButton>
-                </Menu.Item>
-            );
+            items.push({
+                key: "REMOVE_LAYER",
+                icon: <DeleteOutlined />,
+                label:  <RemoveLayerButton size='small' type="text" map={map} layer={node.ol_layer}>
+                            Remove Layer
+                        </RemoveLayerButton>
+            });
         }
-        return null;
-    }
+    };
 
-    const createClearLayerButton = (layer) => {
+    const createClearLayerButtonItem = (layer, items) => {
         if(layer instanceof OlLayerVector) {
-            return (
-                <Menu.Item key="CLEAR_LAYER" icon={<ClearOutlined  />}>
-                    <ClearAllFeaturesButton size='small' type="text" map={map} vectorLayer={node.ol_layer}>
-                        Clear Layer
-                    </ClearAllFeaturesButton>
-                </Menu.Item>
-            );
+            items.push({
+                key: "CLEAR_LAYER",
+                icon: <ClearOutlined  />,
+                label: <ClearAllFeaturesButton size='small' type="text" map={map} vectorLayer={node.ol_layer}>
+                            Clear Layer
+                        </ClearAllFeaturesButton>
+            });
         }
-        return null;
     };
 
-    const createGetFeatureInfoButton = (map, layer) => {
+
+    const createGetFeatureInfoButtonItem = (map, layer, items) => {
         if(layer instanceof OlLayerImage || layer instanceof OlLayerGroup) {
-            return (
-                <Menu.Item key="GET_FEATURE_INFO" icon={<InfoCircleOutlined />} 
-                           selectable={false ? 0 : 1} //https://github.com/styled-components/styled-components/issues/1198
-                >
-                    <WmsGetFeatureInfoButton 
-                        size='small' 
-                        type="text"
-                        map={map}
-                        layers={[layer]}
-                        wndStyle={{visibility: 'visible', width:600}}
-                    >
-                        Feature Info
-                    </WmsGetFeatureInfoButton>
-                </Menu.Item>
-            );
+            items.push({
+                key: "GET_FEATURE_INFO",
+                icon: <InfoCircleOutlined />,
+                label:  <WmsGetFeatureInfoButton 
+                            size='small' 
+                            type="text"
+                            map={map}
+                            layers={[layer]}
+                            wndStyle={{width:600}}
+                        >
+                            Feature Info
+                        </WmsGetFeatureInfoButton>
+            });
         }
-        return null;
     };
 
-    let overlay = (
-        <Menu mode="vertical">
-            {createEditLayerButton(node.ol_layer)}
-            {createRemoveLayerButton(node.ol_layer)}
-            {createClearLayerButton(node.ol_layer)}
-            {createGetFeatureInfoButton(map, node.ol_layer)}
-            <Menu.Divider/>
-            <Menu.Divider/>
-            {createAddGroupLayerButton(node.ol_layer)}
-            {createAddWMSLayerButton(node.ol_layer)}
-            {createAddTileWMSLayerButton(node.ol_layer)}
-            {createAddOSMLayerButton(node.ol_layer)}
-            {/* {createAddLayerSubMenu(node.ol_layer)} */}
-            {/* {createAddLayerItemGroup(node.ol_layer)} */}
-        </Menu>
+    const items = [];
+    createAddLayerItems(node.ol_layer, items);
+    createEditLayerButtonItem(node.ol_layer, items);
+    createRemoveLayerButtonItem(node.ol_layer, items);
+    createClearLayerButtonItem(node.ol_layer, items);
+    createGetFeatureInfoButtonItem(map, node.ol_layer, items);
+
+    const menuOverlay = (
+        <Menu mode="vertical" items={items}/>
     );
 
-   
-    // overlay = (
-    //     <React.Fragment>
-    //         {createEditLayerButton(node.ol_layer)}
-    //         {createRemoveLayerButton(node)}
-    //         {createClearLayerButton(node.ol_layer)}
-    //         {createGetFeatureInfoButton(map, node.ol_layer)}
-    //         {createAddWMSLayerButton(node.ol_layer)}
-    //         {createAddGroupLayerButton(node.ol_layer)}
-    //     </React.Fragment>
-    // );
-
-    // overlay = (
-    //     <Menu mode="vertical">
-    //         <Menu.Item>
-    //             {createEditLayerButton(node.ol_layer)}
-    //         </Menu.Item>
-    //         <Menu.Item>
-    //             {createRemoveLayerButton(node)} 
-    //         </Menu.Item>
-    //         <Menu.Item>
-    //             {createClearLayerButton(node.ol_layer)}
-    //         </Menu.Item>
-    //         <Menu.Item>
-    //             {createGetFeatureInfoButton(map, node.ol_layer)}    
-    //         </Menu.Item>
-    //         <Menu.Divider/>
-    //         <Menu.SubMenu title="Add Layer">
-    //             <Menu.Item>
-    //                 {createAddWMSLayerButton(node.ol_layer)}
-    //             </Menu.Item>
-    //             <Menu.Item>
-    //                 {createAddGroupLayerButton(node.ol_layer)}
-    //             </Menu.Item>
-    //         </Menu.SubMenu>
-    //     </Menu>
-    // );
 
     return(
             <TreeContextMenu 
-                overlay={overlay}
+                overlay={menuOverlay}
                 node = {node}
                 xPos={xPos}
                 yPos={yPos}

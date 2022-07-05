@@ -519,10 +519,11 @@ const LayerTree = ({
     useEffect(() => {
         rebuildTreeNodes();
     }, [rebuildTreeNodes]);
-    
+
 
     return(
         <React.Fragment>
+            {/* <Dropdown overlay={menu} trigger={['contextMenu']} visible={rightClickedNode ? true : false}> */}
             <Tree 
                 {...otherProps}
                 checkedKeys={checkedKeys} 
@@ -544,6 +545,7 @@ const LayerTree = ({
                     </>
                 }
             </Tree>
+            {/* </Dropdown> */}
             {showContextMenu &&
                 <TreeLayerContextMenu 
                     map={map}
