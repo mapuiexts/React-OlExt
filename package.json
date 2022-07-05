@@ -1,7 +1,7 @@
 {
     "name": "@mapuiexts/react-olext",
     "homepage": "https://mapuiexts.github.io/react-olext.github.io/en/v0.1/apidoc",
-    "version": "0.1.14",
+    "version": "0.1.15",
     "description": "A react component to build map applications",
     "keywords": [
         "maps",
