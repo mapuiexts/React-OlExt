@@ -2,10 +2,12 @@ import React, {useCallback, useEffect} from 'react';
 import {Map} from 'ol';
 import VectorLayer from 'ol/layer/Vector';
 import PropTypes from 'prop-types';
-import { Button } from 'antd';
-import useGetPointGeomInteraction from '../../../../hooks/interactions/useGetPointGeomInteraction';
-import useWFSGetFeature from '../../../../hooks/wfs/useWFSGetFeature';
-import {intersects} from 'ol/format/filter';
+import { Button, message } from 'antd';
+//import useGetPointGeomInteraction from '../../../../hooks/interactions/useGetPointGeomInteraction';
+//import useWFSGetFeature from '../../../../hooks/wfs/useWFSGetFeature';
+import useWfsGetFeatureByPointInteraction from '../../../../hooks/interactions/wfs/useWfsGetFeatureByPointInteraction';
+//import {intersects} from 'ol/format/filter';
+import defined from '../../../../core/defined';
 
 
 /**
@@ -23,56 +25,108 @@ import {intersects} from 'ol/format/filter';
  * 
  * @visibleName WFS Search By Point Button
  */
-const WfsSearchByPointButton = ({
+
+ const WfsSearchByPointButton = ({
     url, 
     map, 
     vectorLayer, 
     wfsOptions,
     fetchOptions,
-    msg, 
+    msg,
+    onFeatures, 
     ...otherProps
 }) => {
-    const {geometryName, /*srsName*/} = wfsOptions;
-    const {start, clear, geometry, isRunning} = useGetPointGeomInteraction(map, msg);
-    const wfsGetFeature = useWFSGetFeature();
+    //const {geometryName, /*srsName*/} = wfsOptions;
+    //const {start, clear, geometry, isRunning} = useGetPointGeomInteraction(map, msg);
+    //const wfsGetFeature = useWFSGetFeature();
 
-    //retrieve the srs from map
-    const proj = map.getView().getProjection();
-    let srsName =proj.getCode();
-    const axisOrientation = proj.getAxisOrientation();
-    if(axisOrientation === 'neu') srsName = 'urn:x-ogc:def:crs:' + srsName;
-    wfsOptions.srsName = srsName;
+    const interaction = useWfsGetFeatureByPointInteraction(map, url, msg, wfsOptions, vectorLayer, fetchOptions);
+
 
     const onClickHandler = useCallback((event) => {
-        start();
-    }, [start]);
+        interaction.start();
+    }, [interaction]);
+
 
     useEffect(() => {
-        if(geometry && !isRunning) {
-            //clear layer
-            vectorLayer.getSource().clear();
-            //create filter
-            const geom = geometry;
-            const filter = intersects(
-                geometryName, 
-                geom,
-                srsName
-            );
-            const wfsFilteredOptions = {...wfsOptions, filter};
-            wfsGetFeature.sendRequest(url, map, vectorLayer, wfsFilteredOptions, fetchOptions);
-            clear();
+        if(defined(interaction.features)) {
+            if(interaction.features.length === 0) {
+                message.info('Features not found!!');
+            }
+            console.log(interaction.features);
+            defined(onFeatures) && onFeatures(interaction.features);
+            interaction.clear();
         }
-    }, [geometry, isRunning, vectorLayer, geometryName, srsName, map, url, wfsGetFeature, wfsOptions, fetchOptions, clear]);
+    },  [interaction, onFeatures]);
+
+    useEffect(() => {
+        if(defined(interaction.error)) {
+            message.info(interaction.error);
+            console.log(message.info(interaction.error));
+            interaction.clear();
+        }
+    }, [interaction]);
 
     return(
         <Button {...otherProps} onClick={onClickHandler} 
-            disabled={isRunning}
-            loading={wfsGetFeature.isLoading}
+            //disabled={isRunning}
+            loading={interaction.isRunning}
         >
             {otherProps.children}
         </Button>
     );
 };
+
+// const WfsSearchByPointButton = ({
+//     url, 
+//     map, 
+//     vectorLayer, 
+//     wfsOptions,
+//     fetchOptions,
+//     msg, 
+//     ...otherProps
+// }) => {
+//     const {geometryName, /*srsName*/} = wfsOptions;
+//     const {start, clear, geometry, isRunning} = useGetPointGeomInteraction(map, msg);
+//     const wfsGetFeature = useWFSGetFeature();
+
+//     //retrieve the srs from map
+//     const proj = map.getView().getProjection();
+//     let srsName =proj.getCode();
+//     const axisOrientation = proj.getAxisOrientation();
+//     if(axisOrientation === 'neu') srsName = 'urn:x-ogc:def:crs:' + srsName;
+//     wfsOptions.srsName = srsName;
+
+//     const onClickHandler = useCallback((event) => {
+//         start();
+//     }, [start]);
+
+//     useEffect(() => {
+//         if(geometry && !isRunning) {
+//             //clear layer
+//             vectorLayer.getSource().clear();
+//             //create filter
+//             const geom = geometry;
+//             const filter = intersects(
+//                 geometryName, 
+//                 geom,
+//                 srsName
+//             );
+//             const wfsFilteredOptions = {...wfsOptions, filter};
+//             wfsGetFeature.sendRequest(url, map, vectorLayer, wfsFilteredOptions, fetchOptions);
+//             clear();
+//         }
+//     }, [geometry, isRunning, vectorLayer, geometryName, srsName, map, url, wfsGetFeature, wfsOptions, fetchOptions, clear]);
+
+//     return(
+//         <Button {...otherProps} onClick={onClickHandler} 
+//             disabled={isRunning}
+//             loading={wfsGetFeature.isLoading}
+//         >
+//             {otherProps.children}
+//         </Button>
+//     );
+// };
 
 WfsSearchByPointButton.propTypes = {
 
@@ -90,7 +144,7 @@ WfsSearchByPointButton.propTypes = {
      * The <i>ol/layer/Vector</i> layer from where the WFS features will
      * be stored. 
      */
-    vectorLayer: PropTypes.instanceOf(VectorLayer).isRequired,
+    vectorLayer: PropTypes.instanceOf(VectorLayer),
 
     /**
      * The WFS options for the WFS GetFeature request.
@@ -111,6 +165,12 @@ WfsSearchByPointButton.propTypes = {
      * If not provided, a default message will be provided by the application.
      */
     msg: PropTypes.string,
+
+    /**
+     * Callback Handler receiveing as parameter an
+     * array of retrieved features
+     */
+    onFeatures: PropTypes.func,
 
     /**
      * The child node for the button

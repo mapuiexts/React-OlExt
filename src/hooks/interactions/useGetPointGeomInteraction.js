@@ -54,13 +54,11 @@ const useGetPointGeomInteraction = (
      * @param {*} source 
      */
     const createInteraction = useCallback((map, source) => {
-		const newInteraction = new OlInteractionDraw(
-			{
+		const newInteraction = new OlInteractionDraw({
 				source: source,
 				type: 'Point',
 				style: style
-			}
-        );
+		});
         //register handler for 'drawend' event in the interaction
         newInteraction.on('drawend', drawEndHandler);
         //register handler for 'drawstart' handler

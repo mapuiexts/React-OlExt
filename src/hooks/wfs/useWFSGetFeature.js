@@ -4,11 +4,12 @@ import GeoJSON from 'ol/format/GeoJSON';
 import GML2 from 'ol/format/GML2';
 import GML3 from 'ol/format/GML3';
 import GML32 from 'ol/format/GML32';
+import defined from '../../core/defined';
 
 const useWFSGetFeature = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
-    //const [features, setFeatures] = useState[null]
+    const [features, setFeatures] = useState(null)
 
     const sendRequest = useCallback((url, map, layer, wfsOptions, fetchOptions = {
         method: 'POST', 
@@ -62,27 +63,30 @@ const useWFSGetFeature = () => {
                     parser = new GML3();
             }
             const features = parser.readFeatures(responseData);
+            console.log(features);
             //const xml = (new window.DOMParser()).parseFromString(responseData, "text/xml")
             //const features = parser.readFeatures(xml);
-            layer.getSource().addFeatures(features);
+            if(defined(layer)) layer.getSource().addFeatures(features);
             setIsLoading(false);
+            setFeatures(features);
         })
         .catch(error => {
-            alert(error.message);
             setError(error.message);
             setIsLoading(false);
         });
 
-    }, []);
+    }, [setFeatures]);
 
     const clearRequest = useCallback(() => {
         setIsLoading(false);
         setError(null);
+        setFeatures(null);
     }, []);
 	
     return {
         sendRequest,
         clearRequest,
+        features,
         isLoading,
         error
     };
