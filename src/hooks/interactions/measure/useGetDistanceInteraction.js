@@ -1,3 +1,4 @@
+
 import {useCallback, useState, useRef} from 'react';
 import VectorSource from 'ol/source/Vector';
 import VectorLayer from 'ol/layer/Vector';
@@ -11,6 +12,7 @@ import Snap from 'ol/interaction/Snap';
 import defined from '../../../core/defined';
 import {createTooltip, createMeasureTooltip, mouseOut, pointerMove} from '../../../core/interaction';
 
+
 /**
  * Hook responsible to retrieve the distance provided by the user input.
  * 
@@ -22,9 +24,9 @@ import {createTooltip, createMeasureTooltip, mouseOut, pointerMove} from '../../
  * Check the options parameter in <a href="https://openlayers.org/en/latest/apidoc/module-ol_interaction_Draw-Draw.html">documentation</a>.
  * @param {Object} snapOptions The snap options. 
  * Check the options parameter in <a href="https://openlayers.org/en/latest/apidoc/module-ol_interaction_Snap-Snap.html">documentation</a>.
- * @returns 
+ * @returns  {start, clear, feature, distance, getOlInteraction}
  */
-const useGetDistanceInteraction = (
+ const useGetDistanceInteraction = (
     map, 
     vectorSource = null,
     startMsg = 'Click to start the measure', 
@@ -60,6 +62,7 @@ const useGetDistanceInteraction = (
     const snapRef = useRef(null);
     const tooltipRef = useRef(null);
     const measureTooltipRef = useRef(null);
+    //const measureTooltipRef = useRef(null);
     const sketchRef = useRef(null);
     const vectorLayerRef = useRef(null);
     const [feature, setFeature] = useState(null);
@@ -151,8 +154,8 @@ const useGetDistanceInteraction = (
         }
     }, [stop]);
 
-    const formatLength  = (linestring) => {
-        const length = getLength(linestring);
+    const formatLength  = (linestring, projection) => {
+        const length = getLength(linestring) * projection.getMetersPerUnit();
         let output;
         if (length > 100) {
             output = `${Math.round(length / 1000 * 100) / 100} km`;
@@ -164,10 +167,12 @@ const useGetDistanceInteraction = (
 
     const onChangeGeometryHandler = useCallback((evt) => {
         const geom = evt.target;
-        const output = formatLength(geom);
+        const output = formatLength(geom, map.getView().getProjection());
         let tooltipCoord = geom.getLastCoordinate();
-        measureTooltipRef.current.setPosition(tooltipCoord);
-        measureTooltipRef.current.getElement().innerHTML = output;
+        if(defined(measureTooltipRef.current)) {
+            measureTooltipRef.current.setPosition(tooltipCoord);
+            measureTooltipRef.current.getElement().innerHTML = output;
+        }
     }, []);
 
     const drawStartHandler = useCallback((evt) => {
@@ -181,7 +186,7 @@ const useGetDistanceInteraction = (
         evt.feature.getGeometry().un('change', onChangeGeometryHandler);
         stop();
         setFeature(evt.feature);
-        setDistance(getLength(evt.feature));
+        setDistance(getLength(evt.feature.getGeometry()));
         sketchRef.current = null;
     }, [stop, onChangeGeometryHandler]);
 
@@ -221,6 +226,7 @@ const useGetDistanceInteraction = (
             snapRef.current = snap;
         }
 
+
         //Add <esc> handler to cancel command
         document.addEventListener('keydown', escKeyHandler);
 
@@ -239,9 +245,9 @@ const useGetDistanceInteraction = (
         setFeature(null);
         setDistance(null);
     }, []);
-
     
-    return {start, clear, feature, distance};
+
+    return {start, clear, feature, distance, getOlInteraction: () => interactionRef.current};
 
 }
 

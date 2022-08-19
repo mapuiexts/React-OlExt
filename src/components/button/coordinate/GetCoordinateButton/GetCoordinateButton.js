@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import {Button} from 'antd';
 import useGetPointGeomInteraction from '../../../../hooks/interactions/useGetPointGeomInteraction';
 import CoordinateWnd from '../../../window/coordinate/CoordinateWnd/CoordinateWnd';
+import defined from '../../../../core/defined';
 
 /**
  * <p>Button to retrieve the coordinate indicated by the user.</p>
@@ -17,7 +18,7 @@ const GetCoordinateButton = (
         wndStyle, 
         msg = 'Pick Coordinate',
         projs,
-        children = 'Get Coordinate',
+        children,
         ...otherProps
     }) => {
 
@@ -54,7 +55,7 @@ const GetCoordinateButton = (
                 { position &&
                     <CoordinateWnd 
                         //title='Get Coordinate'
-                        title={children}
+                        title={defined(children) || 'Get Coordinate'} 
                         onClose = {onClose}
                         visible={visibleWnd}
                         map={map}

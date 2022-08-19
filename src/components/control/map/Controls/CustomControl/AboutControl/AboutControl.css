@@ -1,0 +1,17 @@
+/* .rolext-about-button-control.ant-btn {
+    position: absolute;
+    opacity: 0.5;
+    padding: 2px;
+    border: 2px;
+    top: 4.0em;
+    left: 0.5em;
+    font-weight: bold;
+} */
+
+.rolext-about-control.ant-btn {
+    position: absolute;
+    opacity: 0.5;
+    padding: 2px;
+    border: 2px;
+    font-weight: bold;
+}

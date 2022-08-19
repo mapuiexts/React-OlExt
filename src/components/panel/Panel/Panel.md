@@ -1,10 +1,8 @@
-<p>This Example shows the creation of a <i>Panel Control</i>:</p>
-<ul>
-    <li>The panel is a container component</li>
-    <li>Click in the "down/up arrow" to expand/collapse the panel</li>
-    <li>The panel can be collapsed and/or closable</li>
-    <li>The <i>Window</i> component uses the Panel to provide the child components</li>
-</ul>
+This Example shows the creation of a *Panel Control*:
+* The panel is a container component
+* Click in the "down/up arrow" to expand/collapse the panel
+* The panel can be collapsed and/or closable
+* The *Window* component uses the Panel to provide the child components
 
 ```js
 import Panel from './Panel';

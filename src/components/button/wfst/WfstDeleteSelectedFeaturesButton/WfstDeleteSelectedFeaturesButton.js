@@ -6,12 +6,13 @@ import VectorLayer from 'ol/layer/Vector';
 import { Button, Modal } from 'antd';
 import {ExclamationCircleOutlined} from '@ant-design/icons';
 import defined from '../../../../core/defined';
-import {refreshWmsLayer} from '../../../../../core/map';
-import useWriteWfsTransaction from '../../../../../hooks/wfst/useWriteWfsTransaction';
+import {refreshWmsLayer} from '../../../../core/wmsLayer';
+import useWfstWriteTransaction from '../../../../hooks/wfst/useWfstWriteTransaction';
 
 /**
- * Button to delete the selected features in the grid
- * @visibleName WFST Delete Selected Features
+ * Button to delete feature(s) selected in the grid through a 
+ * WFS Transaction call.
+ * @visibleName WFST Delete Selected Features Button
  */
 const WfstDeleteSelectedFeaturesButton = ({
     url,
@@ -25,7 +26,7 @@ const WfstDeleteSelectedFeaturesButton = ({
 ) => {
 
     const [selectedFeatures, setSelectedFeatures] = useState(null);
-    const [sendRequest, clearRequest, isLoading, data, error] = useWriteWfsTransaction();
+    const [sendRequest, clearRequest, isLoading, data, error] = useWfstWriteTransaction();
 
     /**
      * Show the confirm dialog box requesting if the user 

@@ -11,6 +11,7 @@ import EditLayerButton from './components/button/layer/edit/EditLayerButton/Edit
 import NewGroupLayerButton from './components/button/layer/new/NewGroupLayerButton/NewGroupLayerButton';
 import NewImageWMSLayerButton from './components/button/layer/new/NewImageWMSLayerButton/NewImageWMSLayerButton';
 import NewOSMLayerButton from './components/button/layer/new/NewOSMLayerButton/NewOSMLayerButton';
+import GetDistanceButton from './components/button/measure/GetDistanceButton/GetDistanceButton';
 import NewTileWMSLayerButton from './components/button/layer/new/NewTileWMSLayerButton/NewTileWMSLayerButton';
 import RemoveLayerButton from './components/button/layer/remove/RemoveLayerButton/RemoveLayerButton';
 import WfsSearchByBBoxButton from './components/button/wfs/WfsSearchByBBoxButton/WfsSearchByBBoxButton';
@@ -93,6 +94,7 @@ export {
     NewGroupLayerButton,
     NewImageWMSLayerButton,
     NewOSMLayerButton,
+    GetDistanceButton,
     NewTileWMSLayerButton,
     RemoveLayerButton,
     WfsSearchByBBoxButton,

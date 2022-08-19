@@ -1,7 +1,7 @@
 import {useCallback, useEffect, useMemo} from 'react';
-import {intersects} from 'ol/format/filter';
-import useGetPointGeomInteraction from '../useGetPointGeomInteraction';
-import useWfsGetFeature from  '../../wfs/useWFSGetFeature';
+import {bbox} from 'ol/format/filter';
+import useGetBoxSelectionGeomInteraction from '../geometry/useGetBoxSelectionGeomInteraction';
+import useWfsGetFeature from '../../../hooks/wfs/useWFSGetFeature';
 import defined from '../../../core/defined';
 
 /** this interaction will retrieve a point from the user and 
@@ -14,12 +14,12 @@ import defined from '../../../core/defined';
  * @param {Object} wfsOptions  the wfs options
  * @param {Array} vectorLayer the vector layer where the features will be added
  * @param {Object} fetchOptions the optional options for the fetch command
- * @returns {start, clear, features, isRunning, error}
+ * @returns {start, features, isRunning, error}
  */
-const useWfsGetFeatureByPointInteraction = (map, url, msg, wfsOptions, vectorLayer, fetchOptions) => {
+const useWfsGetFeatureByBoxSelectionInteraction = (map, url, msg, wfsOptions, size, vectorLayer, fetchOptions) => {
 
     const {geometryName, /*srsName*/} = wfsOptions;
-    const interaction = useGetPointGeomInteraction(map, msg);
+    const interaction = useGetBoxSelectionGeomInteraction(map, msg, size, null);
     const wfsGetFeature = useWfsGetFeature();
 
 
@@ -32,8 +32,6 @@ const useWfsGetFeatureByPointInteraction = (map, url, msg, wfsOptions, vectorLay
         return {...wfsOptions, srsName}
     }, [wfsOptions, srsName]);
 
-    wfsFilteredOptions.srsName = srsName;
-
     /**
      * Start the interaction to click the point location
      */
@@ -45,23 +43,36 @@ const useWfsGetFeatureByPointInteraction = (map, url, msg, wfsOptions, vectorLay
      * Effect to send wfs request once the location is retrieved
      */
     useEffect(() => {
-        if(defined(interaction.geometry) && !interaction.isRunning) {
+        if(defined(interaction.bbox) && !interaction.isRunning) {
             const geomName = defined(geometryName) ? geometryName : 'geometry';
             //clear layer
-            defined(vectorLayer) && vectorLayer.getSource().clear();
-            //create filter
-            const geom = interaction.geometry;
-            const filter = intersects(
+            vectorLayer.getSource().clear();
+            //create wfs filter
+            const extent = interaction.bbox;
+            const filter = bbox(
                 geomName, 
-                geom,
+                extent,
                 srsName
             );
             wfsFilteredOptions.filter = filter;
+            console.log('sending request');
             wfsGetFeature.sendRequest(url, map, vectorLayer, wfsFilteredOptions, fetchOptions);
             interaction.clear();
         }
 
     }, [interaction, vectorLayer, fetchOptions, geometryName, map, srsName, url, wfsGetFeature, wfsFilteredOptions]);
+
+    /**
+     * Effect to be executed if the user cancel the selection in the map
+     * using the <esc> key.
+     */
+    useEffect(() => {
+        if(interaction.bbox === undefined && !interaction.isRunning) {
+            console.log('cancelled');
+            interaction.clear();
+        }
+
+    }, [interaction]);
 
     return {
         start,
@@ -73,4 +84,4 @@ const useWfsGetFeatureByPointInteraction = (map, url, msg, wfsOptions, vectorLay
 
 };
 
-export default useWfsGetFeatureByPointInteraction;
+export default useWfsGetFeatureByBoxSelectionInteraction;

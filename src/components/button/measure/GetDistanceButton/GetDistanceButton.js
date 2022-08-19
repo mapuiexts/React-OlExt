@@ -1,6 +1,7 @@
-import { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Button } from 'antd';
+import Map from 'ol/Map';
+import { Button, Tooltip } from 'antd';
 import VectorSource from 'ol/source/Vector';
 import defined from '../../../../core/defined';
 import useGetDistanceInteraction from '../../../../hooks/interactions/measure/useGetDistanceInteraction';
@@ -17,6 +18,8 @@ const GetDistanceButton = ({
     drawOptions,
     snapOptions,
     onDistance,
+    tooltipProps = null,
+    showTooltip = true,
     children,
     ...otherProps
 }) => {
@@ -41,11 +44,21 @@ const GetDistanceButton = ({
     }, [interaction, onDistance]);
 
     return (
-        <Button {...otherProps} onClick={onClickHandler}>
-            {children}
-        </Button>
+        <React.Fragment>
+            {showTooltip ?
+                <Tooltip title="Get Distance" placement="top" mouseLeaveDelay={0.05} {...tooltipProps}>
+                    <Button {...otherProps} onClick={onClickHandler}>
+                        {children}
+                    </Button>
+                </Tooltip>
+                :
+                <Button {...otherProps} onClick={onClickHandler}>
+                    {children}
+                </Button>
+            }
+        </React.Fragment>
+        
     );
-
 };
 
 GetDistanceButton.propTypes = {
@@ -57,7 +70,7 @@ GetDistanceButton.propTypes = {
     /**
      * The vector source where the line distance will be stored. If null a temporary layer will be created
      */
-    vectorSource: PropTypes.instanceOf(VectorSource).isRequired,
+    vectorSource: PropTypes.instanceOf(VectorSource),
 
     /**
      * The message tooltip show before the user selects the first point

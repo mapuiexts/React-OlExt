@@ -1,0 +1,11 @@
+.rolext-feature-info-control.ant-btn {
+    position: absolute;
+    opacity: 0.5;
+    padding: 2px;
+    border: 2px;
+    font-weight: bold;
+}
+
+.rolext-feature-info-control.ant-btn.ant-btn-loading {
+    position: absolute;
+}

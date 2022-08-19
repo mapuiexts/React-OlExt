@@ -5,15 +5,16 @@ import Collection from 'ol/Collection';
 import Map from 'ol/Map';
 import Layer from 'ol/layer/Layer';
 import VectorLayer from 'ol/layer/Vector';
-import defined from '@mapuiexts/react-olext/dist/core/defined';
-import useTranslateInteraction from '../../../../../hooks/interactions/modify/useTranslateInteraction';
-import useWriteWfsTransaction from '../../../../../hooks/wfst/useWriteWfsTransaction';
-import {refreshWmsLayer} from '../../../../../core/map';
+import defined from '../../../../core/defined';
+import useTranslateInteraction from '../../../../hooks/interactions/modify/useTranslateInteraction';
+import useWfstWriteTransaction from '../../../../hooks/wfst/useWfstWriteTransaction';
+import {refreshWmsLayer} from '../../../../core/wmsLayer';
 
 /**
  * Button to translate the selected feature(s) in the grid.
  * After this operation, the selected feature(s) will be translated
  * and its coordinated will be updated in the database.
+ * @visibleName WFST Translate Selected Features Button
  */
 const WfstTranslateSelectedFeaturesButton = ({
     map,
@@ -27,7 +28,7 @@ const WfstTranslateSelectedFeaturesButton = ({
     ...otherProps
 }) => {
     const interaction = useTranslateInteraction(map, msg);
-    const [sendRequest, clearRequest, isLoading, data, error] = useWriteWfsTransaction();
+    const [sendRequest, clearRequest, isLoading, data, error] = useWfstWriteTransaction();
     const translatedFeaturesRef = useRef(null);
     
      /**

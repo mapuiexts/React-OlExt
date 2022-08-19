@@ -2,7 +2,7 @@ import React, {useCallback, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {Map} from 'ol';
 import BaseLayer from 'ol/layer/Base';
-import {message, Button} from 'antd';
+import {message, Button, Tooltip} from 'antd';
 import useGetPointGeomInteraction from '../../../../hooks/interactions/useGetPointGeomInteraction';
 import useWmsGetFeatureInfo from '../../../../hooks/wms/useWmsGetFeatureInfo';
 import FeaturePropertiesWnd from '../../../window/feature/FeaturePropertiesWnd/FeaturePropertiesWnd';
@@ -22,6 +22,7 @@ const WmsGetFeatureInfoButton = (props) => {
         msg, 
         wndStyle,
         children,
+        tooltipProps = null,
     ...otherProps
     } = props;
     const interaction = useGetPointGeomInteraction(map, msg);
@@ -65,13 +66,16 @@ const WmsGetFeatureInfoButton = (props) => {
 
     return(
         <>
-            <Button 
-                {...otherProps} 
-                onClick={onClickHandler} 
-                disabled={interaction.isRunning}
-            >
-                {children}
-            </Button>
+            <Tooltip title="Feature Info" placement="top" mouseLeaveDelay={0.05} {...tooltipProps}>
+                <Button 
+                    {...otherProps} 
+                    onClick={onClickHandler} 
+                    // disabled={interaction.isRunning}
+                    loading={interaction.isRunning}
+                >
+                    {children}
+                </Button>
+            </Tooltip>
             {
                 (features && features.length > 0) &&
                 <FeaturePropertiesWnd 

@@ -1,6 +1,6 @@
 import React, {useCallback, useState} from 'react';
 import PropTypes from 'prop-types';
-import {Button} from 'antd';
+import {Button, Tooltip} from 'antd';
 import AboutWnd from '../../../window/common/AboutWnd/AboutWnd';
 
 /**
@@ -18,8 +18,10 @@ import AboutWnd from '../../../window/common/AboutWnd/AboutWnd';
  */
 const AboutButton = ({
     wndStyle, 
-    children = 'About',
+    children,
     content = 'Content about your application goes here...',
+    tooltipProps = null,
+    showTooltip = true,
     ...otherProps
 }) => {
 
@@ -42,7 +44,13 @@ const AboutButton = ({
 
     return (
         <React.Fragment>
-            <Button onClick={onShowWindow} {...otherProps}>{children}</Button>
+            { showTooltip ?
+                <Tooltip title="About" placement="top" mouseLeaveDelay={0.05} {...tooltipProps}>
+                    <Button onClick={onShowWindow} {...otherProps}>{children}</Button>
+                </Tooltip>
+                :
+                <Button onClick={onShowWindow} {...otherProps}>{children}</Button>
+            }
             {visibleWnd && <AboutWnd onClose={onCloseWindow} style={wndStyle} visible={visibleWnd} content={content} />}
         </React.Fragment>
     );

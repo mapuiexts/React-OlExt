@@ -1,13 +1,9 @@
-<p>This Example shows the creation of a <i>Window Component</i>:</p>
-<ul>
-    <li>The Window is a draggable container component. So it can be dragged to a different position</li>
-    <li>The Window uses the <i>Panel</i> component to store the child components</li>
-    <li>The Window can be collapsed and/or closable:</li>
-    <ul>
-        <li>Click in the "down/up arrow" to expand/collapse the window panel</li>
-        <li>As shown in the example below, the <i>onClose</i> callback must be implemented to close the window</li>
-    </ul>
-</ul>
+This Example shows the creation of a *Window Component*:
+- The Window is a draggable container component. So it can be dragged to a different position.
+- The Window uses the *Panel* component to store the child components.
+- The Window can be collapsed and/or closable:
+    - Click in the "down/up arrow" to expand/collapse the window panel.
+    - As shown in the example below, the *onClose* callback must be implemented to close the window.
 
 ```js
 import {useState} from 'react';

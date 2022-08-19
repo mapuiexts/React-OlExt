@@ -20,7 +20,7 @@ module.exports = {
     assetsDir: './docs',
     tocMode: 'collapse',
     title: 'React-OlExt',
-    version: '0.1 Beta',
+    version: '0.1.x Beta',
     styles: {
       Logo: {
         logo: {
@@ -158,6 +158,16 @@ module.exports = {
                 usageMode: 'expand', // 'hide' | 'collapse' | 'expand'
               },
               {
+                name:'wfst',
+                //content: 'docs/ui.md',
+                sectionDepth: 1,
+                components: [
+                  'src/components/button/wfst/**/*.{js,jsx,ts,tsx}'
+                ],
+                exampleMode: 'expand', // 'hide' | 'collapse' | 'expand'
+                usageMode: 'expand', // 'hide' | 'collapse' | 'expand'
+              },
+              {
                 name:'wms',
                 //content: 'docs/ui.md',
                 sectionDepth: 1,
@@ -193,10 +203,19 @@ module.exports = {
                 name: 'map',
                 sections: [
                   {
-                    name: 'Controls',
-                    description: 'The controls for the Map and MapOverview Widget',
+                    name: 'Custom Controls',
+                    description: 'The React-Olext Custom Controls for the Map and MapOverview Widget',
                     components: [
-                      'src/components/control/map/Controls/**/*.{js, jsx, ts, tsx}'
+                      'src/components/control/map/Controls/CustomControl/**/*.{js, jsx, ts, tsx}'
+                    ],
+                    exampleMode: 'expand', // 'hide' | 'collapse' | 'expand'
+                    usageMode: 'expand', // 'hide' | 'collapse' | 'expand'
+                  },
+                  {
+                    name: 'Native Controls',
+                    description: 'The OpenLayers native controls for the Map and MapOverview Widget',
+                    components: [
+                      'src/components/control/map/Controls/NativeControl/**/*.{js, jsx, ts, tsx}'
                     ],
                     exampleMode: 'expand', // 'hide' | 'collapse' | 'expand'
                     usageMode: 'expand', // 'hide' | 'collapse' | 'expand'
