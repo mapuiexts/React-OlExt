@@ -173,7 +173,7 @@ import {createTooltip, createMeasureTooltip, mouseOut, pointerMove} from '../../
             measureTooltipRef.current.setPosition(tooltipCoord);
             measureTooltipRef.current.getElement().innerHTML = output;
         }
-    }, []);
+    }, [map]);
 
     const drawStartHandler = useCallback((evt) => {
         console.log(evt);

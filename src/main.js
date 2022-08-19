@@ -23,16 +23,25 @@ import ZoomCenterButton from './components/button/zoom/ZoomCenterButton/ZoomCent
 import ZoomToAllFeaturesButton from './components/button/zoom/ZoomToAllFeaturesButton/ZoomToAllFeaturesButton';
 import ZoomToSelectedFeaturesButton from './components/button/zoom/ZoomToSelectedFeaturesButton/ZoomToSelectedFeaturesButton';
 //context menu
+
 //control
 import CustomControl from './components/control/map/Controls/CustomControl/CustomControl';
-import FullScreenControl from './components/control/map/Controls/FullScreenControl/FullScreenControl';
-import MousePositionControl from './components/control/map/Controls/MousePositionControl/MousePositionControl';
-import RotateControl from './components/control/map/Controls/RotateControl/RotateControl';
-import ScaleLineControl from './components/control/map/Controls/ScaleLineControl/ScaleLineControl';
-import ZoomControl from './components/control/map/Controls/ZoomControl/ZoomControl';
-import ZoomSliderControl from './components/control/map/Controls/ZoomSliderControl/ZoomSliderControl';
-import ZoomToExtentControl from './components/control/map/Controls/ZoomToExtentControl/ZoomToExtentControl';
+import FullScreenControl from './components/control/map/Controls/NativeControl/FullScreenControl/FullScreenControl';
+import MousePositionControl from './components/control/map/Controls/NativeControl/MousePositionControl/MousePositionControl';
+import RotateControl from './components/control/map/Controls/NativeControl/RotateControl/RotateControl';
+import ScaleLineControl from './components/control/map/Controls/NativeControl/ScaleLineControl/ScaleLineControl';
+import NativeZoomControl from './components/control/map/Controls/NativeControl/ZoomControl/ZoomControl';
+import ZoomSliderControl from './components/control/map/Controls/NativeControl/ZoomSliderControl/ZoomSliderControl';
+import ZoomToExtentControl from './components/control/map/Controls/NativeControl/ZoomToExtentControl/ZoomToExtentControl';
 import Controls from './components/control/map/Controls/Controls';
+
+import AboutControl from './components/control/map/Controls/CustomControl/AboutControl/AboutControl';
+import CoordinateControl from './components/control/map/Controls/CustomControl/CoordinateControl/CoordinateControl';
+import FeatureInfoControl from './components/control/map/Controls/CustomControl/FeatureInfoControl/FeatureInfoControl';
+import LayerTreeControl from './components/control/map/Controls/CustomControl/LayerTreeControl/LayerTreeControl';
+import MeasureControl from './components/control/map/Controls/CustomControl/MeasureControl/MeasureControl'
+import ZoomControl from './components/control/map/Controls/CustomControl/ZoomControl/ZoomControl';
+
 //form
 //grid
 import FeatureGrid from './components/grid/feature/FeatureGrid/FeatureGrid';
@@ -107,15 +116,22 @@ export {
     ZoomToSelectedFeaturesButton,
     //context menu
     //control
-    CustomControl,
+    Controls,
     FullScreenControl,
     MousePositionControl,
     RotateControl,
     ScaleLineControl,
-    ZoomControl,
+    NativeZoomControl,
     ZoomSliderControl,
     ZoomToExtentControl,
-    Controls,
+    //custom controls
+    CustomControl,
+    AboutControl,
+    CoordinateControl,
+    FeatureInfoControl,
+    LayerTreeControl,
+    MeasureControl,
+    ZoomControl,
     //form
     //grid
     FeatureGrid,
