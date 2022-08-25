@@ -15,7 +15,8 @@ import defined from '../../../../core/defined';
 const GetCoordinateButton = (
     {
         map,
-        wndStyle, 
+        //wndStyle, 
+        wndProps = null,
         msg = 'Pick Coordinate',
         projs,
         children,
@@ -55,14 +56,14 @@ const GetCoordinateButton = (
                 { position &&
                     <CoordinateWnd 
                         //title='Get Coordinate'
-                        title={defined(children) || 'Get Coordinate'} 
+                        {...wndProps}
+                        title={defined(children) ? children : 'Get Coordinate'} 
                         onClose = {onClose}
                         visible={visibleWnd}
                         map={map}
                         coordinate={position? position.getCoordinates() : null}
                         coordinateProj={map.getView().getProjection()}
                         projs={projs}
-                        style={wndStyle}
                     />
                 }
             </React.Fragment>

@@ -8,11 +8,13 @@ import {
   LayerTree,
   WmsGetFeatureInfoButton,
   GetCoordinateButton,
+  GoToCoordinateButton,
   WfsFeatureGrid,
   ZoomCenterButton,
   AboutButton,
   NewImageWMSLayerButton,
   NewGroupLayerButton,
+  CoordinateControl,
   //BottomTabs
 } from './main.js';
 import {createDefaultOverviewMap} from './util/map';
@@ -143,6 +145,7 @@ const App = () => {
         <SimpleHeader map={map} style={{height:'64px'}}/> 
         <MenuBar>
           <GetCoordinateButton type="primary" map={map} projs={[map.getView().getProjection(), getProjection('EPSG:4326')]}>Get Coordinate</GetCoordinateButton>
+          <GoToCoordinateButton map={map} projs={projs}>Go To Coordinate</GoToCoordinateButton>
           <ZoomCenterButton type="primary" map={map} projs={projs}>Zoom Center</ZoomCenterButton>
           <NewImageWMSLayerButton type="primary" map={map} wndStyle={{visibility: 'visible', width: '50vh', maxHeight: 500}}>New WMS Layer</NewImageWMSLayerButton>
           <NewGroupLayerButton type="primary" map={map} wndStyle={{visibility: 'visible', width: '50vh', maxHeight: 500}}>New Group Layer</NewGroupLayerButton>
@@ -156,7 +159,11 @@ const App = () => {
               <LayerTree map={map}/>
             </div>
           <BorderLayout split="vertical" primary="second" defaultSize={350} maxSize={400} minSize={0} onDragFinished={dragHandler}>
-              <MapWidget map={map}/>
+              <MapWidget map={map}>
+                <MapWidget.Controls>
+                  <CoordinateControl map={map} projs={projs}/>
+                </MapWidget.Controls>
+              </MapWidget>
               <MapOverviewWidget parentMap={map} map={overviewMap} magnification={magnification}/>
           </BorderLayout>
         </BorderLayout>

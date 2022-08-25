@@ -1,9 +1,8 @@
-import {useEffect, useRef, useCallback} from 'react';
+import {useEffect, useRef, useState, useCallback} from 'react';
 import PropTypes from 'prop-types';
 import {Map} from 'ol';
 import Overlay from 'ol/Overlay';
 import './BasePopup.css';
-import defined from '../../../../core/defined';
 
 /**
  * Component to allow to show a window popup in the ol/Map.
@@ -23,8 +22,7 @@ const BasePopup = ({
 
     const popupRef = useRef();
     const popupCloserRef = useRef();
-    //const [overlay, setOverlay] = useState(null);
-    const overlayRef = useRef();
+    const [overlay, setOverlay] = useState(null);
 
 
     // const previousExpanded = usePrevious(expanded);
@@ -34,16 +32,16 @@ const BasePopup = ({
 
 
     const onClickCloser = useCallback(() => {
-        overlayRef.current && overlayRef.current.setPosition(undefined)
+        overlay && overlay.setPosition(undefined)
         popupCloserRef.current && popupCloserRef.current.blur();
         onClose && onClose();
-    }, [onClose]);
+    }, [overlay, onClose]);
 
      /**
      * Effect to add overlay in the map
      */
     useEffect(() => {
-        if(defined(popupRef.current) && !defined(overlayRef.current)) {
+        if(popupRef.current && !overlay) {
             const newOverlay = new Overlay({
                 element: popupRef.current,
                 //positioning: 'bottom-center',
@@ -53,25 +51,24 @@ const BasePopup = ({
                     duration: 250,
                 }
             });
-            //setOverlay(newOverlay);
-            overlayRef.current = newOverlay;
+            setOverlay(newOverlay);
             map.addOverlay(newOverlay);
         }
 
         return () => {
-            map.removeOverlay(overlayRef.current);
+            map.removeOverlay(overlay);
         }
 
-    }, [map]);
+    }, [overlay, map]);
 
     /**
      * Effect to add position to overlay
      */
     useEffect(() => {
-        if(defined(position) && defined(overlayRef.current) && position !== overlayRef.current.getPosition()) {
-            overlayRef.current.setPosition(position);
+        if(position && overlay && position !== overlay.getPosition()) {
+            overlay.setPosition(position);
         }
-    }, [position]);
+    }, [overlay, position]);
 
 
     return(

@@ -1,12 +1,14 @@
 .rolext-wnd {
     position: fixed;
-    top: 30vh;
-    left: calc(50% - 15rem);
+    /* top: 30vh;
+    left: calc(50% - 15rem); */
+    top: 0;
+    left: 0;
     z-index: 100;
 }
 
 .rolext-wnd-btn-container {
-    display:flex;
+    display: flex;
     gap: 5px;
     justify-content: flex-end;
 }

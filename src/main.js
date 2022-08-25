@@ -5,6 +5,7 @@ import SetMapProjectionAutoComplete from './components/autoComplete/projection/S
 //button
 import AboutButton from './components/button/common/AboutButton/AboutButton';
 import GetCoordinateButton from './components/button/coordinate/GetCoordinateButton/GetCoordinateButton';
+import GoToCoordinateButton from './components/button/coordinate/GoToCoordinateButton/GoToCoordinateButton';
 import ClearAllFeaturesButton from './components/button/feature/ClearAllFeaturesButton/ClearAllFeaturesButton';
 import ClearSelectedFeaturesButton from './components/button/feature/ClearSelectedFeaturesButton/ClearSelectedFeaturesButton';
 import EditLayerButton from './components/button/layer/edit/EditLayerButton/EditLayerButton';
@@ -97,6 +98,7 @@ export {
     //button
     AboutButton,
     GetCoordinateButton,
+    GoToCoordinateButton,
     ClearAllFeaturesButton,
     ClearSelectedFeaturesButton,
     EditLayerButton,
