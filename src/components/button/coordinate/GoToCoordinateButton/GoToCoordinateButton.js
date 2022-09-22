@@ -21,6 +21,7 @@ const GoToCoordinateButton = ({
     map,
     wndProps = {style: {width:'32rem'}},
     projs,
+    defaultProjCode= map.getView().getProjection().getCode(),
     defaultScaleDenominator = 500,
     children,
     ...otherProps
@@ -30,7 +31,7 @@ const GoToCoordinateButton = ({
     const [positionInfo, setPositionInfo] = useState(undefined);
 
     const initialValues = {
-        projection: map.getView().getProjection().getCode(),
+        projection: defaultProjCode,
         coordinateStr: undefined,
         scaleDenominator: defaultScaleDenominator
     };
@@ -90,14 +91,24 @@ const GoToCoordinateButton = ({
         setVisibleWnd(true);
     }, []);
 
+
     const onFinishHandler = useCallback((values) => {
         console.log(values);
         let coordinate = calculateMapPosition(values.coordinateStr, values.projection);
         if(defined(coordinate)) {
+            const centerChanged = (evt) => {
+                console.log('center changed');
+                setPositionInfo(values);
+            }
+            map.once('moveend', centerChanged);
+
+
+
+
+            //set popup position
+            //setPositionInfo(values);
             //zoom to coordinate
             zoomCenter(map, values.scaleDenominator, coordinate[0], coordinate[1]);
-            //set popup position
-            setPositionInfo(values);
         }
         //setVisibleWnd(false);
     }, [map, calculateMapPosition])

@@ -15,6 +15,7 @@ import {
   NewImageWMSLayerButton,
   NewGroupLayerButton,
   CoordinateControl,
+  ZoomControl
   //BottomTabs
 } from './main.js';
 import {createDefaultOverviewMap} from './util/map';
@@ -135,7 +136,9 @@ const wfsOptions = getWfsOptions();
 //create overview map
 const overviewMap = createDefaultOverviewMap(map);
 //projections to be used in the application
-const projs= [map.getView().getProjection(), getProjection('EPSG:4326')];
+//const projs= [getProjection('Belgian Lambert 72'), getProjection('WGS84')]; //adding alias
+const projs= [getProjection('Belgian Lambert 72'), getProjection('WGS84'), getProjection('EPSG:4326')]; //adding alias
+//const projs = [getProjection('EPSG:31370'), getProjection('WGS84')]
 const magnification = 5;
 
 const App = () => {
@@ -144,9 +147,9 @@ const App = () => {
       <div style={{width:"100%", display:'flex', flexDirection:'column'}}>
         <SimpleHeader map={map} style={{height:'64px'}}/> 
         <MenuBar>
-          <GetCoordinateButton type="primary" map={map} projs={[map.getView().getProjection(), getProjection('EPSG:4326')]}>Get Coordinate</GetCoordinateButton>
-          <GoToCoordinateButton map={map} projs={projs}>Go To Coordinate</GoToCoordinateButton>
-          <ZoomCenterButton type="primary" map={map} projs={projs}>Zoom Center</ZoomCenterButton>
+          <GetCoordinateButton type="primary" map={map} projs={projs} defaultProjCode="Belgian Lambert 72">Get Coordinate</GetCoordinateButton>
+          <GoToCoordinateButton map={map} projs={projs} defaultProjCode="Belgian Lambert 72">Go To Coordinate</GoToCoordinateButton>
+          <ZoomCenterButton type="primary" map={map} projs={projs} defaultProjCode="Belgian Lambert 72">Zoom Center</ZoomCenterButton>
           <NewImageWMSLayerButton type="primary" map={map} wndStyle={{visibility: 'visible', width: '50vh', maxHeight: 500}}>New WMS Layer</NewImageWMSLayerButton>
           <NewGroupLayerButton type="primary" map={map} wndStyle={{visibility: 'visible', width: '50vh', maxHeight: 500}}>New Group Layer</NewGroupLayerButton>
           <AboutButton type="primary"/>
@@ -161,7 +164,8 @@ const App = () => {
           <BorderLayout split="vertical" primary="second" defaultSize={350} maxSize={400} minSize={0} onDragFinished={dragHandler}>
               <MapWidget map={map}>
                 <MapWidget.Controls>
-                  <CoordinateControl map={map} projs={projs}/>
+                  <CoordinateControl map={map} projs={projs} defaultProjCode="Belgian Lambert 72"/>
+                  <ZoomControl map={map} projs={projs} defaultProjCode="Belgian Lambert 72"/>
                 </MapWidget.Controls>
               </MapWidget>
               <MapOverviewWidget parentMap={map} map={overviewMap} magnification={magnification}/>

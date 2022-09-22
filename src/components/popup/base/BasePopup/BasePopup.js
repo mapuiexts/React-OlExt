@@ -18,6 +18,7 @@ const BasePopup = ({
     position,
     onClose,
     children,
+    overlayProps,
     ...otherProps
 }) => {
 
@@ -37,6 +38,7 @@ const BasePopup = ({
         overlayRef.current && overlayRef.current.setPosition(undefined)
         popupCloserRef.current && popupCloserRef.current.blur();
         onClose && onClose();
+        return false;
     }, [onClose]);
 
      /**
@@ -47,11 +49,13 @@ const BasePopup = ({
             const newOverlay = new Overlay({
                 element: popupRef.current,
                 //positioning: 'bottom-center',
-                //stopEvent: false,
-                autoPan: true,
-                autoPanAnimation: {
-                    duration: 250,
-                }
+                stopEvent: true,
+                insertFirst: true,
+                // autoPan: true,
+                // autoPanAnimation: {
+                //     duration: 250,
+                // }
+                ...overlayProps
             });
             //setOverlay(newOverlay);
             overlayRef.current = newOverlay;
@@ -62,7 +66,7 @@ const BasePopup = ({
             map.removeOverlay(overlayRef.current);
         }
 
-    }, [map]);
+    }, [map, overlayProps]);
 
     /**
      * Effect to add position to overlay
@@ -98,6 +102,12 @@ BasePopup.propTypes = {
      * map where the popup will be shown
      */
     position: PropTypes.arrayOf(PropTypes.number),
+
+    /**
+     * The properties for the openlayers popup overlay
+     * See: <a href="https://openlayers.org/en/latest/apidoc/module-ol_Overlay-Overlay.html">Overlay</a>
+     */
+    overlayProps: PropTypes.object,
 
     /**
      * The content of the popup

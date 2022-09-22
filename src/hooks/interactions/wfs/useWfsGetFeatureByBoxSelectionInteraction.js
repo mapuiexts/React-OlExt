@@ -46,7 +46,7 @@ const useWfsGetFeatureByBoxSelectionInteraction = (map, url, msg, wfsOptions, si
         if(defined(interaction.bbox) && !interaction.isRunning) {
             const geomName = defined(geometryName) ? geometryName : 'geometry';
             //clear layer
-            vectorLayer.getSource().clear();
+            //vectorLayer.getSource().clear();
             //create wfs filter
             const extent = interaction.bbox;
             const filter = bbox(

@@ -17,12 +17,12 @@ import {get as getProjection} from 'ol/proj/projections';
 var projObj = {
   'code': '31370', 
   'name': 'Belge 1972 / Belgian Lambert 72',
-  'proj4': "+proj=lcc +lat_1=51.16666723333333 +lat_2=49.8333339 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.013 +y_0=5400088.438 +ellps=intl +towgs84=-106.869,52.2978,-103.724,0.3366,-0.457,1.8422,-1.2747 +units=m +no_defs",
+  'proj4': "+title=Belgian Lambert 72 +proj=lcc +lat_1=51.16666723333333 +lat_2=49.8333339 +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.013 +y_0=5400088.438 +ellps=intl +towgs84=-106.869,52.2978,-103.724,0.3366,-0.457,1.8422,-1.2747 +units=m +no_defs",
   'bbox': [51.51, 2.5, 49.5, 6.4]
 };
 proj4.defs('EPSG:31370', projObj['proj4']);
+proj4.defs('Belgian Lambert 72', proj4.defs('EPSG:31370')); //adding alias
 register(proj4);
-//const proj31370 = getProjection('EPSG:31370');
 
 export function registerProjection(projectionCode, proj4Definition) {
   let projection = getProjection(projectionCode);
@@ -366,9 +366,9 @@ export const getLeafVisibleLayers = (lyrs) => {
  */
 export const coordinateToString = (srcCoordinate, srcProjCode, destProjCode) => {
   const stringifyFunc = createStringXY(8);
+  const destProj = getProjection(destProjCode);
   const destCoordinate = transform(srcCoordinate, srcProjCode, destProjCode);
   //retrieve destinatin projection/axisOrientation
-  const destProj = getProjection(destProjCode);
   const destAxisOrientation = destProj.getAxisOrientation();
 
   if(destAxisOrientation === 'neu') {

@@ -48,7 +48,7 @@ const useWfsGetFeatureByPointInteraction = (map, url, msg, wfsOptions, vectorLay
         if(defined(interaction.geometry) && !interaction.isRunning) {
             const geomName = defined(geometryName) ? geometryName : 'geometry';
             //clear layer
-            defined(vectorLayer) && vectorLayer.getSource().clear();
+            //defined(vectorLayer) && vectorLayer.getSource().clear();
             //create filter
             const geom = interaction.geometry;
             const filter = intersects(

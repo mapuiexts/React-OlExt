@@ -1,6 +1,7 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {Map} from 'ol';
 import {Projection} from 'ol/proj';
+import {get as getProjection} from 'ol/proj';
 import PropTypes from 'prop-types';
 import {Button} from 'antd';
 import useGetPointGeomInteraction from '../../../../hooks/interactions/useGetPointGeomInteraction';
@@ -19,6 +20,7 @@ const GetCoordinateButton = (
         wndProps = null,
         msg = 'Pick Coordinate',
         projs,
+        defaultProjCode= map.getView().getProjection().getCode(),
         children,
         ...otherProps
     }) => {
@@ -62,7 +64,7 @@ const GetCoordinateButton = (
                         visible={visibleWnd}
                         map={map}
                         coordinate={position? position.getCoordinates() : null}
-                        coordinateProj={map.getView().getProjection()}
+                        coordinateProj={getProjection(defaultProjCode)}
                         projs={projs}
                     />
                 }

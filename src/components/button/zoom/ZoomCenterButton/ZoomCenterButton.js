@@ -20,6 +20,7 @@ const ZoomCenterButton = ({
     wndProps = {style: {width:'32rem'}},
     projs,
     defaultScaleDenominator = 500,
+    defaultProjCode= map.getView().getProjection().getCode(),
     children,
     ...otherProps
 }) => {
@@ -27,7 +28,7 @@ const ZoomCenterButton = ({
     const [visibleWnd, setVisibleWnd] = useState(false);
 
     const initialValues = {
-        projection: map.getView().getProjection().getCode(),
+        projection: defaultProjCode,
         coordinateStr: undefined,
         scaleDenominator: defaultScaleDenominator
     };

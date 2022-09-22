@@ -57,7 +57,8 @@ const CoordinateWnd = ({
             <Space direction="vertical">
                 <Select 
                     // defaultValue={map.getView().getProjection().getCode()}
-                    defaultValue={curProjCode}
+                    //defaultValue={curProjCode}
+                    defaultValue={coordinateProj.getCode()}
                     onChange={onProjChangeHandler}
                 >
                     {projs.map((proj) => {

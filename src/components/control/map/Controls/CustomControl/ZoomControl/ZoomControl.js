@@ -11,6 +11,9 @@ import './ZoomControl.css';
  */
 const ZoomControl = ({
     map,
+    projs,
+    defaultScaleDenominator = 500,
+    defaultProjCode= map.getView().getProjection().getCode(),
     icon= <ZoomInOutlined  />,
     dropDownProps = null,
     tooltipProps = null,
@@ -26,10 +29,18 @@ const ZoomControl = ({
 
     return (
         <CustomControl map={map} options={options}>
-            <Dropdown trigger="click" 
-                      placement="bottomLeft"
-                      overlay={<ZoomMenu map={map}/>}
-                      {...dropDownProps}
+            <Dropdown 
+                trigger="click" 
+                placement="bottomLeft"
+                overlay={
+                    <ZoomMenu 
+                        map={map}
+                        projs={projs}
+                        defaultScaleDenominator={defaultScaleDenominator}
+                        defaultProjCode={defaultProjCode}
+                    />
+                }
+                {...dropDownProps}
             >
                 <Tooltip title="Zoom" placement="top" mouseLeaveDelay={0.05} {...tooltipProps}>
                     <Button type="primary" icon= {icon} {...otherProps}/>

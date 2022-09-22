@@ -7,6 +7,7 @@ const CoordinateMenu = ({
     map,
     wndProps = {style: {width:'32rem'}},
     projs,
+    defaultProjCode= map.getView().getProjection().getCode(),
     defaultScaleDenominator = 500,
     ...otherProps
 }) => {
@@ -22,6 +23,7 @@ const CoordinateMenu = ({
                                 map={map} 
                                 wndProps = {wndProps}
                                 projs = {projs}
+                                defaultProjCode={defaultProjCode}
                                 //defaultScaleDenominator = {defaultScaleDenominator}
                                 //showTooltip={false}
                             >
@@ -36,6 +38,7 @@ const CoordinateMenu = ({
                                 map={map} 
                                 wndProps = {wndProps}
                                 projs = {projs}
+                                defaultProjCode={defaultProjCode}
                                 defaultScaleDenominator = {defaultScaleDenominator}
                                 //showTooltip={false}
                             >
@@ -44,7 +47,7 @@ const CoordinateMenu = ({
                 }
         ]
         );
-    }, [map, defaultScaleDenominator, projs, wndProps]);
+    }, [map, defaultScaleDenominator, projs, wndProps, defaultProjCode]);
 
     return(
         <Menu items={items} subMenuCloseDelay={0.05} {...otherProps}/>

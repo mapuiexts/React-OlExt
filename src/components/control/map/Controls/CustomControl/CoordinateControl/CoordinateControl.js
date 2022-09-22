@@ -11,6 +11,7 @@ const CoordinateControl = ({
     dropDownProps = null,
     tooltipProps = null,
     projs = [map.getView().getProjection()],
+    defaultProjCode= map.getView().getProjection().getCode(),
     wndProps = {style: {width:'32rem'}},
     defaultScaleDenominator = 5000,
     children,
@@ -29,6 +30,7 @@ const CoordinateControl = ({
                       placement="bottomLeft"
                       overlay={<CoordinateMenu  map={map} 
                                                 projs={projs} 
+                                                defaultProjCode={defaultProjCode}
                                                 wndProps={wndProps} 
                                                 defaultScaleDenominator={defaultScaleDenominator}
                                 />}

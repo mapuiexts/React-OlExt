@@ -106,6 +106,7 @@ const WfstTranslateFeaturesButton = ({
                 translatedFeaturesRef.current.forEach((feature) => {
                     vectorLayer.getSource().removeFeature(feature);
                 });
+                translatedFeaturesRef.current = null;
             }
         }
 
@@ -123,9 +124,12 @@ const WfstTranslateFeaturesButton = ({
             message.info(wfst.error);
             wfst.clearRequest();
             //remove translated features from vector layer
-            interaction.translatedFeatures.forEach((feature) => {
-                vectorLayer.getSource().removeFeature(feature);
-            });
+            if(defined(translatedFeaturesRef.current)) {
+                translatedFeaturesRef.current.forEach((feature) => {
+                    vectorLayer.getSource().removeFeature(feature);
+                });
+                translatedFeaturesRef.current = null;
+            }
         }
 
     }, [wfst, interaction, vectorLayer]);
