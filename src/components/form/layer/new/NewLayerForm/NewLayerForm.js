@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import {Tabs} from 'antd';
 import {Form, Button, Space} from 'antd';
 import GeneralTab from '../../tabs/general/GeneralTab/GeneralTab';
@@ -21,6 +21,15 @@ const tailLayout = {
     },
 };
 
+const defaultTabs = [
+    {
+        title: "General",
+        key: "general",
+        isDefault: true,
+        el: GeneralTab
+    }
+];
+
 /**
  * A basic Form to create a new Layer ol/layer/Base Layer.
  */
@@ -28,17 +37,22 @@ const NewLayerForm = ({
     layerOpts,
     onFinish,
     onFinishFailed,
-    tabs = [
-        {
-            title: "General",
-            key: "general",
-            isDefault: true,
-            el: GeneralTab
-        }
-    ],
+    tabs = defaultTabs,
     ...otherProps
 }) => {
     const [form] = Form.useForm();
+    const tabItems = useMemo(() => {
+        const items = tabs.map((tab) => {
+            const Item = tab.el;
+            return({
+                key: tab.key,
+                label: tab.title,
+                forceRender: true,
+                children: <Item mode="new"/>
+            });
+        });
+        return items;
+    }, [tabs]);
 
 
     const onReset = () => {
@@ -59,6 +73,7 @@ const NewLayerForm = ({
 
     return(
         <Form 
+            {...otherProps}
             {...layout} 
             //layout="vertical"
             form={form} 
@@ -66,26 +81,7 @@ const NewLayerForm = ({
             onFinish={onFinish}
             initialValues = {layerOpts}
         >
-        <Tabs defaultActiveKey= {defaultActiveKey}>
-        {tabs.map((Tab) => {
-                const TabItem = Tab.el;
-                return(
-                    <Tabs.TabPane tab={Tab.title} key={Tab.key}>
-                        <TabItem mode="new"/>
-                    </Tabs.TabPane>
-                );
-            })}
-        </Tabs>
-        {/* <Tabs defaultActiveKey= {defaultActiveKey}>
-            <Tabs.TabPane tab="General" key="general">
-                <GeneralTab mode="new"/>
-            </Tabs.TabPane>
-            {SourceTab &&
-                <Tabs.TabPane tab="Source" key="source">
-                    <SourceTab mode="new"/>
-                </Tabs.TabPane>
-            }
-        </Tabs> */}
+        <Tabs defaultActiveKey= {defaultActiveKey} items={tabItems}/>
         <Form.Item 
             {...tailLayout}
         >

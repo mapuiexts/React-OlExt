@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {Tabs} from 'antd';
 import {Form, Button, Space} from 'antd';
 import GeneralTab from '../../tabs/general/GeneralTab/GeneralTab';
@@ -21,6 +21,15 @@ const tailLayout = {
     },
 };
 
+const defaultTabs = [
+    {
+        title: "General",
+        key: "general",
+        isDefault: true,
+        el: GeneralTab
+    }
+];
+
 /**
  * A basic Form for the ol/layer/Base Layer.
  */
@@ -28,17 +37,22 @@ const EditLayerForm = ({
     layer,
     onFinish,
     onFinishFailed,
-    tabs = [
-        {
-            title: "General",
-            key: "general",
-            isDefault: true,
-            el: GeneralTab
-        }
-    ],
+    tabs = defaultTabs,
     ...otherProps
 }) => {
     const [form] = Form.useForm();
+    const tabItems = useMemo(() => {
+        const items = tabs.map((tab) => {
+            const Item = tab.el;
+            return({
+                key: tab.key,
+                label: tab.title,
+                forceRender: true,
+                children: <Item mode="edit"/>
+            });
+        });
+        return items;
+    }, [tabs]);
 
     //get first key as the default active key for the tab
     let defaultActiveKey = tabs[0].key;
@@ -64,6 +78,7 @@ const EditLayerForm = ({
 
     return(
         <Form 
+            {...otherProps}
             {...layout} 
             //layout="vertical"
             form={form} 
@@ -71,16 +86,7 @@ const EditLayerForm = ({
             onFinish={onFinish}
             initialValues = {opts}
         >
-        <Tabs defaultActiveKey={defaultActiveKey}>
-            {tabs.map((Tab) => {
-                const TabItem = Tab.el;
-                return(
-                    <Tabs.TabPane tab={Tab.title} key={Tab.key}>
-                        <TabItem mode="edit"/>
-                    </Tabs.TabPane>
-                );
-            })}
-        </Tabs>
+        <Tabs defaultActiveKey={defaultActiveKey} items={tabItems}/>
 
         <Form.Item 
             {...tailLayout}

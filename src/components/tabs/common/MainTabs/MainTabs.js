@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import {Tabs} from 'antd';
 import useMainTabs from '../../../../hooks/ui/useMainTabs'
 import './MainTabs.css';
@@ -15,19 +16,20 @@ import './MainTabs.css';
  */
 const MainTabs = (props) => {
     const {tabs} = useMainTabs();
+
+    const tabItems = useMemo(() => {
+        const items = tabs.map((tabItem) => {
+            return({
+                key: tabItem.key,
+                label: tabItem.name,
+                children: tabItem.tab
+            });
+        });
+        return items;
+    }, [tabs]);
     
     return(
-        <Tabs {...props} style={{...props.style, paddingLeft: '0.2rem', height:'100%', width:'100%'}}>
-            {tabs.map((tabItem) => {
-                return(
-                    <Tabs.TabPane tab={tabItem.name} key={tabItem.key} 
-                                  style={{height:'100%', width:'100%'}}
-                    >
-                        {tabItem.tab}
-                    </Tabs.TabPane>
-                );
-            })}
-        </Tabs>
+        <Tabs {...props} style={{...props.style, paddingLeft: '0.2rem', height:'100%', width:'100%'}} items={tabItems}/>
     );
 };
 

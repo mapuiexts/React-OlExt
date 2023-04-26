@@ -340,6 +340,9 @@ const MapOverviewWidget = (
         if(boxStyle) {
             boxFeature.setStyle(boxStyle);
         }
+        return () => {
+            extentLayer.getSource().clear(true);
+        }
     }, [extentLayer, anchorFeature, boxFeature, boxStyle, anchorStyle]);
 
     /**

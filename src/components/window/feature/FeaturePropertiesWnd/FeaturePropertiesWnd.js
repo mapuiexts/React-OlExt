@@ -1,4 +1,4 @@
-import React, {useState, useCallback, useEffect} from 'react';
+import React, {useState, useCallback, useEffect, useMemo} from 'react';
 import {Table, Tabs} from 'antd';
 import OlGeomGeometry from 'ol/geom/Geometry';
 import Window from '../../base/Window/Window';
@@ -53,21 +53,41 @@ const FeaturePropertiesWnd = ({
 
     const [dataSources, setDataSources] = useState(buildDataSourcesFromFromFeatures(features));
     const [featureIds, setFeatureIds] = useState(getFeatureIds(features));
+    const tabItems = useMemo(() => {
+        const columns = [
+            {
+              title: 'Name',
+              dataIndex: 'name',
+              key: 'name',
+            },
+            {
+              title: 'Value',
+              dataIndex: 'value',
+              key: 'value',
+            },
+        ];
+        const scroll = {scrollToFirstRowOnChange:true, x:400, y: 400};
+        const items = dataSources.map((ds, idx) => {
+            return({
+                key: idx.toString(),
+                label: featureIds[idx],
+                children: <Table 
+                            dataSource={ds} 
+                            columns={columns}  
+                            size='middle'
+                            tableLayout='auto'
+                            pagination= {false}
+                            scroll={scroll}
+                            bordered
+                            sticky
+                        />
+            });
+        });
+        return items;
+    }, [dataSources, featureIds]);
 
     
-    const columns = [
-        {
-          title: 'Name',
-          dataIndex: 'name',
-          key: 'name',
-        },
-        {
-          title: 'Value',
-          dataIndex: 'value',
-          key: 'value',
-        },
-    ];
-    const scroll = {scrollToFirstRowOnChange:true, x:400, y: 400};
+    
     useEffect(() => {
         if(features && features.length > 0) {
             setDataSources(buildDataSourcesFromFromFeatures(features));
@@ -86,26 +106,7 @@ const FeaturePropertiesWnd = ({
             {...otherProps}
         >
             <div className="rolext-featureproperties-container">
-                <Tabs defaultActiveKey={['0']} tabPosition="top">
-                    {
-                        dataSources.map((dataSource, idx) => {
-                            return(
-                                <Tabs.TabPane tab={featureIds[idx]} key={idx.toString()}>
-                                    <Table 
-                                        dataSource={dataSource} 
-                                        columns={columns}  
-                                        size='middle'
-                                        tableLayout='auto'
-                                        pagination= {false}
-                                        scroll={scroll}
-                                        bordered
-                                        sticky
-                                    />
-                                </Tabs.TabPane>
-                            );
-                        })
-                    }
-                </Tabs>
+                <Tabs defaultActiveKey={['0']} tabPosition="top" items={tabItems}/>
             </div>
         </Window>     
     );
