@@ -2,7 +2,7 @@ import {useMemo} from 'react';
 import {Dropdown, Tooltip, Button} from 'antd';
 import {EnvironmentOutlined } from '@ant-design/icons';
 import CustomControl from '../CustomControl';
-import CoordinateMenu from '../../../../../menu/coordinate/CoordinateMenu/CoordinateMenu';
+import { GetCoordinateButton, GoToCoordinateButton } from '../../../../../../main';
 import './CoordinateControl.css';
 
 const CoordinateControl = ({
@@ -24,16 +24,45 @@ const CoordinateControl = ({
         });
     }, []);
 
+    const menuProps = useMemo(() => {
+        return({
+            items: [
+                {
+                    key:    'GET_COORDINATE',
+                    label:  <GetCoordinateButton 
+                                type='text' 
+                                size="small" 
+                                map={map} 
+                                wndProps = {wndProps}
+                                projs = {projs}
+                                defaultProjCode={defaultProjCode}
+                            >
+                                Get Coordinate
+                            </GetCoordinateButton>
+                },
+                {
+                    key:    'GOTO_COORDINATE',
+                    label:  <GoToCoordinateButton 
+                                type='text' 
+                                size="small" 
+                                map={map} 
+                                wndProps = {wndProps}
+                                projs = {projs}
+                                defaultProjCode={defaultProjCode}
+                                defaultScaleDenominator = {defaultScaleDenominator}
+                            >
+                                Go To Coordinate
+                            </GoToCoordinateButton>
+                }
+            ]
+        });
+    }, [defaultProjCode, defaultScaleDenominator, map, projs, wndProps]);
+
     return (
         <CustomControl map={map} options={options}>
             <Dropdown trigger="click" 
                       placement="bottomLeft"
-                      overlay={<CoordinateMenu  map={map} 
-                                                projs={projs} 
-                                                defaultProjCode={defaultProjCode}
-                                                wndProps={wndProps} 
-                                                defaultScaleDenominator={defaultScaleDenominator}
-                                />}
+                      menu={menuProps}
                       {...dropDownProps}
             >
                 <Tooltip title="Coordinate" placement="top" mouseLeaveDelay={0.05} {...tooltipProps}>
@@ -43,14 +72,6 @@ const CoordinateControl = ({
                 </Tooltip>
             </Dropdown>  
         </CustomControl>
-        // <CustomControl map={map} options={options}>
-        //         <GetCoordinateButton icon= {<EnvironmentOutlined />}  
-        //                              type='primary' map={map}
-        //                              projs={projs}
-        //         >
-        //             {children}
-        //         </GetCoordinateButton>
-        // </CustomControl>
     );
 
 };

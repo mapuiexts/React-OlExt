@@ -12,7 +12,7 @@ import './Expander.css';
 const Expander = ({
   expanded = true,
   className = 'rolext-panel-expander-wrap',
-  style = {},
+  style = {height:500},
   ...otherProps
 }) => {
 
@@ -42,7 +42,8 @@ const Expander = ({
     <div
       ref={divEl}
       className={className}
-      style = {{...style, height} }
+      style = {height === 0 ? {...style, height} 
+      : {...style, height, minHeight:'10em'}  }
     >
       {otherProps.children}
     </div>

@@ -56,7 +56,6 @@ const useWfstWriteTransaction = () => {
         .then((responseData) => {
             console.log(responseData);
             //const response = formatWFS.readTransactionResponse(responseData);
-            //console.log(response);
             setData(responseData);
             setIsLoading(false);
         })

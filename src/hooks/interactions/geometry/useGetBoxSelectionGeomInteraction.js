@@ -111,7 +111,6 @@ const useGetBoxSelectionGeomInteraction = (
      */
     escKeyHandler = useCallback((evt) => {
         if(evt.keyCode === 27) {
-            console.log('BBox command cancelled');
             stop();
             setIsRunning(false);
             setBbox(undefined);
@@ -124,13 +123,11 @@ const useGetBoxSelectionGeomInteraction = (
      * added in the map.
      */
     const drawStartHandler = useCallback((evt) => {
-        console.log('draw start event', evt);
         setIsRunning(true);
         setBbox(null);
     }, []);
 
     const drawEndHandler = useCallback((evt) => {
-        console.log('draw end event', evt);
         //retrieve the resolution (view units/pixel)
         const resolution = map.getView().getResolution();
         //calculate normalized size in view units
@@ -138,8 +135,6 @@ const useGetBoxSelectionGeomInteraction = (
         //calculate bbox
         const pt = evt.feature.getGeometry().getCoordinates();
         const extent = buffer([pt[0], pt[1], pt[0], pt[1]], bufferSize);
-        console.log('extent', extent);
-        console.log('extent height', getHeight(extent));
 
         stop();
         setIsRunning(false);
@@ -147,7 +142,7 @@ const useGetBoxSelectionGeomInteraction = (
     }, [stop, map, size]);
 
     const drawAbortHandler = useCallback(() => {
-        //console.log('drawAbortHandler');
+        
     }, []);
 
 

@@ -24,15 +24,12 @@ const useGetBBoxGeomInteraction = (
     const [geometry, setGeometry] = useState(null);
 
     const boxStartHandler = useCallback((evt) => {
-        //console.log('boxstart fired', evt);
     }, []);
 
     const boxDragHandler = useCallback((evt) => {
-        //console.log('boxdrag fired', evt);
     }, []);
 
     const boxCancelHandler = useCallback((evt) => {
-        //console.log('boxcancel fired', evt);
     }, []);
 
     /**

@@ -1,7 +1,7 @@
 .rolext-panel {
     display: flex;
     flex-direction: column;
-    background: white;
+    background: rgba(255, 255, 255, 0.85);
 }
 
 .rolext-panel-body-el {

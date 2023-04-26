@@ -40,7 +40,7 @@ const useGetPolygonGeomInteraction = (
     const [geometry, setGeometry] = useState(null);
 
     const drawStartHandler = useCallback((evt) => {
-        //console.log('drawStartHandler');
+        
     }, []);
 
     const drawEndHandler = useCallback((evt) => {
@@ -51,7 +51,7 @@ const useGetPolygonGeomInteraction = (
     }, [geometry]);
 
     const drawAbortHandler = useCallback(() => {
-        //console.log('drawAbortHandler');
+        
     }, []);
 
     /**

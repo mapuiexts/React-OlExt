@@ -55,7 +55,6 @@ const useWfsGetFeatureByBoxSelectionInteraction = (map, url, msg, wfsOptions, si
                 srsName
             );
             wfsFilteredOptions.filter = filter;
-            console.log('sending request');
             wfsGetFeature.sendRequest(url, map, vectorLayer, wfsFilteredOptions, fetchOptions);
             interaction.clear();
         }
@@ -68,7 +67,6 @@ const useWfsGetFeatureByBoxSelectionInteraction = (map, url, msg, wfsOptions, si
      */
     useEffect(() => {
         if(interaction.bbox === undefined && !interaction.isRunning) {
-            console.log('cancelled');
             interaction.clear();
         }
 

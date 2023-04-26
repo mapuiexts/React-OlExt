@@ -40,8 +40,6 @@ const CoordinateForm = ({
      * Handler called once the projection is changed in the combo box
      */
      const onProjChangeHandler = useCallback((value) => {
-        console.log('projection new value ', value);
-        console.log('projection old value: ',curProjCode);
         //parse x and y values from input
         const oldCoordinate = stringToCoordinate(form.getFieldValue('coordinateStr'), curProjCode);
         if(defined(oldCoordinate))

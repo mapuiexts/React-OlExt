@@ -39,7 +39,7 @@ const MenuBar = ({
                 }
             </nav>
             <nav>
-            <Drawer mask={false} title={title} placement="left" onClose={onCloseDrawer} visible={!collapsed} width="50%">
+            <Drawer mask={false} title={title} placement="left" onClose={onCloseDrawer} open={!collapsed} width="50%">
                 <nav className="rolext-menubar-side">
                     <>{children}</>
                 </nav>

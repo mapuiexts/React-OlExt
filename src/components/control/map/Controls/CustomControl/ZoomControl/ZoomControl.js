@@ -2,7 +2,7 @@ import {useMemo} from 'react';
 import {Dropdown, Tooltip, Button} from 'antd';
 import {ZoomInOutlined  } from '@ant-design/icons';
 import CustomControl from '../CustomControl';
-import ZoomMenu from '../../../../../menu/zoom/ZoomMenu/ZoomMenu';
+import { ZoomCenterButton } from '../../../../../../main';
 import './ZoomControl.css';
 
 /**
@@ -27,19 +27,31 @@ const ZoomControl = ({
         });
     }, []);
 
+    const menuProps = useMemo(() => {
+        return({
+            items: [
+                {
+                    key: 'ZOOM_CENTER',
+                    label: <ZoomCenterButton 
+                                type='text' size="small" 
+                                map={map}
+                                projs={projs}
+                                defaultScaleDenominator={defaultScaleDenominator}
+                                defaultProjCode={defaultProjCode}
+                            >
+                            Zoom Center
+                           </ZoomCenterButton>
+                }
+            ]
+        });
+    }, [map, defaultProjCode, defaultScaleDenominator, projs]);
+
     return (
         <CustomControl map={map} options={options}>
             <Dropdown 
                 trigger="click" 
                 placement="bottomLeft"
-                overlay={
-                    <ZoomMenu 
-                        map={map}
-                        projs={projs}
-                        defaultScaleDenominator={defaultScaleDenominator}
-                        defaultProjCode={defaultProjCode}
-                    />
-                }
+                menu={menuProps}
                 {...dropDownProps}
             >
                 <Tooltip title="Zoom" placement="top" mouseLeaveDelay={0.05} {...tooltipProps}>

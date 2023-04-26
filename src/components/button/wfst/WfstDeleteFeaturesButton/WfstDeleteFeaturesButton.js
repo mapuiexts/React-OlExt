@@ -107,7 +107,6 @@ const WfstDeleteFeaturesButton = ({
       useEffect(() => {
         //response from transaction is returned
         if(!wfst.isLoading && defined(wfst.data) ) {
-            console.log('transaction finished', wfst.data);
             wfst.clearRequest();
             defined(wmsLayer) && refreshWmsLayer(wmsLayer);
             vectorLayer.getSource().removeFeature(selectedFeatureRef.current);
@@ -123,7 +122,6 @@ const WfstDeleteFeaturesButton = ({
      useEffect(() => {
         //response error from transaction is returned
         if(!wfst.isLoading && defined(wfst.error) ) {
-            console.log('transaction failed', wfst.error);
             message.info(wfst.error);
             wfst.clearRequest();
             selectedFeatureRef.current = null;

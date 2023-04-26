@@ -53,7 +53,6 @@ import defined from '../../../../core/defined';
             if(interaction.features.length === 0) {
                 message.info('Features not found!!');
             }
-            console.log(interaction.features);
             defined(onFeatures) && onFeatures(interaction.features);
             interaction.clear();
         }
@@ -62,7 +61,6 @@ import defined from '../../../../core/defined';
     useEffect(() => {
         if(defined(interaction.error)) {
             message.info(interaction.error);
-            console.log(message.info(interaction.error));
             interaction.clear();
         }
     }, [interaction]);

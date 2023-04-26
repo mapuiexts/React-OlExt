@@ -66,7 +66,6 @@ const useTranslateInteraction = (map, msg) => {
      escKeyHandler = useCallback((evt) => {
         if(evt.keyCode === 27) {
             stop();
-            console.log('translate command cancelled');
             setTranslatedFeatures(new Collection());
         }
     }, [stop]);
@@ -77,8 +76,6 @@ const useTranslateInteraction = (map, msg) => {
      * feature translation start.
      */
     const translateStartHandler = useCallback((evt) => {
-        console.log('translate start event', evt);
-
         document.removeEventListener('keydown', escKeyHandler);
         map.removeOverlay(tooltipRef.current);
         map.getViewport().removeEventListener('mouseout', mouseOutHandler);
@@ -91,7 +88,6 @@ const useTranslateInteraction = (map, msg) => {
      * feature translation end.
      */
      const translateEndHandler = useCallback((evt) => {
-        console.log('translate end event', evt);
         stop();
         setTranslatedFeatures(evt.features);
         

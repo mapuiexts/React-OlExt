@@ -1,5 +1,5 @@
-import React from 'react';
-import { Space, Dropdown, Button, Menu } from 'antd';
+import { useMemo }  from 'react';
+import { Space, Dropdown, Button } from 'antd';
 import ZoomToAllFeaturesButton from '../../../button/zoom/ZoomToAllFeaturesButton/ZoomToAllFeaturesButton';
 import ZoomToSelectedFeaturesButton from '../../../button/zoom/ZoomToSelectedFeaturesButton/ZoomToSelectedFeaturesButton';
 import ClearAllFeaturesButton from '../../../button/feature/ClearAllFeaturesButton/ClearAllFeaturesButton';
@@ -10,46 +10,56 @@ const FeatureGridMenuBar = ({
     layer,
     gridApi
 }) => {
-    const zoomMenu = (
-        <Menu>
-            <Menu.Item  key="1">
-                <ZoomToAllFeaturesButton type="text" map={map} vectorLayer={layer}>
-                    Zoom All
-                </ZoomToAllFeaturesButton>
-            </Menu.Item>
-            <Menu.Item  key="2">
-                <ZoomToSelectedFeaturesButton type='text' map={map} gridApi={gridApi}>
-                    Zoom to Selected Feature(s)
-                </ZoomToSelectedFeaturesButton>
-            </Menu.Item>
-        </Menu>
-    );
+    
+    const zoomMenuProps = useMemo(() => {
+        return({
+            items: [
+                {
+                    key: '1',
+                    label: <ZoomToAllFeaturesButton type="text" map={map} vectorLayer={layer}>
+                                Zoom All
+                            </ZoomToAllFeaturesButton>
+                },
+                {
+                    key: '2',
+                    label: <ZoomToSelectedFeaturesButton type='text' map={map} gridApi={gridApi}>
+                                Zoom to Selected Feature(s)
+                            </ZoomToSelectedFeaturesButton>
+                }
+            ]
+        });
+    }, [gridApi, layer, map]);
 
-    const clearMenu = (
-        <Menu>
-            <Menu.Item  key="1">
-                <ClearAllFeaturesButton type='text' vectorLayer={layer}>
-                    Clear All
-                </ClearAllFeaturesButton>
-            </Menu.Item>
-            <Menu.Item  key="2">
-                <ClearSelectedFeaturesButton type="text" gridApi={gridApi} vectorLayer={layer}>
-                    Clear Selected Feature(s)
-                </ClearSelectedFeaturesButton>
-            </Menu.Item>
-        </Menu>
-    );
+    const clearMenuProps = useMemo(() => {
+        return({
+            items: [
+                {
+                    key: '1',
+                    label: <ClearAllFeaturesButton type='text' vectorLayer={layer}>
+                                Clear All
+                            </ClearAllFeaturesButton>
+                },
+                {
+                    key: '2',
+                    label: <ClearSelectedFeaturesButton type="text" gridApi={gridApi} vectorLayer={layer}>
+                                Clear Selected Feature(s)
+                            </ClearSelectedFeaturesButton>
+                }
+            ]
+        });
+    }, [gridApi, layer]);
+
     return (
-        <React.Fragment>
+        <>
             <Space >
-                <Dropdown overlay={clearMenu} placement="bottomLeft">
+                <Dropdown menu={clearMenuProps} placement="bottomLeft">
                     <Button>Clear</Button>
                 </Dropdown>
-                <Dropdown overlay={zoomMenu} placement="bottomLeft" >
+                <Dropdown menu={zoomMenuProps} placement="bottomLeft" >
                     <Button>Zoom</Button>
                 </Dropdown>
             </Space>
-        </React.Fragment>
+        </>
     );
 };
 

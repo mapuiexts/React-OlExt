@@ -1,6 +1,5 @@
 import React from 'react';
 import OlLayerBase from 'ol/layer/Base';
-import OlState from 'ol/source/State';
 import {Form, Input, InputNumber, Checkbox} from 'antd';
 
 const getOpts = (layer) => {
@@ -8,7 +7,7 @@ const getOpts = (layer) => {
         const sourceOpts = {
             source: {
                 url: layer.getSource().getUrls(),
-                attributions: layer.getSource().getAttributions()(OlState.READY)
+                attributions: layer.getSource().getAttributions()('ready')
             }
         };
         return sourceOpts;

@@ -34,11 +34,9 @@ const GetDistanceButton = ({
         //response from interaction is returned with all translated features
         if(defined(interaction.distance) && defined(interaction.feature) ) {
             onDistance && onDistance(interaction.feature, interaction.distance);
-            console.log('resulted feature', interaction.feature);
             interaction.clear();
         }
         if(interaction.feature === undefined && interaction.distance === undefined) {
-            console.log('canceled command', interaction.feature);
             interaction.clear();
         }
     }, [interaction, onDistance]);

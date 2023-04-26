@@ -1,22 +1,16 @@
 import React from 'react';
 import {
   SimpleHeader, 
-  MenuBar,
   MapWidget,
   MapOverviewWidget,
   BorderLayout,
   LayerTree,
-  WmsGetFeatureInfoButton,
-  GetCoordinateButton,
-  GoToCoordinateButton,
   WfsFeatureGrid,
-  ZoomCenterButton,
-  AboutButton,
-  NewImageWMSLayerButton,
-  NewGroupLayerButton,
   CoordinateControl,
-  ZoomControl
-  //BottomTabs
+  ZoomControl,
+  MeasureControl,
+  FeatureInfoControl,
+  AboutControl
 } from './main.js';
 import {createDefaultOverviewMap} from './util/map';
 import {createDefaultMap} from './util/map';
@@ -25,10 +19,7 @@ import OlLayerVector from 'ol/layer/Vector';
 import ImageLayer from 'ol/layer/Image';
 import ImageWMSSource from 'ol/source/ImageWMS';
 import LayerGroup from 'ol/layer/Group';
-import {InfoOutlined } from '@ant-design/icons';
 import {get as getProjection} from 'ol/proj';
-//import 'antd/dist/antd.min.css'; //https://github.com/ant-design/ant-design/issues/33327
-//import 'antd/dist/antd.css';
 import 'ol/ol.css';
 import './assets/css/react-olext-ol.css';
 import './App.css';
@@ -132,7 +123,6 @@ createWmsLayers(map);
 const wfsLayer = createWfsLayer(map);
 const wfsOptions = getWfsOptions();
 
-
 //create overview map
 const overviewMap = createDefaultOverviewMap(map);
 //projections to be used in the application
@@ -143,18 +133,9 @@ const magnification = 5;
 
 const App = () => {
   return (
-    <BorderLayout split="horizontal" minSize={96} maxSize={96} defaultSize={96} onDragFinished={dragHandler} >
+    <BorderLayout split="horizontal" minSize={64} maxSize={64} defaultSize={64} onDragFinished={dragHandler} >
       <div style={{width:"100%", display:'flex', flexDirection:'column'}}>
         <SimpleHeader map={map} style={{height:'64px'}}/> 
-        <MenuBar>
-          <GetCoordinateButton type="primary" map={map} projs={projs} defaultProjCode="Belgian Lambert 72">Get Coordinate</GetCoordinateButton>
-          <GoToCoordinateButton map={map} projs={projs} defaultProjCode="Belgian Lambert 72">Go To Coordinate</GoToCoordinateButton>
-          <ZoomCenterButton type="primary" map={map} projs={projs} defaultProjCode="Belgian Lambert 72">Zoom Center</ZoomCenterButton>
-          <NewImageWMSLayerButton type="primary" map={map} wndStyle={{visibility: 'visible', width: '50vh', maxHeight: 500}}>New WMS Layer</NewImageWMSLayerButton>
-          <NewGroupLayerButton type="primary" map={map} wndStyle={{visibility: 'visible', width: '50vh', maxHeight: 500}}>New Group Layer</NewGroupLayerButton>
-          <AboutButton type="primary"/>
-          <WmsGetFeatureInfoButton icon= {<InfoOutlined style={{fontSize:20}}/>}  shape="circle" type='primary' style={{backgroundColor:'red'}} map={map} /*layers={map.getLayers().getArray()}*/ wndStyle={{width:600}}/>
-        </MenuBar>
       </div>
       <BorderLayout split="horizontal" defaultSize={250} primary="second" onDragFinished={dragHandler}>
         <BorderLayout split="vertical" defaultSize={250} onDragFinished={dragHandler}>
@@ -164,8 +145,11 @@ const App = () => {
           <BorderLayout split="vertical" primary="second" defaultSize={350} maxSize={400} minSize={0} onDragFinished={dragHandler}>
               <MapWidget map={map}>
                 <MapWidget.Controls>
+                  <AboutControl map={map} content={<div>Hello My App</div>}/>
                   <CoordinateControl map={map} projs={projs} defaultProjCode="Belgian Lambert 72"/>
                   <ZoomControl map={map} projs={projs} defaultProjCode="Belgian Lambert 72"/>
+                  <FeatureInfoControl map={map}/>
+                  <MeasureControl map={map}/>
                 </MapWidget.Controls>
               </MapWidget>
               <MapOverviewWidget parentMap={map} map={overviewMap} magnification={magnification}/>

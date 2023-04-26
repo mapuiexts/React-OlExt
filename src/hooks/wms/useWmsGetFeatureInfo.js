@@ -50,7 +50,6 @@ const useWmsGetFeatureInfo = () => {
             const wmsSource = lyr.getSource();
             if(!wmsSource.getFeatureInfoUrl) return;
             let info_format =  lyr.getSource().getParams().INFO_FORMAT;
-            console.log('info_format:', info_format);
             if(!info_format) info_format = 'application/json';
             const url = wmsSource.getFeatureInfoUrl(coordinate, 
                 viewResolution, proj, 

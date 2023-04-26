@@ -50,7 +50,6 @@ const WfsSearchByBoxSelectionButton = ({
             if(selectInteraction.features.length === 0) {
                 message.info('feature not found');
             }
-            console.log('ending selection');
             onGetFeature && onGetFeature(selectInteraction.features);
             onEndSelection && onEndSelection();
             selectInteraction.clear();

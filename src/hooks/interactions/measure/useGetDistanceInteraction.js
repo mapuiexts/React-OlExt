@@ -147,7 +147,6 @@ import {createTooltip, createMeasureTooltip, mouseOut, pointerMove} from '../../
      escKeyHandler = useCallback((evt) => {
         if(evt.keyCode === 27) {
             stop();
-            console.log('command cancelled');
             setFeature(undefined);
             setDistance(undefined);
             sketchRef.current = null;
@@ -176,13 +175,11 @@ import {createTooltip, createMeasureTooltip, mouseOut, pointerMove} from '../../
     }, [map]);
 
     const drawStartHandler = useCallback((evt) => {
-        console.log(evt);
         sketchRef.current = evt.feature;
         evt.feature.getGeometry().on('change', onChangeGeometryHandler);
     }, [onChangeGeometryHandler]);
 
     const drawEndHandler = useCallback((evt) => {
-        console.log(evt);
         evt.feature.getGeometry().un('change', onChangeGeometryHandler);
         stop();
         setFeature(evt.feature);

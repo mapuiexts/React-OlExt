@@ -28,6 +28,16 @@
     color: #61dafb;
 }
 
+.rolext-about-control {
+    top: 0.5em;
+    right: 0.5em;
+}
+
+.rolext-feature-info-control {
+    top: 0.5em;
+    left: 2.5em;
+}
+
 .rolext-coordinate-control {
     top: 4.0em;
     left: 0.5em;
@@ -35,6 +45,11 @@
 
 .rolext-zoom-control {
     top: 6.1em;
+    left: 0.5em;
+}
+
+.rolext-measure-control {
+    top: 8.3em;
     left: 0.5em;
 }
 

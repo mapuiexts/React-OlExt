@@ -93,11 +93,9 @@ const GoToCoordinateButton = ({
 
 
     const onFinishHandler = useCallback((values) => {
-        console.log(values);
         let coordinate = calculateMapPosition(values.coordinateStr, values.projection);
         if(defined(coordinate)) {
             const centerChanged = (evt) => {
-                console.log('center changed');
                 setPositionInfo(values);
             }
             map.once('moveend', centerChanged);

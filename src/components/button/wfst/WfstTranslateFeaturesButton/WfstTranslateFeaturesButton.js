@@ -72,7 +72,6 @@ const WfstTranslateFeaturesButton = ({
     useEffect(() => {
         //response from interaction is returned with all translated features
         if(defined(interaction.translatedFeatures) ) {
-            console.log('translated features', interaction.translatedFeatures);
             if(interaction.translatedFeatures.getLength() > 0) {
                 interaction.translatedFeatures.forEach((feature) => {
                     const geom = feature.getGeometry();
@@ -98,7 +97,6 @@ const WfstTranslateFeaturesButton = ({
     useEffect(() => {
         //response from transaction is returned
         if(!wfst.isLoading && defined(wfst.data) ) {
-            console.log('transaction finished', wfst.data);
             wfst.clearRequest();
             defined(wmsLayer) && refreshWmsLayer(wmsLayer);
             //remove translated features from vector layer
@@ -120,8 +118,7 @@ const WfstTranslateFeaturesButton = ({
     useEffect(() => {
         //response error from transaction is returned
         if(!wfst.isLoading && defined(wfst.error) ) {
-            console.log('transaction failed', wfst.error);
-            message.info(wfst.error);
+             message.info(wfst.error);
             wfst.clearRequest();
             //remove translated features from vector layer
             if(defined(translatedFeaturesRef.current)) {

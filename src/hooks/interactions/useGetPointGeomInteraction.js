@@ -41,7 +41,6 @@ const useGetPointGeomInteraction = (
     }, []);
 
     const drawAbortHandler = useCallback(() => {
-        //console.log('drawAbortHandler');
     }, []);
 
     /**

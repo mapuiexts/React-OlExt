@@ -88,9 +88,6 @@ const LayerTree = ({
                 {childNodes.length > 0 && childNodes}
             </Tree.TreeNode>
         );
-        //treeNode._ol_layer = layer;
-
-        console.log(treeNode);
         return treeNode;
     }, [filterFunc, titleFunc]);
     
@@ -523,7 +520,6 @@ const LayerTree = ({
 
     return(
         <React.Fragment>
-            {/* <Dropdown overlay={menu} trigger={['contextMenu']} visible={rightClickedNode ? true : false}> */}
             <Tree 
                 {...otherProps}
                 checkedKeys={checkedKeys} 

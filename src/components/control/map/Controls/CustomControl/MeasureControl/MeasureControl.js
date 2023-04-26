@@ -2,7 +2,7 @@ import {useMemo} from 'react';
 import {Dropdown, Tooltip, Button} from 'antd';
 import {ColumnWidthOutlined} from '@ant-design/icons';
 import CustomControl from '../CustomControl';
-import MeasureMenu from '../../../../../menu/measure/MeasureMenu/MeasureMenu';
+import { GetDistanceButton } from '../../../../../../main';
 import './MeasureControl.css';
 
 /**
@@ -24,11 +24,24 @@ const MeasureControl = ({
         });
     }, []);
 
+    const menuProps = useMemo(() => {
+        return({
+            items: [
+                {
+                    key: 'GET_DISTANCE',
+                    label: <GetDistanceButton type='text' size="small" map={map} showTooltip={false}>
+                            Get Distance
+                           </GetDistanceButton>
+                }
+            ]
+        });
+    }, [map]);
+
     return (
         <CustomControl map={map} options={options}>
             <Dropdown trigger="click" 
                       placement="bottomLeft"
-                      overlay={<MeasureMenu map={map}/>}
+                      menu={menuProps}
                       {...dropDownProps}
             >
                 <Tooltip title="Measure" placement="top" mouseLeaveDelay={0.05} {...tooltipProps}>

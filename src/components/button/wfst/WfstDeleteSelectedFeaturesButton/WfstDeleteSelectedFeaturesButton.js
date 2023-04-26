@@ -78,7 +78,6 @@ const WfstDeleteSelectedFeaturesButton = ({
     useEffect(() => {
         //response from transaction is returned
         if(!isLoading && defined(data) ) {
-            console.log('transaction finished', data);
             clearRequest();
             defined(wmsLayer) && refreshWmsLayer(wmsLayer);
             selectedFeatures.forEach((feature) => {
@@ -96,7 +95,6 @@ const WfstDeleteSelectedFeaturesButton = ({
     useEffect(() => {
         //response error from transaction is returned
         if(!isLoading && defined(error) ) {
-            console.log('transaction failed', error);
             clearRequest();
             setSelectedFeatures(null);
         }
